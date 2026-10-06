@@ -1,0 +1,542 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Katılım Sertifikası</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@700;900&family=Lato:wght@300;400;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #0c1e3c;
+      --navy2: #152d52;
+      --gold: #c8a84b;
+      --gold2: #e4c97e;
+      --blue: #1a5fa8;
+      --paper: #f7f8fa;
+      --text: #0c1e3c;
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    body {
+      background: #6a7a8a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lato', sans-serif;
+    }
+
+    /* A4 landscape = 297 × 210 mm */
+    .cert {
+      width: 297mm;
+      height: 210mm;
+      display: flex;
+      position: relative;
+      background: var(--paper);
+      box-shadow: 0 16px 60px rgba(0, 0, 0, .5);
+      overflow: hidden;
+    }
+
+    /* ─── LEFT PANEL ─── */
+    .panel {
+      width: 68mm;
+      flex-shrink: 0;
+      background: linear-gradient(175deg, #1a3560 0%, #0c1e3c 45%, #060e1d 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5mm 5mm;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* subtle diagonal lines on panel */
+    .panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(135deg,
+          rgba(255, 255, 255, .03) 0, rgba(255, 255, 255, .03) 1px,
+          transparent 1px, transparent 24px);
+    }
+
+    /* gold separator line */
+    .panel::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 8%;
+      bottom: 8%;
+      width: 2.5px;
+      background: linear-gradient(to bottom, transparent, var(--gold) 20%, var(--gold2) 50%, var(--gold) 80%, transparent);
+    }
+
+    .panel-logo {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .panel-logo img {
+      width: auto;
+      max-width: 46mm;
+      height: auto;
+      max-height: 46mm;
+      object-fit: contain;
+      background: #ffffff;
+      padding: 6mm;
+      border: 1px solid var(--gold);
+      border-radius: 3mm;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+      margin-bottom: 3mm;
+    }
+
+    .panel-logo-name {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .6);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .panel-divider {
+      width: 40mm;
+      height: 1.5px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 10mm 0;
+    }
+
+    .panel-congress {
+      text-align: center;
+      margin-top: 1mm;
+    }
+
+    .panel-congress-num {
+      font-family: 'Cinzel', serif;
+      font-size: 10pt;
+      color: var(--gold2);
+      letter-spacing: 2px;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 2mm;
+    }
+
+    .panel-congress-title {
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .5);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .panel-date {
+      font-family: 'Cinzel', serif;
+      font-size: 8pt;
+      color: rgba(255, 255, 255, .45);
+      letter-spacing: 1.5px;
+      text-align: center;
+      margin-top: 6mm;
+    }
+
+    /* ─── RIGHT MAIN ─── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 5mm 8mm 5mm 8mm;
+      position: relative;
+    }
+
+    /* subtle grid */
+    .main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26, 95, 168, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 95, 168, .04) 1px, transparent 1px);
+      background-size: 15mm 15mm;
+      pointer-events: none;
+    }
+
+    /* corner brackets */
+    .corner {
+      position: absolute;
+      width: 10mm;
+      height: 10mm;
+      z-index: 5;
+    }
+
+    .corner svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .c-tl {
+      top: 5mm;
+      left: 5mm;
+    }
+
+    .c-tr {
+      top: 5mm;
+      right: 5mm;
+      transform: scaleX(-1);
+    }
+
+    .c-bl {
+      bottom: 5mm;
+      left: 5mm;
+      transform: scaleY(-1);
+    }
+
+    .c-br {
+      bottom: 5mm;
+      right: 5mm;
+      transform: scale(-1);
+    }
+
+    /* ── header row ── */
+    .hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2mm;
+      padding-top: 6mm;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hdr-col {
+      font-size: 8pt;
+      font-weight: 900;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      line-height: 1.65;
+      max-width: 80mm;
+    }
+
+    .hdr-col.right {
+      text-align: right;
+    }
+
+    /* ── gold rule ── */
+    .gold-rule {
+      height: 2px;
+      background: linear-gradient(to right, var(--gold) 0%, var(--gold2) 50%, var(--gold) 100%);
+      border-radius: 2px;
+      margin-bottom: 1.5mm;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── titles ── */
+    .title-block {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 1mm;
+    }
+
+    .t-main {
+      font-family: 'Cinzel', serif;
+      font-size: 32pt;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: 3px;
+      line-height: 1;
+      display: block;
+    }
+
+    .t-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15pt;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--blue);
+      letter-spacing: 5px;
+      display: block;
+      margin-top: 1.5mm;
+    }
+
+    /* ── ornament ── */
+    .orn {
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      margin: 1mm 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .orn-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+
+    .orn-line.r {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    .orn-gem {
+      width: 5px;
+      height: 5px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .orn-label {
+      font-family: 'Cinzel', serif;
+      font-size: 7pt;
+      color: var(--gold);
+      letter-spacing: 3px;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    /* ── recipient ── */
+    .recipient {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20pt;
+      font-style: italic;
+      color: var(--navy);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 1.5mm;
+      line-height: 1.3;
+    }
+
+    /* ── body columns ── */
+    .cols {
+      display: flex;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+      min-height: 0;
+    }
+
+    .col {
+      flex: 1;
+      font-size: 9pt;
+      color: #1e2e44;
+      line-height: 1.72;
+      text-align: justify;
+      padding: 0 5mm;
+    }
+
+    .col:first-child {
+      padding-left: 0;
+    }
+
+    .col:last-child {
+      padding-right: 0;
+    }
+
+    .col em {
+      font-style: italic;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .col em.em-compact {
+      font-size: 7.5pt;
+      line-height: 1.55;
+    }
+
+    .col strong {
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .col-sep {
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(150, 170, 190, .5) 20%, rgba(150, 170, 190, .5) 80%, transparent);
+      flex-shrink: 0;
+      margin: 0;
+    }
+
+    /* ── signature ── */
+    .sig {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-top: 1mm;
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(200, 168, 75, .3);
+      margin-top: -8mm;
+    }
+
+    .sig-inner {
+      text-align: center;
+    }
+
+    .sig-inner img {
+      height: 60mm;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto -10mm;
+      position: relative;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .sig-name {
+      font-size: 9pt;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: .3px;
+    }
+
+    .sig-role {
+      font-size: 7pt;
+      color: #556070;
+      font-weight: 400;
+      margin-top: .5mm;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cert">
+
+    <!-- LEFT PANEL -->
+    <div class="panel">
+      <div class="panel-logo">
+        <img src="/img/writetec-logo.png" alt="WRITETEC">
+        <div class="panel-logo-name" lang="en">WRITETEC<br>Information Technology</div>
+      </div>
+
+      <div class="panel-divider"></div>
+
+      <div class="panel-congress">
+        <span class="panel-congress-num">7. Uluslararası</span>
+        <div class="panel-congress-title">
+          <span lang="en">WRITETEC</span> Yapay Zeka Çağında<br>Sosyal Bilimler ve Sağlık Bilimleri
+        </div>
+        <span class="panel-congress-num" style="margin-top: 2mm;">Kongresi</span>
+      </div>
+
+      <div class="panel-date">28 AĞUSTOS – 2 EYLÜL 2026</div>
+      <div class="panel-date" lang="en">August 28 – September 2, 2026</div>
+    </div>
+
+    <!-- RIGHT MAIN -->
+    <div class="main">
+
+      <!-- corner brackets -->
+      <div class="corner c-tl">
+        <svg viewBox="0 0 40 40">
+          <path d="M2 2 L16 2 M2 2 L2 16" stroke="#c8a84b" stroke-width="2.5" fill="none" />
+        </svg>
+      </div>
+      <div class="corner c-tr">
+        <svg viewBox="0 0 40 40">
+          <path d="M2 2 L16 2 M2 2 L2 16" stroke="#c8a84b" stroke-width="2.5" fill="none" />
+        </svg>
+      </div>
+      <div class="corner c-bl">
+        <svg viewBox="0 0 40 40">
+          <path d="M2 2 L16 2 M2 2 L2 16" stroke="#c8a84b" stroke-width="2.5" fill="none" />
+        </svg>
+      </div>
+      <div class="corner c-br">
+        <svg viewBox="0 0 40 40">
+          <path d="M2 2 L16 2 M2 2 L2 16" stroke="#c8a84b" stroke-width="2.5" fill="none" />
+        </svg>
+      </div>
+
+      <!-- HEADER -->
+      <div class="hdr">
+        <div class="hdr-col">
+          7. Uluslararası <span lang="en">WRITETEC</span> Yapay Zeka Çağında<br>
+          Sosyal Bilimler ve Sağlık Bilimleri Kongresi
+        </div>
+        <div class="hdr-col right" lang="en">
+          7<sup>TH</sup> International WRITETEC Congress on<br>
+          Social Sciences and Health Sciences<br>
+          in the Age of Artificial Intelligence
+        </div>
+      </div>
+
+      <div class="gold-rule"></div>
+
+      <!-- TITLES -->
+      <div class="title-block">
+        <span class="t-main">KATILIM SERTİFİKASI</span>
+        <span class="t-sub" lang="en">Certificate &nbsp; of &nbsp; Participation</span>
+      </div>
+
+      <!-- ORNAMENT -->
+      <div class="orn">
+        <div class="orn-line"></div>
+        <div class="orn-gem"></div>
+        <span class="orn-label">SAYIN / DEAR</span>
+        <div class="orn-gem"></div>
+        <div class="orn-line r"></div>
+      </div>
+
+      <!-- RECIPIENT -->
+      <div class="recipient">
+        {{ unvan_isim | safe }}
+      </div>
+
+      <!-- BODY -->
+      <div class="cols">
+        <div class="col">
+          <span lang="en">WRITETEC</span> Bilgi Teknolojileri tarafından <strong>28 Ağustos – 2 Eylül 2026</strong> tarihleri
+          arasında düzenlenen
+          7. Uluslararası <span lang="en">WRITETEC</span> Yapay Zeka Çağında Sosyal Bilimler ve Sağlık Bilimleri
+          Kongresi'ne
+          <em class="{{ turkce_baslik_em_class }}">'{{ turkce_baslik }}'</em> adlı sunumunuz ile katılımınız ve değerli
+          katkılarınızdan dolayı teşekkür ederiz.
+        </div>
+        <div class="col-sep"></div>
+        <div class="col" lang="en">
+          We would like to thank you for your participation and valuable contributions with your
+          presentation titled <em class="{{ ingilizce_baslik_em_class }}">'{{ ingilizce_baslik }}'</em> to the 7<sup>th</sup> International WRITETEC Congress on Social Sciences and Health Sciences organized by WRITETEC
+          Information Technologies between <strong>August 28 – September 2, 2026</strong>.
+        </div>
+      </div>
+
+      <!-- SIGNATURE -->
+      <div class="sig">
+        <div class="sig-inner">
+          <img src="/img/imza.png" alt="imza">
+          <div class="sig-name"><span lang="en">Assoc. Prof. Dr.</span> / Doç. Dr. Nihat ALTUNTEPE</div>
+          <div class="sig-role">Kongre Düzenleme Kurulu Başkanı &nbsp;·&nbsp; <span lang="en">Chairman of the Congress
+              Organizing Committee</span></div>
+        </div>
+      </div>
+
+    </div><!-- /main -->
+  </div><!-- /cert -->
+</body>
+
+</html>
