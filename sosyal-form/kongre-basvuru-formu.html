@@ -1,0 +1,3238 @@
+<!DOCTYPE html>
+<html lang="tr" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Başvuru Formu — 7. Uluslararası WriteTec Sosyal Bilimler ve Sağlık Bilimleri Kongresi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Montserrat:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #132a4a;
+    --blue: #1565c0;
+    --accent: #00b4d8;
+    --accent-deep: #0096c7;
+    --light-blue: #e6f7fb;
+    --surface: #ffffff;
+    --teal: #0d9488;
+    --light: #f0f4f8;
+    --page-bg: linear-gradient(165deg, #eef3f9 0%, #f6f9fc 45%, #e8f4f8 100%);
+    --border: #d4e0eb;
+    --text: #1e293b;
+    --muted: #64748b;
+    --white: #ffffff;
+    --success: #0f766e;
+    --error: #c0392b;
+    --radius: 14px;
+    --shadow-sm: 0 1px 2px rgba(10, 22, 40, 0.04);
+    --shadow-md: 0 4px 6px -1px rgba(10, 22, 40, 0.07), 0 10px 24px -8px rgba(10, 22, 40, 0.12);
+    --shadow-lg: 0 12px 40px -12px rgba(10, 22, 40, 0.18);
+    --focus-ring: rgba(0, 180, 216, 0.22);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--light);
+    background-image: var(--page-bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* SVG sprite (defs only; no layout) */
+  .svg-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  .icon {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    color: var(--accent-deep);
+  }
+  .icon--sm { width: 1rem; height: 1rem; }
+  .icon--md { width: 1.35rem; height: 1.35rem; }
+  .icon--lg { width: 1.5rem; height: 1.5rem; }
+  .icon--xl { width: 2rem; height: 2rem; color: var(--success); }
+  .section-title .icon-wrap .icon { color: var(--accent-deep); }
+  .btn .icon { color: currentColor; }
+  .badge-icon { color: rgba(255,255,255,0.95); }
+  .badge.accent .badge-icon { color: #a5f3fc; }
+  .info-box .icon { color: #b45309; }
+
+  /* Header */
+  .page-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 48%, #0c2744 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -100px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,180,216,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .page-header::after {
+    content: '';
+    position: absolute;
+    bottom: -40%; left: -10%;
+    width: 55%; height: 80%;
+    background: radial-gradient(ellipse at center, rgba(0,180,216,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 36px 24px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .header-brand {
+    flex-shrink: 0;
+    line-height: 0;
+  }
+  .header-brand-img {
+    height: 52px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
+  }
+  .header-text { min-width: 0; flex: 1; }
+  .header-text h1 {
+    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: #fff;
+    font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+  }
+  .header-text p {
+    color: rgba(255,255,255,0.65);
+    font-size: 13px;
+    margin-top: 8px;
+    font-weight: 400;
+  }
+  .badge-row {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 22px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .badge {
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.88);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .badge.accent {
+    background: rgba(0,180,216,0.2);
+    color: #cffafe;
+    border-color: rgba(0,180,216,0.35);
+  }
+
+  /* Progress */
+  .progress-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    padding: 0;
+  }
+  .progress-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    position: relative;
+  }
+  .step-tab {
+    flex: 1;
+    padding: 16px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    transition: color 0.2s, border-color 0.2s;
+    position: relative;
+  }
+  .step-tab:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 28px;
+    background: var(--border);
+    opacity: 0.7;
+  }
+  .step-tab .step-num {
+    width: 28px; height: 28px;
+    border-radius: 9px;
+    background: var(--light);
+    color: var(--muted);
+    font-size: 12px;
+    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .step-tab.active {
+    color: var(--accent-deep);
+    border-bottom-color: var(--accent);
+  }
+  .step-tab.active .step-num {
+    background: linear-gradient(145deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(0, 180, 216, 0.35);
+  }
+  .step-tab.done { color: var(--teal); }
+  .step-tab.done .step-num {
+    background: var(--teal);
+    color: #fff;
+    border-color: transparent;
+  }
+
+  /* Main */
+  .main { max-width: 900px; margin: 0 auto; padding: 32px 24px 72px; }
+
+  /* Section card */
+  .form-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 30px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-md);
+  }
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--navy);
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+    padding-left: 4px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+  }
+  .section-title::before {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -1px;
+    width: 48px;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+  }
+  .section-title .icon-wrap {
+    width: 36px; height: 36px;
+    background: linear-gradient(145deg, var(--light-blue) 0%, #dff5fa 100%);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(0, 180, 216, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 180, 216, 0.12);
+  }
+  .section-title .lang-pill {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: var(--navy);
+    color: #fff;
+    margin-right: 4px;
+    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Grid */
+  .field-grid { display: grid; gap: 18px; }
+  .field-grid.cols2 { grid-template-columns: 1fr 1fr; }
+  .field-grid.cols3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  @media (max-width: 600px) {
+    .field-grid.cols2, .field-grid.cols3 { grid-template-columns: 1fr; }
+    .header-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .header-brand-img { height: 44px; max-width: 180px; }
+    .step-tab span { display: none; }
+    .step-tab { padding: 14px 8px; }
+  }
+
+  /* Field */
+  .field { display: flex; flex-direction: column; gap: 7px; }
+  .field label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .field label .req { color: var(--error); margin-left: 2px; }
+  .field label .hint {
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 12px;
+    margin-left: 6px;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 15px;
+    font-size: 14px;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    background: var(--surface);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    outline: none;
+    width: 100%;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+  }
+  .field input.error, .field select.error, .field textarea.error {
+    border-color: var(--error);
+  }
+  .field textarea { min-height: 110px; resize: vertical; line-height: 1.65; }
+  .field .error-msg {
+    font-size: 12px;
+    color: var(--error);
+    display: none;
+  }
+  .field.invalid .error-msg { display: block; }
+  .field.invalid input, .field.invalid select, .field.invalid textarea {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.08);
+  }
+
+  .char-count {
+    text-align: right;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: -2px;
+  }
+  .char-count.warn { color: #d97706; }
+  .char-count.over { color: var(--error); }
+
+  .field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+  }
+
+  .checkbox-group { display: flex; flex-direction: column; gap: 12px; margin-top: 6px; }
+  .checkbox-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    background: var(--surface);
+  }
+  .checkbox-item:hover {
+    border-color: rgba(0, 180, 216, 0.45);
+    background: var(--light-blue);
+    box-shadow: var(--shadow-sm);
+  }
+  .checkbox-item.selected {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, #f0fdff 0%, var(--light-blue) 100%);
+    box-shadow: 0 0 0 1px rgba(0, 180, 216, 0.15);
+  }
+  .checkbox-item input[type="checkbox"] {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+    margin-top: 10px;
+    accent-color: var(--accent-deep);
+    cursor: pointer;
+  }
+  .checkbox-item .cb-label {
+    font-size: 13px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    flex: 1;
+    min-width: 0;
+  }
+  .checkbox-item .cb-icon-wrap {
+    width: 42px; height: 42px;
+    border-radius: 11px;
+    background: linear-gradient(145deg, var(--light-blue), #e0f2f7);
+    border: 1px solid rgba(0, 180, 216, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .checkbox-item .cb-icon-wrap .icon { color: var(--accent-deep); }
+  .checkbox-item .cb-text > strong {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--navy);
+    margin-bottom: 4px;
+    font-family: 'Inter', 'Montserrat', system-ui, 'Segoe UI', Roboto, sans-serif;
+  }
+  .checkbox-item .cb-text > span { color: var(--muted); font-size: 12px; line-height: 1.45; display: block; }
+
+  .abstract-box {
+    background: linear-gradient(180deg, #f8fbff 0%, #f0f9fc 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .abstract-box .abstract-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .abstract-box h4 {
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--navy);
+    margin: 0;
+  }
+  .abstract-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .abstract-box ul li {
+    font-size: 12.5px;
+    color: var(--muted);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .abstract-box ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.55em;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .info-box {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border: 1px solid #f59e0b;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 12.5px;
+    color: #92400e;
+    margin-bottom: 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    box-shadow: var(--shadow-sm);
+  }
+  .info-box .icon-wrap {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: rgba(245, 158, 11, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.12s, box-shadow 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: linear-gradient(145deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0, 180, 216, 0.35);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(0, 180, 216, 0.45);
+    filter: brightness(1.05);
+  }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent-deep);
+  }
+  .btn-success {
+    background: linear-gradient(145deg, #14b8a6 0%, var(--teal) 100%);
+    color: #fff;
+    padding: 13px 28px;
+    font-size: 15px;
+    box-shadow: 0 4px 16px rgba(13, 148, 136, 0.35);
+  }
+  .btn-success:hover { filter: brightness(1.06); box-shadow: 0 6px 22px rgba(13, 148, 136, 0.4); }
+  .btn-success:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .btn-icon { flex-shrink: 0; }
+
+  .submit-loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(13, 35, 64, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.22s ease, visibility 0.22s ease;
+  }
+  .submit-loading-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .submit-loading-card {
+    max-width: 340px;
+    width: 90vw;
+    background: #eef1f6;
+    border-radius: 20px;
+    padding: 40px 36px 36px;
+    box-shadow: 0 30px 80px rgba(11, 26, 62, 0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    animation: slo-fadeUp 0.5s ease 0.15s both;
+  }
+  @keyframes slo-fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .submit-loading-spinner { display: none; }
+  .submit-loading-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #122050;
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .submit-loading-body {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #5A6787;
+    font-weight: 400;
+    text-align: center;
+  }
+  .submit-loading-card .wt-brand {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    color: #0d1424;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: wt-pl-pulse 1.6s ease-in-out infinite;
+  }
+  .submit-loading-card .wt-brand small {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    color: #9aa4b2;
+  }
+  @keyframes wt-pl-pulse{0%,100%{opacity:.55}50%{opacity:1}}
+  .submit-loading-card .wt-loader {
+    --duration:3s;--primary:#2456e6;--primary-light:#17b4e8;--primary-rgba:rgba(36,86,230,0);
+    width:200px;height:320px;position:relative;transform-style:preserve-3d;zoom:0.45;
+  }
+  @media(max-width:480px){.submit-loading-card .wt-loader{zoom:0.35}.submit-loading-card{padding:30px 24px 28px}}
+  .submit-loading-card .wt-loader:before,.submit-loading-card .wt-loader:after{--r:20.5deg;content:"";width:320px;height:140px;position:absolute;right:32%;bottom:-11px;background:#eef1f6;transform:translateZ(200px) rotate(var(--r));animation:wt-mask var(--duration) linear forwards infinite}
+  .submit-loading-card .wt-loader:after{--r:-20.5deg;right:auto;left:32%}
+  .submit-loading-card .wt-loader .ground{position:absolute;left:-50px;bottom:-120px;transform-style:preserve-3d;transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}
+  .submit-loading-card .wt-loader .ground div{transform:rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(0);width:200px;height:200px;background:linear-gradient(45deg,var(--primary) 0%,var(--primary) 50%,var(--primary-light) 50%,var(--primary-light) 100%);transform-style:preserve-3d;animation:wt-ground var(--duration) linear forwards infinite}
+  .submit-loading-card .wt-loader .ground div:before,.submit-loading-card .wt-loader .ground div:after{--rx:90deg;--ry:0deg;--x:44px;--y:162px;--z:-50px;content:"";width:156px;height:300px;opacity:0;background:linear-gradient(var(--primary),var(--primary-rgba));position:absolute;transform:rotateX(var(--rx)) rotateY(var(--ry)) translate(var(--x),var(--y)) translateZ(var(--z));animation:wt-ground-shine var(--duration) linear forwards infinite}
+  .submit-loading-card .wt-loader .ground div:after{--rx:90deg;--ry:90deg;--x:0;--y:177px;--z:150px}
+  .submit-loading-card .wt-loader .box{--x:0;--y:0;position:absolute;animation:var(--duration) linear forwards infinite;transform:translate(var(--x),var(--y))}
+  .submit-loading-card .wt-loader .box div{width:48px;height:48px;position:relative;transform-style:preserve-3d;animation:var(--duration) ease forwards infinite;background-color:#17b4e8;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}
+  .submit-loading-card .wt-loader .box div:before,.submit-loading-card .wt-loader .box div:after{--rx:90deg;--ry:0deg;--z:24px;--y:-24px;--x:0;content:"";position:absolute;width:inherit;height:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);transform:rotateX(var(--rx)) rotateY(var(--ry)) translate(var(--x),var(--y)) translateZ(var(--z))}
+  .submit-loading-card .wt-loader .box div:before{background-color:#2456e6}
+  .submit-loading-card .wt-loader .box div:after{--rx:0deg;--ry:90deg;--x:24px;--y:0;background-color:#0a3a6b}
+  .submit-loading-card .wt-loader .box.box7{display:none}
+  .submit-loading-card .wt-loader .box.box5 div:after{background-color:#0a0a0a;box-shadow:inset 0 0 0 1px rgba(255,255,255,.34)}
+  .submit-loading-card .wt-loader .box.box6 div{background-color:#0a0a0a;box-shadow:inset 0 0 0 1px rgba(255,255,255,.34)}
+  .submit-loading-card .wt-loader .box.box4 div:before{background-color:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.34)}
+  .submit-loading-card .wt-loader .box.box0{--x:-220px;--y:-120px;left:58px;top:108px;animation-name:wt-box-move0}
+  .submit-loading-card .wt-loader .box.box0 div{animation-name:wt-box-scale0}
+  .submit-loading-card .wt-loader .box.box1{--x:-260px;--y:120px;left:25px;top:120px;animation-name:wt-box-move1}
+  .submit-loading-card .wt-loader .box.box1 div{animation-name:wt-box-scale1}
+  .submit-loading-card .wt-loader .box.box2{--x:120px;--y:-190px;left:58px;top:64px;animation-name:wt-box-move2}
+  .submit-loading-card .wt-loader .box.box2 div{animation-name:wt-box-scale2}
+  .submit-loading-card .wt-loader .box.box3{--x:280px;--y:-40px;left:91px;top:120px;animation-name:wt-box-move3}
+  .submit-loading-card .wt-loader .box.box3 div{animation-name:wt-box-scale3}
+  .submit-loading-card .wt-loader .box.box4{--x:60px;--y:200px;left:58px;top:132px;animation-name:wt-box-move4}
+  .submit-loading-card .wt-loader .box.box4 div{animation-name:wt-box-scale4}
+  .submit-loading-card .wt-loader .box.box5{--x:-220px;--y:-120px;left:25px;top:76px;animation-name:wt-box-move5}
+  .submit-loading-card .wt-loader .box.box5 div{animation-name:wt-box-scale5}
+  .submit-loading-card .wt-loader .box.box6{--x:-260px;--y:120px;left:91px;top:76px;animation-name:wt-box-move6}
+  .submit-loading-card .wt-loader .box.box6 div{animation-name:wt-box-scale6}
+  .submit-loading-card .wt-loader .box.box7{--x:-240px;--y:200px;left:58px;top:87px;animation-name:wt-box-move7}
+  .submit-loading-card .wt-loader .box.box7 div{animation-name:wt-box-scale7}
+  @keyframes wt-box-move0{12%{transform:translate(var(--x),var(--y))}25%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+  @keyframes wt-box-scale0{6%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}14%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+  @keyframes wt-box-move1{16%{transform:translate(var(--x),var(--y))}29%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+  @keyframes wt-box-scale1{10%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}18%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+  @keyframes wt-box-move2{20%{transform:translate(var(--x),var(--y))}33%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+  @keyframes wt-box-scale2{14%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}22%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+  @keyframes wt-box-move3{24%{transform:translate(var(--x),var(--y))}37%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+  @keyframes wt-box-scale3{18%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}26%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+  @keyframes wt-box-move4{28%{transform:translate(var(--x),var(--y))}41%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+  @keyframes wt-box-scale4{22%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}30%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+  @keyframes wt-box-move5{32%{transform:translate(var(--x),var(--y))}45%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+  @keyframes wt-box-scale5{26%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}34%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+  @keyframes wt-box-move6{36%{transform:translate(var(--x),var(--y))}49%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+  @keyframes wt-box-scale6{30%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}38%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+  @keyframes wt-box-move7{40%{transform:translate(var(--x),var(--y))}53%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+  @keyframes wt-box-scale7{34%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}42%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+  @keyframes wt-ground{0%,65%{transform:rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(0)}75%,90%{transform:rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(1)}100%{transform:rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(0)}}
+  @keyframes wt-ground-shine{0%,70%{opacity:0}75%,87%{opacity:.2}100%{opacity:0}}
+  @keyframes wt-mask{0%,65%{opacity:0}66%,100%{opacity:1}}
+
+  .step-page { display: none; }
+  .step-page.active { display: block; }
+
+  .success-screen {
+    text-align: center;
+    padding: 52px 24px 40px;
+  }
+  .success-icon {
+    width: 80px; height: 80px;
+    background: linear-gradient(145deg, #d1fae5, #a7f3d0);
+    border-radius: 50%;
+    margin: 0 auto 26px;
+    display: flex; align-items: center; justify-content: center;
+    border: 3px solid #fff;
+    box-shadow: var(--shadow-md);
+    color: var(--success);
+  }
+  .success-icon .icon { color: var(--success); }
+  .success-screen h2 {
+    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .success-screen p { color: var(--muted); font-size: 15px; line-height: 1.65; max-width: 440px; margin: 0 auto; }
+  .success-details {
+    background: linear-gradient(180deg, #f0fdff 0%, var(--light-blue) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    margin: 28px auto;
+    max-width: 440px;
+    text-align: left;
+    box-shadow: var(--shadow-sm);
+  }
+  .success-details .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 180, 216, 0.12);
+  }
+  .success-details .row:last-child { border-bottom: none; }
+  .success-details .row span:first-child { color: var(--muted); flex-shrink: 0; }
+  .success-details .row span:last-child {
+    font-weight: 500;
+    color: var(--navy);
+    text-align: right;
+  }
+  .success-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--success);
+  }
+  .success-pill svg { flex-shrink: 0; }
+
+  .orcid-help {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .orcid-help a { color: var(--accent-deep); text-decoration: none; font-weight: 500; }
+  .orcid-help a:hover { text-decoration: underline; }
+
+  .footer-note { font-size: 13px; color: var(--muted); margin-top: 20px; line-height: 1.5; }
+
+  .form-hidden { display: none !important; }
+  .locale-bar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: auto;
+  }
+  .locale-bar .locale-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.9);
+    transition: background 0.15s, border-color 0.15s;
+    line-height: 1;
+  }
+  .locale-bar .locale-btn .locale-flag {
+    width: 22px;
+    height: auto;
+    max-height: 15px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: block;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+  }
+  .locale-bar .locale-btn:hover {
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .locale-bar .locale-btn.active {
+    background: rgba(0,180,216,0.35);
+    border-color: rgba(0,180,216,0.55);
+    color: #ecfeff;
+  }
+
+  .consent-hint {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .consent-hint strong { color: var(--navy); font-weight: 600; }
+  .consent-checkboxes.consent-locked {
+    opacity: 0.72;
+    pointer-events: none;
+  }
+  .consent-checkboxes.consent-locked .checkbox-item {
+    cursor: not-allowed;
+  }
+  .consent-checkboxes.consent-locked input[type="checkbox"] {
+    cursor: not-allowed;
+  }
+  .consent-doc-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .consent-doc-links .btn-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--accent-deep);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .consent-doc-links .btn-link:hover { color: var(--accent); }
+  .consent-field-invalid .checkbox-item {
+    border-color: var(--error);
+    box-shadow: 0 0 0 1px rgba(192, 57, 43, 0.12);
+  }
+
+  .legal-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(10, 22, 40, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+  .legal-modal-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .legal-modal {
+    width: 100%;
+    max-width: 640px;
+    max-height: min(88vh, 720px);
+    background: var(--surface);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .legal-modal-head {
+    flex-shrink: 0;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    background: linear-gradient(180deg, #f8fbff 0%, var(--surface) 100%);
+  }
+  .legal-modal-head h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+    color: var(--navy);
+    margin: 0;
+    line-height: 1.35;
+  }
+  .legal-modal-close {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .legal-modal-close:hover {
+    border-color: var(--accent);
+    color: var(--accent-deep);
+  }
+  .legal-modal-body {
+    padding: 18px 22px 22px;
+    overflow-y: auto;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .legal-modal-body h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 18px 0 8px;
+    font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+  }
+  .legal-modal-body h3:first-child { margin-top: 0; }
+  .legal-modal-body p { margin: 0 0 10px; }
+  .legal-modal-body ul {
+    margin: 0 0 12px 1.1em;
+    padding: 0;
+  }
+  .legal-modal-body li { margin-bottom: 6px; }
+  .legal-modal-body .legal-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+</style>
+</head>
+<body>
+
+<svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 12H4a2 2 0 0 0-2 2v8h4M18 9h2a2 2 0 0 1 2 2v11h-4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m22 6-10 7L2 6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-microscope" viewBox="0 0 24 24"><path d="M9 2h6M10 8v12a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V8M8 8h8l-1.5 3h-5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M6 22h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-books" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 9v4M12 17h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-book-open" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-newspaper" viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9h2v9Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M18 4h2v4h-2M14 4h2v4h-2M10 4h2v4h-2M6 4h2v4H6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-library" viewBox="0 0 24 24"><path d="m16 6 4 14M20 6l-4 14M4 6l4 14M8 6 4 20" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6v14M12 6h4M12 6H8" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="8" y="2" width="8" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 12h6M9 16h6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-languages" viewBox="0 0 24 24"><path d="M5 8h6M8 5v6M2 14h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 12h8M16 9v6M14 18h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- Header -->
+<div class="page-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <img class="header-brand-img" src="img/writetec-logo.png" width="200" height="60" alt="WRITETEC">
+    </div>
+    <div class="header-text">
+      <h1 id="header-title" lang="tr">7. Uluslararası WriteTec Yapay Zeka Çağında Sosyal Bilimler ve Sağlık Bilimleri Kongresi</h1>
+      <p id="header-sub">Başvuru Formu · 28 Ağustos – 2 Eylül 2026, Antalya</p>
+    </div>
+  </div>
+  <div class="badge-row">
+    <span class="badge accent">
+      <svg class="icon icon--sm badge-icon" aria-hidden="true"><use href="#i-globe"/></svg>
+      <span id="badge-online">Yüz Yüze + Online</span>
+    </span>
+    <span class="badge" id="badge-dates">28 Ağustos – 2 Eylül 2026 · Antalya / Alanya</span>
+    <span class="badge">writetecbt@gmail.com</span>
+    <span class="badge" id="badge-phone">0 (530) 471 80 78</span>
+    <div class="locale-bar" role="group" aria-label="Language">
+      <button type="button" class="locale-btn" id="btn-locale-tr" data-locale="tr" aria-label="Türkçe">
+        <img class="locale-flag" src="/turkey.svg" alt="" width="22" height="15" decoding="async" />
+        <span>TR</span>
+      </button>
+      <button type="button" class="locale-btn" id="btn-locale-en" data-locale="en" aria-label="English">
+        <img class="locale-flag" src="img/uk.svg" alt="" width="22" height="15" decoding="async" />
+        <span>EN</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Düzeltme (revizyon) bilgi şeridi — URL'de ?duzeltmeRef=WT-… varsa JS gösterir -->
+<div id="revision-banner" style="display:none;max-width:960px;margin:18px auto 0;padding:14px 18px;background:#fef9ec;border:1px solid #fde68a;border-left:4px solid #b45309;border-radius:10px;color:#92400e;font-size:14px;line-height:1.6;box-sizing:border-box"></div>
+
+<!-- Kabul edildi ekranı — onaylı bir ref için düzeltme linki açılınca JS gösterir (form gizlenir) -->
+<div id="accepted-screen" style="display:none">
+  <div style="max-width:900px;margin:0 auto;padding:32px 24px 72px">
+    <div class="form-section success-screen">
+      <div class="success-icon" aria-hidden="true">
+        <svg class="icon icon--xl" width="36" height="36"><use href="#i-check"/></svg>
+      </div>
+      <h2 id="accepted-title"></h2>
+      <p id="accepted-body"></p>
+      <p class="footer-note" id="accepted-footer">
+        <strong>writetecbt@gmail.com</strong> · <strong>+90 530 471 80 78</strong>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Progress Tabs -->
+<div class="progress-bar">
+  <div class="progress-inner">
+    <div class="step-tab active" id="tab1">
+      <div class="step-num">1</div>
+      <span id="tab-label-1">Kişisel Bilgiler</span>
+    </div>
+    <div class="step-tab" id="tab2">
+      <div class="step-num">2</div>
+      <span id="tab-label-2">Bilim Alanı &amp; Yayın</span>
+    </div>
+    <div class="step-tab" id="tab3">
+      <div class="step-num">3</div>
+      <span id="tab-label-3">Bildiri Özeti</span>
+    </div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- STEP 1 -->
+  <div class="step-page active" id="step1">
+    <div class="form-section">
+      <div class="section-title">
+        <span class="icon-wrap" aria-hidden="true"><svg class="icon"><use href="#i-user"/></svg></span>
+        <span id="section-authors-title">Yazar Bilgileri</span>
+      </div>
+      <div class="info-box" style="margin-bottom:18px">
+        <span class="icon-wrap" aria-hidden="true"><svg class="icon icon--md"><use href="#i-alert"/></svg></span>
+        <span id="section-authors-info"></span>
+      </div>
+
+      <div id="authors-container"></div>
+
+      <div class="nav-row" style="margin-top:18px">
+        <button type="button" class="btn btn-secondary" id="btn-add-author">
+          <span id="btn-add-author-label">+ Yazar Ekle</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <div></div>
+      <button type="button" class="btn btn-primary" onclick="goStep(2)">
+        <span id="btn-next-1">Devam Et</span>
+        <svg class="icon icon--sm btn-icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-page" id="step2">
+    <div class="form-section">
+      <div class="section-title">
+        <span class="icon-wrap" aria-hidden="true"><svg class="icon"><use href="#i-globe"/></svg></span>
+        <span id="section-katilim-title">Katılım Şekli</span>
+      </div>
+      <div class="field" id="f-katilim">
+        <label id="label-katilim">Katılım Şekli <span class="req">*</span></label>
+        <select id="katilim">
+          <option value="">Seçiniz</option>
+          <option value="Yüz yüze (Alanya)">Yüz yüze — Noxinn Club Hotel, Alanya/Antalya</option>
+          <option value="Online (Çevrimiçi)">Online (Çevrimiçi)</option>
+        </select>
+        <span class="error-msg">Katılım şekli seçimi zorunludur.</span>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="section-title">
+        <span class="icon-wrap" aria-hidden="true"><svg class="icon"><use href="#i-microscope"/></svg></span>
+        <span id="section-field-title">Bilim Alanı</span>
+      </div>
+      <div class="field" id="f-alan">
+        <label id="label-alan">Bilim Alanı <span class="req">*</span></label>
+        <select id="alan" onchange="toggleDigerAlan()">
+          <option value="">Seçiniz</option>
+          <option value="Hemşirelik">Hemşirelik</option>
+          <option value="Ebelik">Ebelik</option>
+          <option value="Sağlık Yönetimi">Sağlık Yönetimi</option>
+          <option value="Halk Sağlığı">Halk Sağlığı</option>
+          <option value="Fizyoterapi ve Rehabilitasyon">Fizyoterapi ve Rehabilitasyon</option>
+          <option value="Beslenme ve Diyetetik">Beslenme ve Diyetetik</option>
+          <option value="Tıp">Tıp</option>
+          <option value="Eczacılık">Eczacılık</option>
+          <option value="Diş Hekimliği">Diş Hekimliği</option>
+          <option value="Tıbbi Biyokimya">Tıbbi Biyokimya</option>
+          <option value="İktisat">İktisat</option>
+          <option value="İşletme">İşletme</option>
+          <option value="Maliye">Maliye</option>
+          <option value="Uluslararası İlişkiler">Uluslararası İlişkiler</option>
+          <option value="Siyaset Bilimi ve Kamu Yönetimi">Siyaset Bilimi ve Kamu Yönetimi</option>
+          <option value="Sosyoloji">Sosyoloji</option>
+          <option value="Psikoloji">Psikoloji</option>
+          <option value="Eğitim Bilimleri">Eğitim Bilimleri</option>
+          <option value="Tarih">Tarih</option>
+          <option value="Hukuk">Hukuk</option>
+          <option value="Diğer">Diğer</option>
+        </select>
+        <span class="error-msg">Bilim alanı seçimi zorunludur.</span>
+      </div>
+      <div class="field" id="f-alan-diger" style="display:none; margin-top: 14px;">
+        <input type="text" id="alan-diger" placeholder="Lütfen alanınızı belirtin">
+        <span class="error-msg">Lütfen alanınızı belirtin.</span>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="section-title">
+        <span class="icon-wrap" aria-hidden="true"><svg class="icon"><use href="#i-books"/></svg></span>
+        <span id="section-yayin-title">Yayın Tercihi</span>
+      </div>
+      <div class="info-box">
+        <span class="icon-wrap" aria-hidden="true"><svg class="icon icon--md"><use href="#i-alert"/></svg></span>
+        <span id="section-yayin-info"></span>
+      </div>
+      <div class="checkbox-group" id="yayin-group">
+        <label class="checkbox-item" onclick="this.classList.toggle('selected')">
+          <input type="checkbox" name="yayin" value="bildiri_kitabi" data-forms-label="Kongre Bildiri Kitabında Yayın (E-kitap, katılım ücretine dahil)" data-label-en="Congress proceedings (e-book, included in registration fee)">
+          <div class="cb-label">
+            <span class="cb-icon-wrap" aria-hidden="true"><svg class="icon icon--md"><use href="#i-book-open"/></svg></span>
+            <span class="cb-text">
+              <strong>Kongre Bildiri Kitabında Yayın</strong>
+              <span>E-kitap olarak yayınlanır. Katılım ücretine dahildir.</span>
+            </span>
+          </div>
+        </label>
+        <label class="checkbox-item" onclick="this.classList.toggle('selected')">
+          <input type="checkbox" name="yayin" value="tr_dizin" data-forms-label="TR Dizinli Dergide Makale Yayını" data-label-en="TR Index journal article (peer review required; not included in fee; 10% discount for congress participants)">
+          <div class="cb-label">
+            <span class="cb-icon-wrap" aria-hidden="true"><svg class="icon icon--md"><use href="#i-newspaper"/></svg></span>
+            <span class="cb-text">
+              <strong>TR Dizinli Dergide Makale Yayını</strong>
+              <span>Hakem sürecini geçmesi şartıyla. Katılım ücretine dahil değildir. Kongre katılımcılarına %10 indirim.</span>
+            </span>
+          </div>
+        </label>
+        <label class="checkbox-item" onclick="this.classList.toggle('selected')">
+          <input type="checkbox" name="yayin" value="scopus" data-forms-label="Scopus İndeksli Dergide Makale Yayını (International Journal of Business and Economic Studies)" data-label-en="Scopus-indexed journal article (International Journal of Business and Economic Studies; English works; not included in fee)">
+          <div class="cb-label">
+            <span class="cb-icon-wrap" aria-hidden="true"><svg class="icon icon--md"><use href="#i-target"/></svg></span>
+            <span class="cb-text">
+              <strong>Scopus İndeksli Dergide Makale Yayını</strong>
+              <span><strong>International Journal of Business and Economic Studies</strong> dergisi. İngilizce çalışmalar kabul edilir. Katılım ücretine dahil değildir.</span>
+            </span>
+          </div>
+        </label>
+        <label class="checkbox-item" onclick="this.classList.toggle('selected')">
+          <input type="checkbox" name="yayin" value="diger_dergi" data-forms-label="Diğer Dergilerde Makale Yayını" data-label-en="Other journals (peer review required; not included in fee)">
+          <div class="cb-label">
+            <span class="cb-icon-wrap" aria-hidden="true"><svg class="icon icon--md"><use href="#i-file"/></svg></span>
+            <span class="cb-text">
+              <strong>Diğer Dergilerde Makale Yayını</strong>
+              <span>Hakem sürecini geçmesi şartıyla. Katılım ücretine dahil değildir.</span>
+            </span>
+          </div>
+        </label>
+        <label class="checkbox-item" onclick="this.classList.toggle('selected')">
+          <input type="checkbox" name="yayin" value="kitap_bolumu" data-forms-label="Uluslararası Kitap Bölümü Yayını" data-label-en="International edited book chapter (peer-reviewed e-book; not included in fee)">
+          <div class="cb-label">
+            <span class="cb-icon-wrap" aria-hidden="true"><svg class="icon icon--md"><use href="#i-library"/></svg></span>
+            <span class="cb-text">
+              <strong>Uluslararası Kitap Bölümü Yayını</strong>
+              <span>Uluslararası yayınevi tarafından editörlü, hakemli e-kitap. Katılım ücretine dahil değildir.</span>
+            </span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button type="button" class="btn btn-secondary" onclick="goStep(1)">
+        <svg class="icon icon--sm btn-icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+        <span id="btn-back-2">Geri</span>
+      </button>
+      <button type="button" class="btn btn-primary" onclick="goStep(3)">
+        <span id="btn-next-2">Devam Et</span>
+        <svg class="icon icon--sm btn-icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-page" id="step3">
+  <div class="abstract-box">
+      <div class="abstract-head">
+        <svg class="icon icon--md" aria-hidden="true"><use href="#i-clipboard"/></svg>
+        <h4 id="abstract-info-heading">Bildiri Özeti Bilgilendirmesi</h4>
+      </div>
+      <ul id="abstract-bullets">
+        <li id="abstract-li-1">Türkçe ve İngilizce olmak üzere iki özet gerekmektedir</li>
+        <li id="abstract-li-2">Her özet için 3–5 anahtar kelime belirtiniz</li>
+        <li id="abstract-li-3">Tezden üretilen çalışmalar “Tez Notu” alanında belirtilmelidir</li>
+      </ul>
+    </div>
+
+    <div class="form-section" id="section-abstract-tr">
+      <div class="section-title">
+        <span class="icon-wrap" aria-hidden="true">TR</span>
+        <span id="section-tr-title">Türkçe Bildiri</span>
+      </div>
+      <div class="field-grid">
+        <div class="field" id="f-baslik-tr">
+          <label id="label-baslik-tr">Bildiri Başlığı (Türkçe) <span class="req">*</span></label>
+          <input type="text" id="baslik-tr" placeholder="Bildiri başlığınızı giriniz" oninput="updateChar('baslik-tr','cc-baslik-tr',120)">
+          <div class="char-count" id="cc-baslik-tr">0 / 120</div>
+          <span class="error-msg">Türkçe başlık zorunludur.</span>
+        </div>
+        <div class="field" id="f-ozet-tr">
+          <label id="label-ozet-tr">Özet (Türkçe) <span class="req">*</span></label>
+          <textarea id="ozet-tr" placeholder="En az 100 kelimelik özet yazınız..." rows="6" oninput="updateChar('ozet-tr','cc-ozet-tr',1800)"></textarea>
+          <div class="char-count" id="cc-ozet-tr">0 / ~300 kelime</div>
+          <span class="error-msg">Türkçe özet zorunludur (min. 100 kelime).</span>
+        </div>
+        <div class="field" id="f-keywords-tr">
+          <label id="label-keywords-tr">Anahtar Kelimeler (Türkçe) <span class="req">*</span></label>
+          <input type="text" id="keywords-tr" placeholder="Kelime1, Kelime2, Kelime3">
+          <span class="error-msg">En az 3 anahtar kelime giriniz.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section" id="section-abstract-en">
+      <div class="section-title">
+        <span class="icon-wrap" aria-hidden="true">EN</span>
+        <span id="section-en-title">English abstract</span>
+      </div>
+      <div class="field-grid">
+        <div class="field" id="f-baslik-en">
+          <label id="label-baslik-en">Paper Title (English) <span class="req">*</span></label>
+          <input type="text" id="baslik-en" placeholder="Enter your paper title" oninput="updateChar('baslik-en','cc-baslik-en',120)">
+          <div class="char-count" id="cc-baslik-en">0 / 120</div>
+          <span class="error-msg">English title is required.</span>
+        </div>
+        <div class="field" id="f-ozet-en">
+          <label id="label-ozet-en">Abstract (English) <span class="req">*</span></label>
+          <textarea id="ozet-en" placeholder="Write at least 100 words..." rows="6" oninput="updateChar('ozet-en','cc-ozet-en',1800)"></textarea>
+          <div class="char-count" id="cc-ozet-en">0 / ~300 words</div>
+          <span class="error-msg">English abstract is required (min. 100 words).</span>
+        </div>
+        <div class="field" id="f-keywords-en">
+          <label id="label-keywords-en">Keywords (English) <span class="req">*</span></label>
+          <input type="text" id="keywords-en" placeholder="Keyword1, Keyword2, Keyword3">
+          <span class="error-msg">At least 3 keywords required.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section" id="section-thesis">
+      <div class="field">
+        <label id="label-tez-cb">
+          <input type="checkbox" id="tez" style="width:auto; margin-right:8px;">
+          <span id="label-tez-text">Bu çalışma bir tezden üretilmiştir</span>
+        </label>
+      </div>
+      <div class="field">
+        <label id="label-tez-notu">Tez Notu <span class="hint" id="hint-tez-notu">(isteğe bağlı; tez çalışmasıysa kısaca belirtiniz)</span></label>
+        <input type="text" id="tez-notu" placeholder="Örn. Yüksek lisans tezi, 2024">
+      </div>
+    </div>
+
+    <div class="form-section" id="section-consent">
+      <div class="section-title">
+        <span class="icon-wrap" aria-hidden="true"><svg class="icon"><use href="#i-clipboard"/></svg></span>
+        <span id="section-consent-title">KVKK ve gizlilik onayı</span>
+      </div>
+      <p class="consent-hint" id="consent-hint"></p>
+      <div class="consent-checkboxes consent-locked" id="consent-checkboxes">
+        <div class="checkbox-group" style="margin-top:0">
+          <label class="checkbox-item" id="label-wrap-kvkk" data-consent-label>
+            <input type="checkbox" id="cb-kvkk" disabled aria-describedby="consent-hint">
+            <div class="cb-label">
+              <span class="cb-icon-wrap" aria-hidden="true"><svg class="icon icon--md"><use href="#i-file"/></svg></span>
+              <span class="cb-text">
+                <strong id="cb-kvkk-title">6698 sayılı KVKK kapsamında aydınlatma metnini okudum ve kabul ediyorum</strong>
+                <span id="cb-kvkk-desc">Metni incelemek için aşağıdaki bağlantıyı kullanabilirsiniz.</span>
+              </span>
+            </div>
+          </label>
+          <label class="checkbox-item" id="label-wrap-gizlilik" data-consent-label>
+            <input type="checkbox" id="cb-gizlilik" disabled aria-describedby="consent-hint">
+            <div class="cb-label">
+              <span class="cb-icon-wrap" aria-hidden="true"><svg class="icon icon--md"><use href="#i-book-open"/></svg></span>
+              <span class="cb-text">
+                <strong id="cb-gizlilik-title">Gizlilik ve güvenlik politikasını okudum ve kabul ediyorum</strong>
+                <span id="cb-gizlilik-desc">Metni incelemek için aşağıdaki bağlantıyı kullanabilirsiniz.</span>
+              </span>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="consent-doc-links">
+        <button type="button" class="btn-link" id="btn-open-kvkk" data-open-modal="modal-kvkk">6698 sayılı KVKK — Aydınlatma metni</button>
+        <button type="button" class="btn-link" id="btn-open-gizlilik" data-open-modal="modal-gizlilik">Gizlilik ve güvenlik politikası</button>
+      </div>
+      <p class="error-msg" id="consent-error" style="display:none;margin-top:12px" role="alert"></p>
+    </div>
+
+    <div class="nav-row">
+      <button type="button" class="btn btn-secondary" onclick="goStep(2)">
+        <svg class="icon icon--sm btn-icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+        <span id="btn-back-3">Geri</span>
+      </button>
+      <button class="btn btn-success" type="button" id="btn-submit" onclick="void submitForm()">
+        <svg class="icon icon--sm btn-icon" aria-hidden="true" width="18" height="18"><use href="#i-send"/></svg>
+        <span class="btn-label" id="btn-submit-label">Başvuruyu Gönder</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="step-page" id="step-success">
+    <div class="form-section success-screen">
+      <div class="success-icon" aria-hidden="true">
+        <svg class="icon icon--xl" width="36" height="36"><use href="#i-check"/></svg>
+      </div>
+      <h2 id="success-title">Başvurunuz Alındı!</h2>
+      <p id="success-body">Bildiri özetiniz başarıyla iletildi. Değerlendirme sürecinin ardından e-posta ile bilgilendirileceksiniz.</p>
+      <div class="success-details" id="success-summary">
+        <!-- JS fills this -->
+      </div>
+      <p class="footer-note" id="success-footer">
+        Sorularınız için: <strong>writetecbt@gmail.com</strong> · <strong>+90 (530) 471 80 78</strong>
+      </p>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<div id="modal-kvkk" class="legal-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-kvkk-title" aria-hidden="true" hidden>
+  <div class="legal-modal">
+    <div class="legal-modal-head">
+      <h2 id="modal-kvkk-title">6698 sayılı KVKK — Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metni</h2>
+      <button type="button" class="legal-modal-close" data-close-modal="modal-kvkk" aria-label="Kapat">×</button>
+    </div>
+    <div class="legal-modal-body">
+      <p class="legal-meta">Son güncelleme: 11 Nisan 2026</p>
+      <h3>Veri sorumlusu</h3>
+      <p>6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca, kişisel verileriniz WRITETEC BİLGİ TEKNOLOJİLERİ DAN. SAN. ve TİC. LTD. ŞTİ. NA AKADEMİ ISPARTA ŞUBESİ (“Şirket”) tarafından veri sorumlusu sıfatıyla işlenmektedir.</p>
+      <h3>Adres</h3>
+      <p>Çünür Mah. 5421. Sokak No: 26 D:17 Merkez/Isparta</p>
+      <h3>Telefon</h3>
+      <p>+90 530 471 80 78</p>
+      <h3>E-posta</h3>
+      <p>naakademi@gmail.com</p>
+      <h3>Kişisel verilerin hangi amaçlarla işlendiği</h3>
+      <p>Şirket tarafından, aşağıdaki amaçlarla sınırlı ve ölçülü olarak kişisel verileriniz işlenebilir:</p>
+      <ul>
+        <li>Online İngilizce eğitim hizmetlerinin sunulması, üyelik ve kayıt süreçlerinin yürütülmesi</li>
+        <li>Ders, kurs ve içeriklere erişimin sağlanması; öğrenci destek süreçlerinin yürütülmesi</li>
+        <li>İletişim taleplerinin yanıtlanması; bilgilendirme ve danışmanlık süreçlerinin yönetilmesi</li>
+        <li>Hizmet kalitesinin artırılması, operasyonel süreçlerin planlanması ve güvenliğin sağlanması</li>
+        <li>Yetkili kurum ve kuruluşlara bilgi verilmesi dahil yasal yükümlülüklerin yerine getirilmesi</li>
+        <li>İstatistiksel analiz, raporlama ve arşivleme (anonim veya kimlikten arındırılmış hallerde mümkün olduğu ölçüde)</li>
+      </ul>
+      <h3>İşlenen kişisel veri kategorileri</h3>
+      <p>Hizmetin niteliğine bağlı olarak; kimlik (ad-soyad), iletişim (telefon, e-posta), müşteri işlem (kurs tercihi, kayıt bilgisi), işlem güvenliği (log, IP, cihaz bilgisi) ve pazarlama (açık rıza ile) verileri işlenebilir.</p>
+      <h3>Kişisel verilerin işlenme şartı ve hukuki sebepler</h3>
+      <p>Kişisel verileriniz; KVKK md. 5 ve md. 6 kapsamında, açık rızanızın bulunması, sözleşmenin kurulması veya ifasıyla doğrudan doğruya ilgili olması, veri sorumlusunun hukuki yükümlülüğünü yerine getirebilmesi için zorunlu olması veya meşru menfaat gibi hukuki sebeplere dayanılarak işlenir.</p>
+      <h3>Kişisel verilerin aktarılması</h3>
+      <p>Kişisel verileriniz; hizmetin gerektirdiği ölçüde iş ortaklarımıza, tedarikçilerimize (ör. barındırma, iletişim altyapısı), yetkili kamu kurum ve kuruluşlarına ve yasal düzenlemelerin öngördüğü hallerde üçüncü kişilere KVKK’ya uygun olarak aktarılabilir.</p>
+      <h3>Kişisel verilerin toplanma yöntemi</h3>
+      <p>Verileriniz; web sitemiz, iletişim formları, e-posta, telefon, WhatsApp ve öğrenci paneli gibi kanallar aracılığıyla otomatik veya kısmen otomatik yollarla toplanabilir.</p>
+      <h3>İlgili kişinin KVKK md. 11 kapsamındaki hakları</h3>
+      <p>KVKK’nın 11. maddesi uyarınca veri sahipleri olarak aşağıdaki haklara sahipsiniz:</p>
+      <ul>
+        <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+        <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+        <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+        <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</li>
+        <li>Eksik veya yanlış işlenmişse düzeltilmesini isteme</li>
+        <li>KVKK’nın 7. maddesi çerçevesinde silinmesini veya yok edilmesini isteme</li>
+        <li>Düzeltme, silme, yok etme işlemlerinin aktarıldığı üçüncü kişilere bildirilmesini isteme</li>
+        <li>Münhasıran otomatik sistemler ile analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme</li>
+        <li>Kanuna aykırı işlenmesi sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme</li>
+      </ul>
+      <h3>Başvuru yolu</h3>
+      <p>Yukarıdaki haklarınızı kullanmak için taleplerinizi naakademi@gmail.com adresine e-posta göndererek veya yazılı olarak Şirket adresimize iletebilirsiniz. Başvurularınız, KVKK ve ilgili mevzuat çerçevesinde sonuçlandırılır.</p>
+      <p>Şikâyetlerinizi Kişisel Verileri Koruma Kurulu’na iletme hakkınız saklıdır (<a href="https://www.kvkk.gov.tr" target="_blank" rel="noopener noreferrer">www.kvkk.gov.tr</a>).</p>
+      <p>Ayrıca Gizlilik ve Güvenlik Politikası metnimizi inceleyebilirsiniz.</p>
+    </div>
+  </div>
+</div>
+
+<div id="modal-gizlilik" class="legal-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-gizlilik-title" aria-hidden="true" hidden>
+  <div class="legal-modal">
+    <div class="legal-modal-head">
+      <h2 id="modal-gizlilik-title">Gizlilik ve Güvenlik Politikası</h2>
+      <button type="button" class="legal-modal-close" data-close-modal="modal-gizlilik" aria-label="Kapat">×</button>
+    </div>
+    <div class="legal-modal-body">
+      <p class="legal-meta">Yasal</p>
+      <p>Bu politika, kişisel verilerin korunmasına ilişkin ilke ve uygulamaları açıklar.</p>
+      <h3>Amaç ve Kapsam</h3>
+      <p>Bu politika, WRITETEC BİLGİ TEKNOLOJİLERİ DAN. SAN. ve TİC. LTD. ŞTİ. NA AKADEMİ ISPARTA ŞUBESİ (bundan sonra “Şirket” olarak anılacaktır) tarafından toplanan, işlenen ve saklanan kişisel verilerin korunmasına ilişkin ilke ve uygulamaları açıklar.</p>
+      <p><strong>Amaç:</strong> Kişisel verilerin güvenliğini sağlamak, mevzuata uygun hareket etmek ve müşterilerimizin/çalışanlarımızın güvenini korumaktır.</p>
+      <p><strong>Kapsam:</strong> Bu politika, Şirket’in müşterileri, çalışanları, tedarikçileri ve iş ortakları ile ilişkili tüm kişisel verileri kapsar.</p>
+      <h3>Tanımlar</h3>
+      <ul>
+        <li><strong>Kişisel Veri:</strong> Kimliği belirli veya belirlenebilir gerçek kişiye ilişkin her türlü bilgi.</li>
+        <li><strong>İşlenen Kişisel Veri:</strong> Amaçlanan ve yetkili kişilerce gerçekleştirilen kayıt, saklama, aktarım ve kullanım süreçleri.</li>
+        <li><strong>Veri Sorumlusu:</strong> Kişisel verilerin işlenme amaçlarını ve vasıtalarını belirleyen gerçek veya tüzel kişi.</li>
+        <li><strong>Veri Güvenliği:</strong> Kişisel verilerin yetkisiz erişim, ihlal, kayıp, bozulma veya yok edilmeden korunmasını sağlama eylem ve önlemleri.</li>
+      </ul>
+      <h3>İlkeler</h3>
+      <ul>
+        <li><strong>Yasalara Uygunluk:</strong> Kişisel veriler, yürürlükteki veri koruma mevzuatına uygun işlenir.</li>
+        <li><strong>Amaçla Sınırlama:</strong> Veriler, belirlenen amaç için ve bu amaçla sınırlı olarak işlenir.</li>
+        <li><strong>Şeffaflık:</strong> Veri sahiplerine hangi verilerin niçin işlendiği konusunda net bilgi verilir.</li>
+        <li><strong>Güvenlik:</strong> Kişisel verilerin güvenliğini sağlamak için uygun teknik ve organizasyonel önlemler alınır.</li>
+        <li><strong>Sadece Yetkilendirilmiş Erişim:</strong> Verilere erişim, yetkilendirilmiş personelle sınırlıdır.</li>
+      </ul>
+      <h3>Veri Sınıflandırması</h3>
+      <ul>
+        <li><strong>Gizli Veri:</strong> Yasal olarak korunması gereken ve yüksek güvenlik gerektiren veriler (ör. mali bilgiler, kimlik belgeleri).</li>
+        <li><strong>Kısıtlı Veri:</strong> Erişimi sınırlı olan kişisel veriler.</li>
+        <li><strong>Genel Veri:</strong> Kamuya açık veya düşük güvenlik gerektiren veriler.</li>
+      </ul>
+      <p>Verilere ilişkin sınıflandırma, ilgili süreçler ve kullanıcı grupları için net olarak tanımlanır.</p>
+      <h3>Veri İşleme Amaçları</h3>
+      <p>Hizmet sunumu, müşteri desteği, hesap yönetimi, güvenlik izlemesi, yasal uyum vb.</p>
+      <p>Amaçlar açıkça belgelenir ve dışa aktarım veya paylaşım durumlarında veri sahiplerine gerekli bilgilendirme yapılır.</p>
+      <h3>Hukuki Dayanak</h3>
+      <p>Kişisel verilerin işlenmesi, uygulanabilir mevzuata uygun olarak gerçekleştirilir. Gerekli hallerde açık rıza, sözleşme gerekliliği veya meşru menfaatler gibi hukuki sebepler kullanılır.</p>
+      <h3>Kişisel Verilerin Saklanması ve İmha Edilmesi</h3>
+      <p>Veriler, amaç için gerekli süre boyunca saklanır ve bu sürenin bitiminde güvenli bir şekilde imha edilir. Saklama süreleri politika dokümanında veya ilgili prosedürlerde belirtilir.</p>
+      <h3>Güvenlik Önlemleri</h3>
+      <p><strong>Teknik önlemler:</strong> Şifreleme, güvenlik duvarları, güncel yama yönetimi, güvenli yedekleme, izinsiz erişim tespit sistemleri.</p>
+      <p><strong>Organizasyonel önlemler:</strong> Erişim kontrolü, en az ayrıcalık prensibi, farkındalık eğitimi, güvenlik politikalarının düzenli denetimi.</p>
+      <p><strong>Fiziksel önlemler:</strong> Kritik altyapı için güvenli fiziksel alanlar, ziyaretçi yönetimi.</p>
+      <h3>Veri üçüncü taraf işleyicileri</h3>
+      <p>Taşeronlar ile veri işleme sözleşmeleri ve güvenlik şartları.</p>
+      <h3>Erişim ve Yetkilendirme</h3>
+      <p>Tüm çalışanlar ve üçüncü taraflar için rol tabanlı erişim kontrolü uygulanır. Yetkisiz erişim durumunda acil durum prosedürleri devreye alınır ve olay kaydı tutulur.</p>
+      <h3>Veri İhlali Bildirimi</h3>
+      <p>Kişisel verilerin güvenliğini tehdit eden olaylar tespit edildiğinde, gerekli mevzuat kapsamında ilgili taraflara ve yetkili mercilere bildirim yapılır. İhlal yönetimi için olay müdahale planı (IRP) uygulanır.</p>
+      <h3>Sorumluluk ve Yetkili Kişiler</h3>
+      <p>Veri Koruma Görevlisi (DPO) veya yetkili biri, veri koruma ile ilgili sorumlulukları yürütür ve denetimleri koordine eder. Şirket içi birimlerden görev tanımları ve iletişim kanalları belirlenmiştir.</p>
+      <h3>Üçüncü Taraflarla Paylaşım</h3>
+      <p>Kişisel veriler yalnızca yasa ve mevzuata uygun olarak paylaşılır. Taşeronlar ile veri işleme sözleşmeleri yapılır ve güvenlik yükümlülükleri açıkça belirlenir.</p>
+      <h3>Çocuk Verileri</h3>
+      <p>Çocuklardan elde edilen veriler özel koruma önlemlerine tabidir ve gerekli izinler alınır.</p>
+      <h3>Uluslararası Veri Aktarımı</h3>
+      <p>Uluslararası veri aktarımlarında uygun koruma önlemleri ve yasal mekanizmalar kullanılır (ör. uygunluk beyanları, standart sözleşme maddeleri).</p>
+      <h3>Değişiklikler ve Güncellemeler</h3>
+      <p>Bu politika, mevzuat ve uygulama ihtiyaçlarına göre güncellenebilir. Güncellemeler ilgili paydaşlara duyurulur.</p>
+      <p>Gizlilik politikamızla ilgili her türlü sorularınız için naakademi@gmail.com adresine e-posta gönderebilirsiniz.</p>
+      <h3>İletişim</h3>
+      <p><strong>Unvan:</strong> WriteTec Bilgi Teknolojileri Dan. San. ve Tic. Ltd. Şti. NA Akademi Isparta Şubesi</p>
+      <p><strong>Adres:</strong> Çünür Mah. 5421. Sokak No: 26 D:17 Merkez/Isparta</p>
+      <p><strong>Telefon:</strong> +90 530 471 80 78</p>
+      <p><strong>E-posta:</strong> naakademi@gmail.com</p>
+      <p>KVKK kapsamındaki haklarınız için Aydınlatma Metni sayfamızı inceleyebilirsiniz.</p>
+    </div>
+  </div>
+</div>
+
+<div
+  id="submit-loading-overlay"
+  class="submit-loading-overlay"
+  aria-hidden="true"
+  role="status"
+  aria-live="polite"
+  aria-busy="false"
+>
+  <div class="submit-loading-card">
+    <div class="wt-loader">
+      <div class="box box0"><div></div></div>
+      <div class="box box1"><div></div></div>
+      <div class="box box2"><div></div></div>
+      <div class="box box3"><div></div></div>
+      <div class="box box4"><div></div></div>
+      <div class="box box5"><div></div></div>
+      <div class="box box6"><div></div></div>
+      <div class="box box7"><div></div></div>
+      <div class="ground"><div></div></div>
+    </div>
+    <div class="submit-loading-spinner" aria-hidden="true"></div>
+    <p class="submit-loading-title" id="submit-loading-title">Başvurunuz gönderiliyor</p>
+    <p class="submit-loading-body" id="submit-loading-body">
+      Lütfen bekleyin; işlem tamamlanana kadar bu sayfayı kapatmayın.
+    </p>
+    <div class="wt-brand">WRITETEC<small>BİLGİ TEKNOLOJİLERİ</small></div>
+  </div>
+</div>
+
+<script>
+/**
+ * SİTE FORMU → OTOMATİK İŞLEM (önerilen)
+ * 1) Apps Script: Dağıt → Web uygulaması → "Ben" / "Herkes" → /exec URL’sini kopyalayın.
+ * 2) Aşağıdaki WEB_APP_EXEC_URL’e yapıştırın. İsteğe bağlı: WEB_APP_TOKEN ile AYARLAR.WEB_GONDERIM_ANAHTARI aynı olsun.
+ * 3) Gönderim no-cors POST ile gider; tarayıcı yanıt gövdesini okuyamaz ama Drive + mail + Sheets çalışır.
+ *
+ * Alternatif: GOOGLE_FORM (entry ID’leri) — Web App yoksa kullanılır.
+ */
+// GEÇİCİ — TEST: yerelde ayrı test Apps Script projesine işaret ediyor.
+// Canlıya çıkmadan önce production URL'sine döndürün:
+// https://script.google.com/macros/s/AKfycbyK0OFUJxUdHR1w49WPHbww08Cbua_igmQEX8_hCX2i_5VZBcJoJFfVbbw3nXHreXFFTw/exec
+const WEB_APP_EXEC_URL =
+  'https://script.google.com/macros/s/AKfycbzW69K5jGl_tS3wyd70YyIyaKTgCmqTjPGvz43KjWzYSiW11ITa3TzHZbpba8Jxv73r/exec';
+/** Apps Script AYARLAR.WEB_GONDERIM_ANAHTARI ile aynı; boş bırakılabilir (yalnızca test) */
+const WEB_APP_TOKEN = '';
+const AUTHORS_UI_MAX = 20;
+
+function detectInitialFormLocale() {
+  const nav =
+    (typeof navigator !== 'undefined' && navigator.languages && navigator.languages[0]) ||
+    (typeof navigator !== 'undefined' && navigator.language) ||
+    '';
+  const s = String(nav).toLowerCase();
+  return s.indexOf('tr') === 0 ? 'tr' : 'en';
+}
+
+let formLocale = detectInitialFormLocale();
+
+/** Ret mailindeki bağlantıdan gelen düzeltme referansı (?duzeltmeRef=WT-…). */
+const DUZELTME_REF = (function () {
+  try {
+    const raw = String(new URLSearchParams(window.location.search).get('duzeltmeRef') || '').trim();
+    return /^WT-\d{8}-\d{6}(-\d+)?$/.test(raw) ? raw : '';
+  } catch (ignore) {
+    return '';
+  }
+})();
+
+function renderRevisionBanner() {
+  const el = document.getElementById('revision-banner');
+  if (!el) return;
+  if (!DUZELTME_REF) {
+    el.style.display = 'none';
+    return;
+  }
+  el.innerHTML =
+    formLocale === 'en'
+      ? 'You are submitting a <strong>revised version</strong> of your application <strong>' +
+        DUZELTME_REF +
+        '</strong>. When you submit the form, your existing application will be updated under the same number and re-evaluated.'
+      : '<strong>' +
+        DUZELTME_REF +
+        '</strong> numaralı başvurunuz için <strong>düzeltilmiş sürümü</strong> gönderiyorsunuz. Formu gönderdiğinizde mevcut başvurunuz aynı numara altında güncellenecek ve yeniden değerlendirmeye alınacaktır.';
+  el.style.display = 'block';
+}
+
+/** Onaylı başvuruda: formu tamamen gizler, "kabul edildi" ekranını gösterir. */
+function showAcceptedScreen() {
+  const banner = document.getElementById('revision-banner');
+  if (banner) banner.style.display = 'none';
+  document.querySelectorAll('.progress-bar, .main').forEach(function (el) {
+    if (el.id !== 'accepted-screen' && !el.closest('#accepted-screen')) el.style.display = 'none';
+  });
+  const title = document.getElementById('accepted-title');
+  const body = document.getElementById('accepted-body');
+  if (title) {
+    title.textContent =
+      formLocale === 'en' ? 'Your abstract has been accepted' : 'Bildiri başvurunuz kabul edildi';
+  }
+  if (body) {
+    body.textContent =
+      formLocale === 'en'
+        ? 'Application ' +
+          DUZELTME_REF +
+          ' has already been accepted for presentation. No further revision or resubmission can be made through this link. Please check your email for the acceptance letter.'
+        : DUZELTME_REF +
+          ' numaralı bildiri başvurunuz kabul edilmiştir. Bu link üzerinden artık düzeltme veya yeniden başvuru yapılamaz. Kabul belgeniz için e-posta kutunuzu kontrol edebilirsiniz.';
+  }
+  const scr = document.getElementById('accepted-screen');
+  if (scr) scr.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/** Düzeltme linki açılışında: form gizli tutulur, ref onaylıysa kabul ekranı gösterilir. */
+function hideFormForRefCheck() {
+  document.querySelectorAll('.progress-bar, .main').forEach(function (el) {
+    if (el.id !== 'accepted-screen' && !el.closest('#accepted-screen')) el.style.display = 'none';
+  });
+}
+
+/** Gizlenen formu geri açar (ref onaylı DEĞİL veya kontrol başarısız). */
+function revealForm() {
+  document.querySelectorAll('.progress-bar, .main').forEach(function (el) {
+    if (el.id !== 'accepted-screen' && !el.closest('#accepted-screen')) el.style.display = '';
+  });
+}
+
+/** Ref durumunu sorar; Onaylandı ise kabul ekranı, değilse formu açar. */
+async function refKabulKontrol() {
+  if (!DUZELTME_REF) return;
+  let acildi = false;
+  const zamanlayici = setTimeout(function () {
+    if (!acildi) { acildi = true; revealForm(); }
+  }, 6000);
+  try {
+    const params = new URLSearchParams();
+    params.append('action', 'refDurum');
+    params.append('ref', DUZELTME_REF);
+    const res = await fetch(WEB_APP_EXEC_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString(),
+    });
+    const json = JSON.parse((await res.text()).trim());
+    clearTimeout(zamanlayici);
+    if (!acildi) {
+      acildi = true;
+      if (json && json.ok && json.kabul === true) { showAcceptedScreen(); return; }
+      revealForm();
+    }
+  } catch (ignore) {
+    clearTimeout(zamanlayici);
+    if (!acildi) { acildi = true; revealForm(); }
+  }
+}
+
+/** Bilim alanı: Sheets/Form ile uyum için value her zaman Türkçe; EN arayüzde yalnızca etiket değişir. */
+const SCIENCE_EN_LABEL = {
+  Hemşirelik: 'Nursing',
+  Ebelik: 'Midwifery',
+  'Sağlık Yönetimi': 'Health Management',
+  'Halk Sağlığı': 'Public Health',
+  'Fizyoterapi ve Rehabilitasyon': 'Physiotherapy and Rehabilitation',
+  'Beslenme ve Diyetetik': 'Nutrition and Dietetics',
+  Tıp: 'Medicine',
+  Eczacılık: 'Pharmacy',
+  'Diş Hekimliği': 'Dentistry',
+  'Tıbbi Biyokimya': 'Medical Biochemistry',
+  İktisat: 'Economics',
+  İşletme: 'Business Administration',
+  Maliye: 'Public Finance',
+  'Uluslararası İlişkiler': 'International Relations',
+  'Siyaset Bilimi ve Kamu Yönetimi': 'Political Science and Public Administration',
+  Sosyoloji: 'Sociology',
+  Psikoloji: 'Psychology',
+  'Eğitim Bilimleri': 'Educational Sciences',
+  Tarih: 'History',
+  Hukuk: 'Law',
+  Diğer: 'Other'
+};
+
+const I18N = {
+  tr: {
+    docTitle: 'Başvuru Formu — 7. Uluslararası WriteTec Sosyal Bilimler ve Sağlık Bilimleri Kongresi',
+    headerTitle: '7. Uluslararası WriteTec Yapay Zeka Çağında Sosyal Bilimler ve Sağlık Bilimleri Kongresi',
+    headerSub: 'Başvuru Formu · 28 Ağustos – 2 Eylül 2026, Antalya',
+    badgeOnline: 'Yüz Yüze + Online',
+    badgeDates: '28 Ağustos – 2 Eylül 2026 · Antalya / Alanya',
+    badgePhone: '0 (530) 471 80 78',
+    tab1: 'Kişisel Bilgiler',
+    tab2: 'Bilim Alanı & Yayın',
+    tab3: 'Bildiri Özeti',
+    sectionAuthorsTitle: 'Yazar Bilgileri',
+    sectionAuthorsInfo:
+      'Yazar ekleyebilir/çıkarabilirsiniz. <strong>Her yazar için</strong> kimlik, kurum ve iletişim bilgileri gereklidir.',
+    btnAddAuthor: '+ Yazar Ekle',
+    btnNext: 'Devam Et',
+    btnBack: 'Geri',
+    btnSubmit: 'Başvuruyu Gönder',
+    btnSubmitBusy: 'Gönderiliyor…',
+    submitLoadingTitle: 'Başvurunuz gönderiliyor',
+    submitLoadingBody:
+      'Lütfen bekleyin. Başvurunuz sunucuya iletiliyor; bu işlem 10-15 saniye sürebilir. Lütfen bu sekmeyi kapatmayın veya yenilemeyin.',
+    sectionFieldTitle: 'Bilim Alanı',
+    labelAlan: 'Bilim Alanı',
+    scienceSelectPlaceholder: 'Seçiniz',
+    scienceRequired: 'Bilim alanı seçimi zorunludur.',
+    sectionKatilimTitle: 'Katılım Şekli',
+    labelKatilim: 'Katılım Şekli',
+    katilimRequired: 'Katılım şekli seçimi zorunludur.',
+    katilimYuzyuze: 'Yüz yüze — Noxinn Club Hotel, Alanya/Antalya',
+    katilimOnline: 'Online (Çevrimiçi)',
+    sectionYayinTitle: 'Yayın Tercihi',
+    sectionYayinInfo:
+      'Yayın tercihleri hakkında detaylı bilgi için <strong>Yayın İmkânları</strong> sayfasını inceleyiniz. Birden fazla seçenek işaretleyebilirsiniz.',
+    abstractInfoHeading: 'Bildiri Özeti Bilgilendirmesi',
+    abstractLi1: 'Türkçe ve İngilizce olmak üzere iki özet gerekmektedir',
+    abstractLi2: 'Her özet için 3–5 anahtar kelime belirtiniz',
+    abstractLi3: 'Tezden üretilen çalışmalar “Tez Notu” alanında belirtilmelidir',
+    sectionTrTitle: 'Türkçe Bildiri',
+    sectionEnTitle: 'İngilizce özet',
+    labelBaslikTr: 'Bildiri Başlığı (Türkçe)',
+    phBaslikTr: 'Bildiri başlığınızı giriniz',
+    labelOzetTr: 'Özet (Türkçe)',
+    phOzetTr: 'En az 100 kelimelik özet yazınız…',
+    labelKwTr: 'Anahtar Kelimeler (Türkçe)',
+    phKwTr: 'Kelime1, Kelime2, Kelime3',
+    errBaslikTr: 'Türkçe başlık zorunludur.',
+    errOzetTr: 'Türkçe özet en az 100 kelime olmalıdır.',
+    errKwTr: 'En az 3 anahtar kelime giriniz.',
+    labelBaslikEn: 'Bildiri Başlığı (İngilizce)',
+    phBaslikEn: 'Paper title in English',
+    labelOzetEn: 'Özet (İngilizce)',
+    phOzetEn: 'En az 100 kelime…',
+    labelKwEn: 'Anahtar Kelimeler (İngilizce)',
+    phKwEn: 'Keyword1, Keyword2, Keyword3',
+    errBaslikEn: 'İngilizce başlık zorunludur.',
+    errOzetEn: 'İngilizce özet en az 100 kelime olmalıdır.',
+    errKwEn: 'En az 3 anahtar kelime giriniz.',
+    labelTezText: 'Bu çalışma bir tezden üretilmiştir',
+    labelTezNotu: 'Tez Notu',
+    hintTezNotu: '(isteğe bağlı; tez çalışmasıysa kısaca belirtiniz)',
+    phTezNotu: 'Örn. Yüksek lisans tezi, 2024',
+    thesisCheckedNote: 'Evet — tez çalışması',
+    wordUnit: 'kelime',
+    wordsApproxTr: '0 / ~300 kelime',
+    wordsApproxEn: '0 / ~300 kelime',
+    successTitle: 'Başvurunuz Alındı!',
+    successBody:
+      'Bildiri özetiniz başarıyla iletildi. Değerlendirme sürecinin ardından e-posta ile bilgilendirileceksiniz.',
+    successName: 'Ad Soyad',
+    successEmail: 'E-posta',
+    successPaperTitle: 'Bildiri Başlığı',
+    successRowStatusLabel: 'Durum',
+    successStatus: 'Değerlendirmede',
+    successReply: 'Yanıt süresi',
+    successReplyVal: '~3 iş günü',
+    successNoteLabel: 'Not',
+    successNotConfigured:
+      'WEB_APP_EXEC_URL (Apps Script Web uygulaması) veya GOOGLE_FORM yapılandırılmadı; başvuru sunucuya iletilmedi.',
+    successFooter: 'Sorularınız için: <strong>writetecbt@gmail.com</strong> · <strong>+90 (530) 471 80 78</strong>',
+    sectionConsentTitle: 'KVKK ve gizlilik onayı',
+    consentHintLocked:
+      'KVKK ve gizlilik onaylarını işaretleyebilmek için önce tüm zorunlu alanları doldurunuz: yazar bilgileri (tüm yazarlar), bilim alanı ve bildiri özeti alanları eksiksiz ve geçerli olmalıdır.',
+    consentHintReady:
+      'Metinleri inceledikten sonra aşağıdaki kutuları işaretleyerek başvurunuzu tamamlayabilirsiniz.',
+    cbKvkkTitle:
+      '6698 sayılı KVKK kapsamında Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metnini okudum ve kabul ediyorum',
+    cbKvkkDesc: 'Tam metni okumak için aşağıdaki bağlantıya tıklayınız.',
+    cbGizlilikTitle: 'Gizlilik ve Güvenlik Politikasını okudum ve kabul ediyorum',
+    cbGizlilikDesc: 'Tam metni okumak için aşağıdaki bağlantıya tıklayınız.',
+    consentErrorBoth:
+      'Gönderim için hem KVKK aydınlatma metni hem de gizlilik politikası onaylarını işaretlemeniz gerekir.',
+    errNetwork:
+      'Gönderim sırasında bir ağ hatası oluştu. Lütfen tekrar deneyin veya doğrudan Google Form bağlantısını kullanın.',
+    errBusy: 'Sistem şu anda yoğun, lütfen birkaç saniye sonra tekrar deneyin.',
+    errUnauthorized: 'Gönderim doğrulanamadı. Lütfen sayfayı yenileyip tekrar deneyin.',
+    errInvalid: 'Gönderilen bilgiler eksik veya hatalı görünüyor. Lütfen alanları kontrol edip tekrar deneyin.',
+    maxAuthorsAlert: 'En fazla {n} yazar ekleyebilirsiniz.',
+    author: {
+      titlePrimary: 'Yazar 1 (Birincil)',
+      titleN: 'Yazar {n}',
+      remove: 'Sil',
+      unvan: 'Ünvan',
+      ad: 'Ad',
+      soyad: 'Soyad',
+      universite: 'Üniversite / Kurum',
+      fakulte: 'Fakülte / YO / MYO',
+      bolum: 'Bölüm',
+      orcid: 'ORCID ID',
+      orcidHint: '(isteğe bağlı)',
+      orcidHelp: 'ORCID kaydı için:',
+      email: 'E-posta',
+      telefon: 'Telefon',
+      sehir: 'Şehir',
+      ulke: 'Ülke',
+      phAd: 'Ad',
+      phSoyad: 'Soyad',
+      phUniversite: 'Kurum adı',
+      phFakulte: 'Fakülte adı',
+      phBolum: 'Bölüm adı',
+      phOrcid: '0000-0000-0000-0000',
+      phEmail: 'ornek@universite.edu.tr',
+      phTelefon: '+90 5XX XXX XX XX',
+      phSehir: 'İstanbul',
+      phUlke: 'Türkiye',
+      errUnvan: 'Lütfen ünvan seçiniz.',
+      errAd: 'Ad zorunludur.',
+      errSoyad: 'Soyad zorunludur.',
+      errUniversite: 'Kurum bilgisi zorunludur.',
+      errBolum: 'Bölüm bilgisi zorunludur.',
+      errEmail: 'Geçerli bir e-posta giriniz.',
+      errTelefon: 'Telefon zorunludur.',
+      errSehir: 'Şehir zorunludur.',
+      errUlke: 'Ülke zorunludur.'
+    },
+    yayin: {
+      bildiri_kitabi: {
+        title: 'Kongre Bildiri Kitabında Yayın',
+        desc: 'E-kitap olarak yayınlanır. Katılım ücretine dahildir.'
+      },
+      tr_dizin: {
+        title: 'TR Dizinli Dergide Makale Yayını',
+        desc: 'Hakem sürecini geçmesi şartıyla. Katılım ücretine dahil değildir. Kongre katılımcılarına %10 indirim.'
+      },
+      scopus: {
+        title: 'Scopus İndeksli Dergide Makale Yayını',
+        desc: '<strong>International Journal of Business and Economic Studies</strong> dergisi. İngilizce çalışmalar kabul edilir. Katılım ücretine dahil değildir.'
+      },
+      diger_dergi: {
+        title: 'Diğer Dergilerde Makale Yayını',
+        desc: 'Hakem sürecini geçmesi şartıyla. Katılım ücretine dahil değildir.'
+      },
+      kitap_bolumu: {
+        title: 'Uluslararası Kitap Bölümü Yayını',
+        desc: 'Uluslararası yayınevi tarafından editörlü, hakemli e-kitap. Katılım ücretine dahil değildir.'
+      }
+    }
+  },
+  en: {
+    docTitle: 'Application Form — 7th International WRITETEC Social Sciences and Health Sciences Congress',
+    headerTitle: '7th International WRITETEC Social Sciences and Health Sciences Congress in the Age of Artificial Intelligence',
+    headerSub: 'Application Form · August 28 – September 2, 2026, Antalya',
+    badgeOnline: 'In-person + Online',
+    badgeDates: 'August 28 – September 2, 2026 · Antalya / Alanya',
+    badgePhone: '+90 530 471 80 78',
+    tab1: 'Authors',
+    tab2: 'Field & publication',
+    tab3: 'Abstract',
+    sectionAuthorsTitle: 'Author details',
+    sectionAuthorsInfo:
+      'You may add or remove authors. <strong>For each author</strong> title, affiliation, and contact details are required.',
+    btnAddAuthor: '+ Add author',
+    btnNext: 'Continue',
+    btnBack: 'Back',
+    btnSubmit: 'Submit application',
+    btnSubmitBusy: 'Sending…',
+    submitLoadingTitle: 'Submitting your application',
+    submitLoadingBody:
+      'Please wait while we send your data to the server. This may take 10-15 seconds. Please do not close or refresh this tab.',
+    sectionFieldTitle: 'Scientific field',
+    labelAlan: 'Scientific field',
+    scienceSelectPlaceholder: 'Select',
+    scienceRequired: 'Please select a scientific field.',
+    sectionKatilimTitle: 'Participation type',
+    labelKatilim: 'Participation type',
+    katilimRequired: 'Please select a participation type.',
+    katilimYuzyuze: 'In-person — Noxinn Club Hotel, Alanya/Antalya',
+    katilimOnline: 'Online',
+    sectionYayinTitle: 'Publication preferences',
+    sectionYayinInfo:
+      'See the <strong>Publication opportunities</strong> page for details. You may select more than one option.',
+    abstractInfoHeading: 'Abstract instructions',
+    abstractLi1: 'Submit your abstract in English.',
+    abstractLi2: 'Provide 3–5 keywords.',
+    abstractLi3: 'If the work is derived from a thesis, use the Thesis note field.',
+    sectionTrTitle: 'Turkish abstract',
+    sectionEnTitle: 'English abstract',
+    labelBaslikTr: 'Paper title (Turkish)',
+    phBaslikTr: 'Turkish title (if applicable)',
+    labelOzetTr: 'Abstract (Turkish)',
+    phOzetTr: 'Turkish abstract…',
+    labelKwTr: 'Keywords (Turkish)',
+    phKwTr: 'Word1, Word2, Word3',
+    errBaslikTr: 'Turkish title is required.',
+    errOzetTr: 'Turkish abstract must be at least 100 words.',
+    errKwTr: 'Enter at least 3 keywords.',
+    labelBaslikEn: 'Paper title (English)',
+    phBaslikEn: 'Enter your paper title',
+    labelOzetEn: 'Abstract (English)',
+    phOzetEn: 'Write at least 100 words…',
+    labelKwEn: 'Keywords (English)',
+    phKwEn: 'Keyword1, Keyword2, Keyword3',
+    errBaslikEn: 'English title is required.',
+    errOzetEn: 'English abstract must be at least 100 words.',
+    errKwEn: 'Enter at least 3 keywords.',
+    labelTezText: 'This work is derived from a thesis',
+    labelTezNotu: 'Thesis note',
+    hintTezNotu: '(optional; briefly describe if thesis-based)',
+    phTezNotu: 'e.g. PhD thesis, 2024',
+    thesisCheckedNote: 'Yes — thesis-based work',
+    wordUnit: 'words',
+    wordsApproxTr: '0 / ~300 words',
+    wordsApproxEn: '0 / ~300 words',
+    successTitle: 'Application received',
+    successBody:
+      'Your abstract has been submitted successfully. You will be notified by email after the review process.',
+    successName: 'Name',
+    successEmail: 'Email',
+    successPaperTitle: 'Paper title',
+    successRowStatusLabel: 'Status',
+    successStatus: 'Under review',
+    successReply: 'Response time',
+    successReplyVal: '~3 business days',
+    successNoteLabel: 'Note',
+    successNotConfigured:
+      'WEB_APP_EXEC_URL or GOOGLE_FORM is not configured; the application was not sent to the server.',
+    successFooter: 'Questions: <strong>writetecbt@gmail.com</strong> · <strong>+90 (530) 471 80 78</strong>',
+    sectionConsentTitle: 'Legal & privacy consent',
+    consentHintLocked:
+      'To enable the KVKK and privacy checkboxes, complete all required fields: every author’s details, the scientific field, and the abstract section (including minimum word counts).',
+    consentHintReady:
+      'Please read the documents, then tick both boxes to submit your application.',
+    cbKvkkTitle:
+      'I have read and accept the Privacy Notice on the processing of personal data under Law No. 6698 (KVKK)',
+    cbKvkkDesc: 'Click the link below to read the full text (Turkish).',
+    cbGizlilikTitle: 'I have read and accept the Privacy and Security Policy',
+    cbGizlilikDesc: 'Click the link below to read the full text (Turkish).',
+    consentErrorBoth: 'You must tick both the KVKK notice and the privacy policy before submitting.',
+    errNetwork: 'A network error occurred. Please try again or use the Google Form link.',
+    errBusy: 'The system is currently busy. Please try again in a few seconds.',
+    errUnauthorized: 'Submission could not be verified. Please refresh the page and try again.',
+    errInvalid: 'The submitted information appears incomplete or invalid. Please check the fields and try again.',
+    maxAuthorsAlert: 'You can add at most {n} authors.',
+    author: {
+      titlePrimary: 'Author 1 (corresponding)',
+      titleN: 'Author {n}',
+      remove: 'Remove',
+      unvan: 'Title',
+      ad: 'First name',
+      soyad: 'Last name',
+      universite: 'University / Institution',
+      fakulte: 'Faculty / school',
+      bolum: 'Department',
+      orcid: 'ORCID ID',
+      orcidHint: '(optional)',
+      orcidHelp: 'Register at',
+      email: 'Email',
+      telefon: 'Phone',
+      sehir: 'City',
+      ulke: 'Country',
+      phAd: 'First name',
+      phSoyad: 'Last name',
+      phUniversite: 'Institution name',
+      phFakulte: 'Faculty name',
+      phBolum: 'Department name',
+      phOrcid: '0000-0000-0000-0000',
+      phEmail: 'name@university.edu',
+      phTelefon: '+1 …',
+      phSehir: 'City',
+      phUlke: 'Country',
+      errUnvan: 'Please select a title.',
+      errAd: 'First name is required.',
+      errSoyad: 'Last name is required.',
+      errUniversite: 'Institution is required.',
+      errBolum: 'Department is required.',
+      errEmail: 'Please enter a valid email.',
+      errTelefon: 'Phone is required.',
+      errSehir: 'City is required.',
+      errUlke: 'Country is required.'
+    },
+    yayin: {
+      bildiri_kitabi: {
+        title: 'Congress proceedings',
+        desc: 'Published as an e-book. Included in the registration fee.'
+      },
+      tr_dizin: {
+        title: 'TR Index journal article',
+        desc: 'Subject to peer review. Not included in the fee. 10% discount for congress participants.'
+      },
+      scopus: {
+        title: 'Scopus-indexed journal',
+        desc: '<strong>International Journal of Business and Economic Studies</strong> journal. English manuscripts. Not included in the fee.'
+      },
+      diger_dergi: {
+        title: 'Other journals',
+        desc: 'Subject to peer review. Not included in the fee.'
+      },
+      kitap_bolumu: {
+        title: 'International book chapter',
+        desc: 'Peer-reviewed e-book by an international publisher. Not included in the fee.'
+      }
+    }
+  }
+};
+
+function applyScienceSelectLabels() {
+  const sel = document.getElementById('alan');
+  if (!sel) return;
+  const pack = I18N[formLocale];
+  Array.from(sel.options).forEach(function (opt) {
+    const trLabel = String(opt.value || '').trim();
+    if (!trLabel) {
+      opt.textContent = pack.scienceSelectPlaceholder;
+      return;
+    }
+    opt.textContent =
+      formLocale === 'en' ? SCIENCE_EN_LABEL[trLabel] || trLabel : trLabel;
+  });
+}
+
+function applyYayinCheckboxLabels() {
+  document.querySelectorAll('#yayin-group input[name="yayin"]').forEach(function (cb) {
+    const key = String(cb.value || '').trim();
+    const block = I18N[formLocale].yayin[key];
+    if (!block) return;
+    const label = cb.closest('.checkbox-item');
+    if (!label) return;
+    const strong = label.querySelector('.cb-text strong');
+    const span = label.querySelector('.cb-text > span');
+    if (strong) strong.textContent = block.title;
+    if (span) span.innerHTML = block.desc;
+  });
+}
+
+function applyLocaleToStaticDom() {
+  const pack = I18N[formLocale];
+  const set = function (id, html) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  };
+  const setText = function (id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  };
+  document.title = pack.docTitle;
+  setText('header-title', pack.headerTitle);
+  const headerTitleEl = document.getElementById('header-title');
+  if (headerTitleEl) headerTitleEl.setAttribute('lang', formLocale === 'tr' ? 'tr' : 'en');
+  setText('header-sub', pack.headerSub);
+  setText('badge-online', pack.badgeOnline);
+  setText('badge-dates', pack.badgeDates);
+  setText('badge-phone', pack.badgePhone);
+  setText('tab-label-1', pack.tab1);
+  setText('tab-label-2', pack.tab2);
+  setText('tab-label-3', pack.tab3);
+  setText('section-authors-title', pack.sectionAuthorsTitle);
+  set('section-authors-info', pack.sectionAuthorsInfo);
+  setText('btn-add-author-label', pack.btnAddAuthor);
+  setText('btn-next-1', pack.btnNext);
+  setText('btn-next-2', pack.btnNext);
+  setText('btn-back-2', pack.btnBack);
+  setText('btn-back-3', pack.btnBack);
+  setText('section-field-title', pack.sectionFieldTitle);
+  const lAlan = document.getElementById('label-alan');
+  if (lAlan) lAlan.innerHTML = pack.labelAlan + ' <span class="req">*</span>';
+  const errAlan = document.querySelector('#f-alan .error-msg');
+  if (errAlan) errAlan.textContent = pack.scienceRequired;
+  setText('section-katilim-title', pack.sectionKatilimTitle);
+  const lKatilim = document.getElementById('label-katilim');
+  if (lKatilim) lKatilim.innerHTML = pack.labelKatilim + ' <span class="req">*</span>';
+  const errKatilim = document.querySelector('#f-katilim .error-msg');
+  if (errKatilim) errKatilim.textContent = pack.katilimRequired;
+  const selKatilim = document.getElementById('katilim');
+  if (selKatilim) {
+    if (selKatilim.options[0]) selKatilim.options[0].textContent = pack.scienceSelectPlaceholder;
+    if (selKatilim.options[1]) selKatilim.options[1].textContent = pack.katilimYuzyuze;
+    if (selKatilim.options[2]) selKatilim.options[2].textContent = pack.katilimOnline;
+  }
+  setText('section-yayin-title', pack.sectionYayinTitle);
+  set('section-yayin-info', pack.sectionYayinInfo);
+  setText('abstract-info-heading', pack.abstractInfoHeading);
+  setText('abstract-li-1', pack.abstractLi1);
+  setText('abstract-li-2', pack.abstractLi2);
+  setText('abstract-li-3', pack.abstractLi3);
+  setText('section-tr-title', pack.sectionTrTitle);
+  setText('section-en-title', pack.sectionEnTitle);
+  const lBt = document.getElementById('label-baslik-tr');
+  if (lBt) lBt.innerHTML = pack.labelBaslikTr + ' <span class="req">*</span>';
+  document.getElementById('baslik-tr').placeholder = pack.phBaslikTr;
+  const lOzTr = document.getElementById('label-ozet-tr');
+  if (lOzTr) lOzTr.innerHTML = pack.labelOzetTr + ' <span class="req">*</span>';
+  document.getElementById('ozet-tr').placeholder = pack.phOzetTr;
+  const lKwTr = document.getElementById('label-keywords-tr');
+  if (lKwTr) lKwTr.innerHTML = pack.labelKwTr + ' <span class="req">*</span>';
+  document.getElementById('keywords-tr').placeholder = pack.phKwTr;
+  document.querySelector('#f-baslik-tr .error-msg').textContent = pack.errBaslikTr;
+  document.querySelector('#f-ozet-tr .error-msg').textContent = pack.errOzetTr;
+  document.querySelector('#f-keywords-tr .error-msg').textContent = pack.errKwTr;
+  const lBe = document.getElementById('label-baslik-en');
+  if (lBe) lBe.innerHTML = pack.labelBaslikEn + ' <span class="req">*</span>';
+  document.getElementById('baslik-en').placeholder = pack.phBaslikEn;
+  const lOe = document.getElementById('label-ozet-en');
+  if (lOe) lOe.innerHTML = pack.labelOzetEn + ' <span class="req">*</span>';
+  document.getElementById('ozet-en').placeholder = pack.phOzetEn;
+  const lKe = document.getElementById('label-keywords-en');
+  if (lKe) lKe.innerHTML = pack.labelKwEn + ' <span class="req">*</span>';
+  document.getElementById('keywords-en').placeholder = pack.phKwEn;
+  document.querySelector('#f-baslik-en .error-msg').textContent = pack.errBaslikEn;
+  document.querySelector('#f-ozet-en .error-msg').textContent = pack.errOzetEn;
+  document.querySelector('#f-keywords-en .error-msg').textContent = pack.errKwEn;
+  document.getElementById('label-tez-text').textContent = pack.labelTezText;
+  const lTn = document.getElementById('label-tez-notu');
+  if (lTn) lTn.innerHTML = pack.labelTezNotu + ' <span class="hint" id="hint-tez-notu">' + pack.hintTezNotu + '</span>';
+  document.getElementById('tez-notu').placeholder = pack.phTezNotu;
+  setText('btn-submit-label', pack.btnSubmit);
+  if (DUZELTME_REF) {
+    setText(
+      'success-title',
+      formLocale === 'en' ? 'Revised Application Received' : 'Düzeltilmiş Başvurunuz Alındı!'
+    );
+    setText(
+      'success-body',
+      formLocale === 'en'
+        ? 'Your revised abstract has been submitted; your application was updated under number ' +
+            DUZELTME_REF +
+            '. You will be notified by email after the review.'
+        : 'Düzeltilmiş bildiri özetiniz iletildi; başvurunuz ' +
+            DUZELTME_REF +
+            ' numarası altında güncellendi. Değerlendirme sonrasında e-posta ile bilgilendirileceksiniz.'
+    );
+  } else {
+    setText('success-title', pack.successTitle);
+    setText('success-body', pack.successBody);
+  }
+  renderRevisionBanner();
+  set('success-footer', pack.successFooter);
+  setText('section-consent-title', pack.sectionConsentTitle);
+  setText('cb-kvkk-title', pack.cbKvkkTitle);
+  setText('cb-kvkk-desc', pack.cbKvkkDesc);
+  setText('cb-gizlilik-title', pack.cbGizlilikTitle);
+  setText('cb-gizlilik-desc', pack.cbGizlilikDesc);
+  applyScienceSelectLabels();
+  applyYayinCheckboxLabels();
+  updateConsentCheckboxesState();
+  const trSec = document.getElementById('section-abstract-tr');
+  if (trSec) trSec.classList.toggle('form-hidden', formLocale === 'en');
+  const ccOtr = document.getElementById('cc-ozet-tr');
+  const ccOen = document.getElementById('cc-ozet-en');
+  if (ccOtr && !document.getElementById('ozet-tr').value.trim()) ccOtr.textContent = pack.wordsApproxTr;
+  if (ccOen && !document.getElementById('ozet-en').value.trim()) ccOen.textContent = pack.wordsApproxEn;
+
+  const slo = document.getElementById('submit-loading-overlay');
+  if (slo && slo.classList.contains('is-visible')) {
+    const tl = document.getElementById('submit-loading-title');
+    const tb = document.getElementById('submit-loading-body');
+    if (tl) tl.textContent = pack.submitLoadingTitle;
+    if (tb) tb.textContent = pack.submitLoadingBody;
+  }
+}
+
+function setFormLocale(next) {
+  if (next !== 'tr' && next !== 'en') return;
+  formLocale = next;
+  const root = document.getElementById('html-root');
+  if (root) root.setAttribute('lang', formLocale === 'tr' ? 'tr' : 'en');
+  const btr = document.getElementById('btn-locale-tr');
+  const ben = document.getElementById('btn-locale-en');
+  if (btr) btr.classList.toggle('active', formLocale === 'tr');
+  if (ben) ben.classList.toggle('active', formLocale === 'en');
+  let snapshot = getAuthorsFromUI();
+  if (!snapshot.length) snapshot = [{}];
+  applyLocaleToStaticDom();
+  renderAuthors(snapshot);
+  updateChar('baslik-tr', 'cc-baslik-tr', 120);
+  updateChar('baslik-en', 'cc-baslik-en', 120);
+  updateChar('ozet-tr', 'cc-ozet-tr', 1800);
+  updateChar('ozet-en', 'cc-ozet-en', 1800);
+}
+
+function isWebAppReady() {
+  const u = WEB_APP_EXEC_URL || '';
+  if (u.indexOf('script.google.com/macros/s/') === -1) return false;
+  if (u.indexOf('EXEC_URL_BURAYA') !== -1) return false;
+  return true;
+}
+
+/**
+ * Google Forms (isteğe bağlı — Web App hazırsa kullanılmaz)
+ */
+const GOOGLE_FORM = {
+  actionUrl: 'https://docs.google.com/forms/d/e/FORM_ID_BURAYA/formResponse',
+  entry: {
+    unvan: 'entry.UNVAN_ID',
+    ad: 'entry.AD_ID',
+    soyad: 'entry.SOYAD_ID',
+    universite: 'entry.UNIVERSITE_ID',
+    fakulte: 'entry.FAKULTE_ID',
+    bolum: 'entry.BOLUM_ID',
+    orcid: 'entry.ORCID_ID',
+    email: 'entry.EMAIL_ID',
+    telefon: 'entry.TELEFON_ID',
+    sehir: 'entry.SEHIR_ID',
+    ulke: 'entry.ULKE_ID',
+    bilimAlani: 'entry.BILIM_ALAN_ID',
+    yayin: 'entry.YAYIN_ID',
+    baslikTr: 'entry.BASLIK_TR_ID',
+    ozetTr: 'entry.OZET_TR_ID',
+    kwTr: 'entry.KW_TR_ID',
+    jel: 'entry.JEL_ID',
+    tezNotu: 'entry.TEZ_ID',
+    baslikEn: 'entry.BASLIK_EN_ID',
+    ozetEn: 'entry.OZET_EN_ID',
+    kwEn: 'entry.KW_EN_ID'
+  }
+};
+
+function isGoogleFormReady() {
+  if (!GOOGLE_FORM || !GOOGLE_FORM.actionUrl) return false;
+  if (GOOGLE_FORM.actionUrl.indexOf('FORM_ID_BURAYA') !== -1) return false;
+  const ok = /^entry\.\d+$/;
+  for (const k of Object.keys(GOOGLE_FORM.entry)) {
+    if (!ok.test(GOOGLE_FORM.entry[k])) return false;
+  }
+  return true;
+}
+
+let currentStep = 1;
+
+function escapeHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+/** value = Turkish canonical (sheet / Apps Script); label depends on UI locale */
+const AUTHOR_UNVAN_ROWS = [
+  { tr: 'Prof. Dr.', en: 'Prof. Dr.' },
+  { tr: 'Doç. Dr.', en: 'Assoc. Prof. Dr.' },
+  { tr: 'Dr. Öğr. Üyesi', en: 'Asst. Prof. Dr.' },
+  { tr: 'Arş. Gör. Dr.', en: 'Res. Asst. Dr.' },
+  { tr: 'Dr.', en: 'Dr.' },
+  { tr: 'Arş. Gör.', en: 'Res. Asst.' },
+  { tr: 'Öğr. Gör.', en: 'Lecturer' },
+  { tr: 'Uzm.', en: 'Specialist' },
+  { tr: 'Diğer', en: 'Other' }
+];
+
+function authorUnvanOptionsHtml() {
+  const ph = I18N[formLocale].scienceSelectPlaceholder;
+  const enUi = formLocale === 'en';
+  const parts = ['<option value="">' + escapeHtml(ph) + '</option>'];
+  AUTHOR_UNVAN_ROWS.forEach(function (row) {
+    const value = row.tr;
+    const label = enUi ? row.en : row.tr;
+    parts.push(
+      '<option value="' + escapeHtml(value) + '">' + escapeHtml(label) + '</option>'
+    );
+  });
+  return parts.join('');
+}
+
+function buildAuthorCardHtml(ix, author) {
+  const a = author || {};
+  const L = I18N[formLocale].author;
+  const isPrimary = ix === 0;
+  const title = isPrimary ? L.titlePrimary : L.titleN.replace('{n}', String(ix + 1));
+  const removeBtn =
+    isPrimary
+      ? ''
+      : '<button type="button" class="btn btn-secondary btn-remove-author" data-action="remove-author" data-index="' +
+        ix +
+        '" style="padding:10px 14px">' +
+        escapeHtml(L.remove) +
+        '</button>';
+
+  return (
+    '<div class="form-section author-card" data-author-index="' +
+    ix +
+    '">' +
+    '<div class="nav-row" style="margin-top:0;margin-bottom:16px">' +
+    '<div class="section-title" style="margin:0;padding-bottom:12px;border-bottom:none">' +
+    '<span class="icon-wrap" aria-hidden="true"><svg class="icon"><use href="#i-user"/></svg></span>' +
+    escapeHtml(title) +
+    '</div>' +
+    removeBtn +
+    '</div>' +
+    '<div class="field-grid cols3">' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.unvan) +
+    ' <span class="req">*</span></label>' +
+    '<select data-author-field="unvan">' +
+    authorUnvanOptionsHtml() +
+    '</select>' +
+    '<span class="error-msg">' +
+    escapeHtml(L.errUnvan) +
+    '</span>' +
+    '</div>' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.ad) +
+    ' <span class="req">*</span></label>' +
+    '<input type="text" data-author-field="ad" placeholder="' +
+    escapeHtml(L.phAd) +
+    '">' +
+    '<span class="error-msg">' +
+    escapeHtml(L.errAd) +
+    '</span>' +
+    '</div>' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.soyad) +
+    ' <span class="req">*</span></label>' +
+    '<input type="text" data-author-field="soyad" placeholder="' +
+    escapeHtml(L.phSoyad) +
+    '">' +
+    '<span class="error-msg">' +
+    escapeHtml(L.errSoyad) +
+    '</span>' +
+    '</div>' +
+    '</div>' +
+    '<div class="field-grid cols2" style="margin-top:16px">' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.universite) +
+    ' <span class="req">*</span></label>' +
+    '<input type="text" data-author-field="universite" placeholder="' +
+    escapeHtml(L.phUniversite) +
+    '">' +
+    '<span class="error-msg">' +
+    escapeHtml(L.errUniversite) +
+    '</span>' +
+    '</div>' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.fakulte) +
+    '</label>' +
+    '<input type="text" data-author-field="fakulte" placeholder="' +
+    escapeHtml(L.phFakulte) +
+    '">' +
+    '<span class="error-msg"></span>' +
+    '</div>' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.bolum) +
+    ' <span class="req">*</span></label>' +
+    '<input type="text" data-author-field="bolum" placeholder="' +
+    escapeHtml(L.phBolum) +
+    '">' +
+    '<span class="error-msg">' +
+    escapeHtml(L.errBolum) +
+    '</span>' +
+    '</div>' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.orcid) +
+    ' <span class="hint">' +
+    escapeHtml(L.orcidHint) +
+    '</span></label>' +
+    '<input type="text" data-author-field="orcid" placeholder="' +
+    escapeHtml(L.phOrcid) +
+    '">' +
+    '<p class="orcid-help">' +
+    escapeHtml(L.orcidHelp) +
+    ' <a href="https://orcid.org" target="_blank">orcid.org</a></p>' +
+    '</div>' +
+    '</div>' +
+    '<div class="field-grid cols2" style="margin-top:16px">' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.email) +
+    ' <span class="req">*</span></label>' +
+    '<input type="email" data-author-field="email" placeholder="' +
+    escapeHtml(L.phEmail) +
+    '">' +
+    '<span class="error-msg">' +
+    escapeHtml(L.errEmail) +
+    '</span>' +
+    '</div>' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.telefon) +
+    ' <span class="req">*</span></label>' +
+    '<input type="tel" inputmode="tel" data-author-field="telefon" placeholder="' +
+    escapeHtml(L.phTelefon) +
+    '">' +
+    '<span class="error-msg">' +
+    escapeHtml(L.errTelefon) +
+    '</span>' +
+    '</div>' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.sehir) +
+    ' <span class="req">*</span></label>' +
+    '<input type="text" data-author-field="sehir" placeholder="' +
+    escapeHtml(L.phSehir) +
+    '">' +
+    '<span class="error-msg">' +
+    escapeHtml(L.errSehir) +
+    '</span>' +
+    '</div>' +
+    '<div class="field">' +
+    '<label>' +
+    escapeHtml(L.ulke) +
+    ' <span class="req">*</span></label>' +
+    '<input type="text" data-author-field="ulke" placeholder="' +
+    escapeHtml(L.phUlke) +
+    '" value="' +
+    escapeHtml(
+      (a.ulke != null && String(a.ulke).trim() !== '')
+        ? String(a.ulke).trim()
+        : formLocale === 'en'
+          ? ''
+          : 'Türkiye'
+    ) +
+    '">' +
+    '<span class="error-msg">' +
+    escapeHtml(L.errUlke) +
+    '</span>' +
+    '</div>' +
+    '</div>' +
+    '</div>'
+  );
+}
+
+function setAuthorCardValues(cardEl, author) {
+  const a = author || {};
+  function set(field, val) {
+    const el = cardEl.querySelector('[data-author-field="' + field + '"]');
+    if (!el) return;
+    if (field === 'unvan') {
+      el.value = String(val || '').trim();
+    } else {
+      el.value = String(val == null ? '' : val);
+    }
+  }
+  set('unvan', a.unvan);
+  set('ad', a.ad);
+  set('soyad', a.soyad);
+  set('universite', a.universite);
+  set('fakulte', a.fakulte);
+  set('bolum', a.bolum);
+  set('orcid', a.orcid);
+  set('email', a.email);
+  set('telefon', a.telefon);
+  set('sehir', a.sehir);
+  set('ulke', a.ulke);
+}
+
+function renderAuthors(authors) {
+  const container = document.getElementById('authors-container');
+  if (!container) return;
+  const list = Array.isArray(authors) && authors.length ? authors : [{}];
+  container.innerHTML = list
+    .map(function (a, ix) {
+      return buildAuthorCardHtml(ix, a);
+    })
+    .join('');
+
+  container.querySelectorAll('.author-card').forEach(function (card, ix) {
+    setAuthorCardValues(card, list[ix]);
+  });
+}
+
+function getAuthorsFromUI() {
+  const cards = Array.from(document.querySelectorAll('.author-card'));
+  return cards.map(function (card) {
+    function val(field) {
+      const el = card.querySelector('[data-author-field="' + field + '"]');
+      return el ? String(el.value || '').trim() : '';
+    }
+    return {
+      unvan: val('unvan'),
+      ad: val('ad'),
+      soyad: val('soyad'),
+      universite: val('universite'),
+      fakulte: val('fakulte'),
+      bolum: val('bolum'),
+      orcid: val('orcid'),
+      email: val('email'),
+      telefon: val('telefon'),
+      sehir: val('sehir'),
+      ulke: val('ulke')
+    };
+  });
+}
+
+function authorsToText(authors) {
+  const list = Array.isArray(authors) ? authors : [];
+  return list
+    .map(function (a) {
+      return [a.unvan, a.ad, a.soyad].filter(Boolean).join(' ').trim();
+    })
+    .filter(function (x) {
+      return x && String(x).trim().length > 0;
+    })
+    .join(', ');
+}
+
+function collectFormPayload() {
+  const authors = getAuthorsFromUI();
+  const primary = (authors && authors[0]) || {};
+  const pack = I18N[formLocale];
+  const tezCb = document.getElementById('tez').checked;
+  const tezNotuRaw = (document.getElementById('tez-notu') && document.getElementById('tez-notu').value.trim()) || '';
+  let tezVal = '';
+  if (tezCb) {
+    tezVal = tezNotuRaw || pack.thesisCheckedNote;
+  } else {
+    tezVal = tezNotuRaw;
+  }
+
+  const yayinLines = [];
+  document.querySelectorAll('#yayin-group input[type="checkbox"]:checked').forEach(function (cb) {
+    let label = cb.getAttribute('data-forms-label') || cb.value;
+    if (formLocale === 'en') {
+      const enL = cb.getAttribute('data-label-en');
+      if (enL && String(enL).trim()) label = String(enL).trim();
+    }
+    yayinLines.push(label);
+  });
+
+  const baslikTrRaw = document.getElementById('baslik-tr').value.trim();
+  const ozetTrRaw = document.getElementById('ozet-tr').value.trim();
+  const kwTrRaw = document.getElementById('keywords-tr').value.trim();
+
+  return {
+    formLocale: formLocale,
+    authors: authors,
+    authorsJson: JSON.stringify(authors || []),
+    authorsText: authorsToText(authors || []),
+    unvan: String(primary.unvan || '').trim(),
+    ad: String(primary.ad || '').trim(),
+    soyad: String(primary.soyad || '').trim(),
+    universite: String(primary.universite || '').trim(),
+    fakulte: String(primary.fakulte || '').trim(),
+    bolum: String(primary.bolum || '').trim(),
+    orcid: String(primary.orcid || '').trim(),
+    email: String(primary.email || '').trim(),
+    telefon: String(primary.telefon || '').trim(),
+    sehir: String(primary.sehir || '').trim(),
+    ulke: String(primary.ulke || '').trim(),
+    bilimAlani: document.getElementById('alan').value === 'Diğer' ? document.getElementById('alan-diger').value.trim() : document.getElementById('alan').value.trim(),
+    katilimSekli:
+      (document.getElementById('katilim') && document.getElementById('katilim').value.trim()) || '',
+    yayinLines: yayinLines,
+    yayinJoined: yayinLines.join(', '),
+    baslikTr: formLocale === 'en' ? '' : baslikTrRaw,
+    ozetTr: formLocale === 'en' ? '' : ozetTrRaw,
+    kwTr: formLocale === 'en' ? '' : kwTrRaw,
+    jel: '',
+    tezNotu: tezVal,
+    baslikEn: document.getElementById('baslik-en').value.trim(),
+    ozetEn: document.getElementById('ozet-en').value.trim(),
+    kwEn: document.getElementById('keywords-en').value.trim(),
+    kvkkOnay: !!(document.getElementById('cb-kvkk') && document.getElementById('cb-kvkk').checked),
+    gizlilikOnay: !!(document.getElementById('cb-gizlilik') && document.getElementById('cb-gizlilik').checked)
+  };
+}
+
+// ── Gönderim güvenliği yardımcıları ─────────────────────────────
+// submissionId: aynı gönderim denemesi grubunun kimliği. Ağ hatasında veya
+// 'busy' tekrar denemesinde AYNI id gider; sunucu (yeni sürüm .gs) bu id ile
+// mükerrer kayıt oluşmasını engeller. Eski sürüm .gs bu parametreyi yok sayar.
+function makeSubmissionId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+}
+
+function sleepMs(ms) {
+  return new Promise(function (resolve) { setTimeout(resolve, ms); });
+}
+
+// Sunucuya "bu submissionId işlendi mi?" diye sorar (kilitsiz public action).
+// Eski .gs dağıtımında bu action {ok:false} döndürür → null → bulunamadı sayılır.
+async function checkBasvuruDurumu(submissionId) {
+  const params = new URLSearchParams();
+  params.append('action', 'basvuruDurum');
+  params.append('submissionId', submissionId);
+  const res = await fetch(WEB_APP_EXEC_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString()
+  });
+  const text = (await res.text()).trim();
+  try {
+    const d = JSON.parse(text);
+    return d && d.ok === true ? d : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+// Ağ hatası sonrası kurtarma: sunucu kaydı işlemiş olabilir (mail gitmiş,
+// satır oluşmuş) ama yanıt tarayıcıya ulaşamamıştır. Kayıt kilit altındaki tüm
+// iş bitince saklandığı için uzun süre (≈46 sn) sorgulanır.
+async function pollBasvuruDurumu(submissionId) {
+  for (let attempt = 0; attempt < 8; attempt++) {
+    await sleepMs(attempt === 0 ? 4000 : 6000);
+    try {
+      const st = await checkBasvuruDurumu(submissionId);
+      if (st && st.found) return st;
+    } catch (e) {
+      console.warn('basvuruDurum:', e);
+    }
+  }
+  return null;
+}
+
+async function submitToWebApp(data) {
+  const params = new URLSearchParams();
+  if (WEB_APP_TOKEN && String(WEB_APP_TOKEN).trim().length) {
+    params.append('token', String(WEB_APP_TOKEN).trim());
+  }
+  params.append('authorsJson', data.authorsJson || '[]');
+  params.append('authorsText', data.authorsText || '');
+  params.append('unvan', data.unvan);
+  params.append('ad', data.ad);
+  params.append('soyad', data.soyad);
+  params.append('universite', data.universite);
+  params.append('fakulte', data.fakulte);
+  params.append('bolum', data.bolum);
+  params.append('orcid', data.orcid);
+  params.append('email', data.email);
+  params.append('telefon', data.telefon);
+  params.append('sehir', data.sehir);
+  params.append('ulke', data.ulke);
+  params.append('bilimAlani', data.bilimAlani);
+  params.append('katilimSekli', data.katilimSekli || '');
+  params.append('yayinTercihi', data.yayinJoined || '');
+  params.append('baslikTr', data.baslikTr);
+  params.append('ozetTr', data.ozetTr);
+  params.append('keywordsTr', data.kwTr);
+  params.append('jel', data.jel);
+  params.append('tezNotu', data.tezNotu);
+  params.append('baslikEn', data.baslikEn);
+  params.append('ozetEn', data.ozetEn);
+  params.append('keywordsEn', data.kwEn);
+  params.append('formLocale', data.formLocale || 'tr');
+  if (DUZELTME_REF) params.append('duzeltmeRef', DUZELTME_REF);
+  params.append('kvkkOnay', data.kvkkOnay ? 'evet' : 'hayir');
+  params.append('gizlilikPolitikasiOnay', data.gizlilikOnay ? 'evet' : 'hayir');
+  params.append('submissionId', data.submissionId || '');
+
+  const res = await fetch(WEB_APP_EXEC_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString()
+  });
+  return (await res.text()).trim();
+}
+
+async function submitToGoogleForms(data) {
+  const e = GOOGLE_FORM.entry;
+  const params = new URLSearchParams();
+  params.append(e.unvan, data.unvan);
+  params.append(e.ad, data.ad);
+  params.append(e.soyad, data.soyad);
+  params.append(e.universite, data.universite);
+  params.append(e.fakulte, data.fakulte);
+  params.append(e.bolum, data.bolum);
+  params.append(e.orcid, data.orcid);
+  params.append(e.email, data.email);
+  params.append(e.telefon, data.telefon);
+  params.append(e.sehir, data.sehir);
+  params.append(e.ulke, data.ulke);
+  params.append(e.bilimAlani, data.bilimAlani);
+  data.yayinLines.forEach(function (line) {
+    params.append(e.yayin, line);
+  });
+  params.append(e.baslikTr, data.baslikTr);
+  params.append(e.ozetTr, data.ozetTr);
+  params.append(e.kwTr, data.kwTr);
+  params.append(e.jel, data.jel);
+  params.append(e.tezNotu, data.tezNotu);
+  params.append(e.baslikEn, data.baslikEn);
+  params.append(e.ozetEn, data.ozetEn);
+  params.append(e.kwEn, data.kwEn);
+
+  await fetch(GOOGLE_FORM.actionUrl, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString()
+  });
+}
+
+function goStep(n) {
+  if (n > currentStep && !validateStep(currentStep)) return;
+
+  document.getElementById('step' + currentStep)?.classList.remove('active');
+  document.getElementById('tab' + currentStep)?.classList.remove('active');
+  if (currentStep < n) {
+    document.getElementById('tab' + currentStep)?.classList.add('done');
+  }
+
+  currentStep = n;
+
+  const page = document.getElementById('step' + n);
+  const tab = document.getElementById('tab' + n);
+  if (page) page.classList.add('active');
+  if (tab) { tab.classList.remove('done'); tab.classList.add('active'); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validateStep(step) {
+  if (step === 1) {
+    return validateAuthorsStep1();
+  }
+  if (step === 2) {
+    const katilimOk = require('katilim', I18N[formLocale].katilimRequired);
+    let ok = require('alan', I18N[formLocale].scienceRequired);
+    if (ok && document.getElementById('alan').value === 'Diğer') {
+      ok = require('alan-diger', formLocale === 'en' ? 'Please specify your field' : 'Lütfen alanınızı belirtin');
+    }
+    return katilimOk && ok;
+  }
+  if (step === 3) {
+    const pack = I18N[formLocale];
+    if (formLocale === 'en') {
+      return (
+        require('baslik-en', pack.errBaslikEn) &&
+        requireWords('ozet-en', 100, pack.errOzetEn) &&
+        require('keywords-en', pack.errKwEn)
+      );
+    }
+    return (
+      require('baslik-tr', pack.errBaslikTr) &&
+      requireWords('ozet-tr', 100, pack.errOzetTr) &&
+      require('keywords-tr', pack.errKwTr) &&
+      require('baslik-en', pack.errBaslikEn) &&
+      requireWords('ozet-en', 100, pack.errOzetEn) &&
+      require('keywords-en', pack.errKwEn)
+    );
+  }
+  return true;
+}
+
+function validateAuthorsStep1() {
+  const cards = Array.from(document.querySelectorAll('.author-card'));
+  if (!cards.length) return false;
+
+  let ok = true;
+  function invalidate(fieldEl, msg) {
+    const field = fieldEl.closest('.field');
+    if (!field) return;
+    field.classList.add('invalid');
+    const em = field.querySelector('.error-msg');
+    if (em && msg) em.textContent = msg;
+    ok = false;
+  }
+  function clearInvalid(fieldEl) {
+    const field = fieldEl.closest('.field');
+    if (!field) return;
+    field.classList.remove('invalid');
+  }
+  function requireInCard(card, field, msg) {
+    const el = card.querySelector('[data-author-field="' + field + '"]');
+    if (!el) return false;
+    const val = String(el.value || '').trim();
+    if (!val) {
+      invalidate(el, msg);
+      return false;
+    }
+    clearInvalid(el);
+    return true;
+  }
+  function requireEmailInCard(card, field) {
+    const el = card.querySelector('[data-author-field="' + field + '"]');
+    if (!el) return false;
+    const val = String(el.value || '').trim();
+    const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    if (!okEmail) {
+      invalidate(el, I18N[formLocale].author.errEmail);
+      return false;
+    }
+    clearInvalid(el);
+    return true;
+  }
+
+  cards.forEach(function (card, ix) {
+    const L = I18N[formLocale].author;
+    const who =
+      formLocale === 'en' ? ' (Author ' + (ix + 1) + ')' : ' (Yazar ' + (ix + 1) + ')';
+    requireInCard(card, 'unvan', L.errUnvan + who);
+    requireInCard(card, 'ad', L.errAd + who);
+    requireInCard(card, 'soyad', L.errSoyad + who);
+    requireInCard(card, 'universite', L.errUniversite + who);
+    requireInCard(card, 'bolum', L.errBolum + who);
+    requireEmailInCard(card, 'email');
+    requireInCard(card, 'telefon', L.errTelefon + who);
+    requireInCard(card, 'sehir', L.errSehir + who);
+    requireInCard(card, 'ulke', L.errUlke + who);
+  });
+
+  return ok;
+}
+
+function isAuthorsComplete() {
+  const cards = Array.from(document.querySelectorAll('.author-card'));
+  if (!cards.length) return false;
+  for (let i = 0; i < cards.length; i++) {
+    const card = cards[i];
+    function v(field) {
+      const el = card.querySelector('[data-author-field="' + field + '"]');
+      return el ? String(el.value || '').trim() : '';
+    }
+    if (!v('unvan')) return false;
+    if (!v('ad')) return false;
+    if (!v('soyad')) return false;
+    if (!v('universite')) return false;
+    if (!v('bolum')) return false;
+    const em = v('email');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return false;
+    if (!v('telefon')) return false;
+    if (!v('sehir')) return false;
+    if (!v('ulke')) return false;
+  }
+  return true;
+}
+
+function isStep2CompleteForConsent() {
+  const a = document.getElementById('alan');
+  return !!(a && String(a.value || '').trim());
+}
+
+function isStep3CompleteForConsent() {
+  if (formLocale === 'en') {
+    const be = document.getElementById('baslik-en');
+    const oe = document.getElementById('ozet-en');
+    const ke = document.getElementById('keywords-en');
+    return !!(
+      be &&
+      oe &&
+      ke &&
+      be.value.trim() &&
+      wordCount('ozet-en') >= 100 &&
+      ke.value.trim()
+    );
+  }
+  const bt = document.getElementById('baslik-tr');
+  const ot = document.getElementById('ozet-tr');
+  const kt = document.getElementById('keywords-tr');
+  const be = document.getElementById('baslik-en');
+  const oe = document.getElementById('ozet-en');
+  const ke = document.getElementById('keywords-en');
+  return !!(
+    bt &&
+    ot &&
+    kt &&
+    be &&
+    oe &&
+    ke &&
+    bt.value.trim() &&
+    wordCount('ozet-tr') >= 100 &&
+    kt.value.trim() &&
+    be.value.trim() &&
+    wordCount('ozet-en') >= 100 &&
+    ke.value.trim()
+  );
+}
+
+function isConsentPrerequisitesMet() {
+  return isAuthorsComplete() && isStep2CompleteForConsent() && isStep3CompleteForConsent();
+}
+
+function updateConsentCheckboxesState() {
+  const wrap = document.getElementById('consent-checkboxes');
+  const kvkk = document.getElementById('cb-kvkk');
+  const giz = document.getElementById('cb-gizlilik');
+  const hint = document.getElementById('consent-hint');
+  if (!wrap || !kvkk || !giz) return;
+  const pack = I18N[formLocale];
+  const ok = isConsentPrerequisitesMet();
+  if (hint) hint.textContent = ok ? pack.consentHintReady : pack.consentHintLocked;
+  wrap.classList.toggle('consent-locked', !ok);
+  kvkk.disabled = !ok;
+  giz.disabled = !ok;
+  if (!ok) {
+    kvkk.checked = false;
+    giz.checked = false;
+    document.getElementById('label-wrap-kvkk')?.classList.remove('selected');
+    document.getElementById('label-wrap-gizlilik')?.classList.remove('selected');
+  }
+}
+
+function openLegalModal(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.removeAttribute('hidden');
+  el.classList.add('is-open');
+  el.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLegalModal(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('is-open');
+  el.setAttribute('aria-hidden', 'true');
+  el.setAttribute('hidden', '');
+  document.body.style.overflow = '';
+}
+
+function clearConsentSubmitError() {
+  const errEl = document.getElementById('consent-error');
+  if (errEl) errEl.style.display = 'none';
+  document.getElementById('section-consent')?.classList.remove('consent-field-invalid');
+}
+
+function require(id, msg) {
+  const el = document.getElementById(id);
+  const field = el.closest('.field');
+  const val = el.value.trim();
+  if (!val) {
+    field.classList.add('invalid');
+    field.querySelector('.error-msg').textContent = msg;
+    return false;
+  }
+  field.classList.remove('invalid');
+  return true;
+}
+
+function requireEmail(id) {
+  const el = document.getElementById(id);
+  const field = el.closest('.field');
+  const val = el.value.trim();
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  if (!ok) {
+    field.classList.add('invalid');
+    field.querySelector('.error-msg').textContent = I18N[formLocale].author.errEmail;
+    return false;
+  }
+  field.classList.remove('invalid');
+  return true;
+}
+
+function wordCount(id) {
+  return document.getElementById(id).value.trim().split(/\s+/).filter(w => w).length;
+}
+
+function requireWords(id, min, msg) {
+  const el = document.getElementById(id);
+  const field = el.closest('.field');
+  const wc = wordCount(id);
+  if (wc < min) {
+    field.classList.add('invalid');
+    field.querySelector('.error-msg').textContent = msg;
+    return false;
+  }
+  field.classList.remove('invalid');
+  return true;
+}
+
+function toggleDigerAlan() {
+  const alan = document.getElementById('alan');
+  const alanDiger = document.getElementById('f-alan-diger');
+  if (alan && alanDiger) {
+    if (alan.value === 'Diğer') {
+      alanDiger.style.display = 'block';
+    } else {
+      alanDiger.style.display = 'none';
+      document.getElementById('alan-diger').value = '';
+    }
+  }
+}
+
+function updateChar(id, ccId, max) {
+  const val = document.getElementById(id).value;
+  const cc = document.getElementById(ccId);
+  const isTextarea = document.getElementById(id).tagName === 'TEXTAREA';
+  const wu = I18N[formLocale].wordUnit;
+  if (isTextarea) {
+    const wc = val.trim().split(/\s+/).filter(w => w).length;
+    cc.textContent = wc + ' ' + wu;
+    cc.className = 'char-count' + (wc > 300 ? ' over' : wc > 250 ? ' warn' : '');
+  } else {
+    const len = val.length;
+    cc.textContent = len + ' / ' + max;
+    cc.className = 'char-count' + (len > max ? ' over' : len > max * 0.85 ? ' warn' : '');
+  }
+}
+
+function setSubmitButtonBusy(busy) {
+  const btn = document.getElementById('btn-submit');
+  if (!btn) return;
+  const label = btn.querySelector('.btn-label');
+  const pack = I18N[formLocale];
+  btn.disabled = !!busy;
+  if (label) label.textContent = busy ? pack.btnSubmitBusy : pack.btnSubmit;
+}
+
+function setSubmitLoadingVisible(show) {
+  const ov = document.getElementById('submit-loading-overlay');
+  if (!ov) return;
+  const on = !!show;
+  ov.classList.toggle('is-visible', on);
+  ov.setAttribute('aria-hidden', on ? 'false' : 'true');
+  ov.setAttribute('aria-busy', on ? 'true' : 'false');
+  if (on) {
+    const pack = I18N[formLocale];
+    const t = document.getElementById('submit-loading-title');
+    const b = document.getElementById('submit-loading-body');
+    if (t) t.textContent = pack.submitLoadingTitle;
+    if (b) b.textContent = pack.submitLoadingBody;
+  }
+}
+
+function showSubmitError(resultCode) {
+  const pack = I18N[formLocale];
+  const messages = {
+    busy: pack.errBusy,
+    unauthorized: pack.errUnauthorized,
+    invalid: pack.errInvalid,
+  };
+  const msg = messages[resultCode] || pack.errNetwork;
+  // Bloklayan alert'ten önce yükleme ekranının kapanışını boyamaya izin ver.
+  setTimeout(function () { alert(msg); }, 260);
+}
+
+async function submitForm() {
+  if (!validateStep(3)) return;
+
+  const kvkkEl = document.getElementById('cb-kvkk');
+  const gizEl = document.getElementById('cb-gizlilik');
+  if (!kvkkEl || !gizEl || !kvkkEl.checked || !gizEl.checked) {
+    const errEl = document.getElementById('consent-error');
+    if (errEl) {
+      errEl.textContent = I18N[formLocale].consentErrorBoth;
+      errEl.style.display = 'block';
+    }
+    document.getElementById('section-consent')?.classList.add('consent-field-invalid');
+    document.getElementById('section-consent')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  clearConsentSubmitError();
+
+  const data = collectFormPayload();
+  data.submissionId = makeSubmissionId();
+
+  setSubmitButtonBusy(true);
+  setSubmitLoadingVisible(true);
+
+  let webAppResult = null;
+  try {
+    if (isWebAppReady()) {
+      webAppResult = await submitToWebApp(data);
+      // Sistem yoğun ('busy'): kilit alınamadı, sunucuda HİÇBİR ŞEY işlenmedi.
+      // Loader açıkken sessizce bekleyip aynı submissionId ile tekrar dene.
+      for (let busyRetry = 0; busyRetry < 2 && webAppResult === 'busy'; busyRetry++) {
+        await sleepMs(9000);
+        webAppResult = await submitToWebApp(data);
+      }
+    } else if (isGoogleFormReady()) {
+      await submitToGoogleForms(data);
+    }
+  } catch (err) {
+    console.error(err);
+    // Ağ hatası: sunucu kaydı işlemiş olabilir. Ekrandan çıkmadan durumu sorgula;
+    // kayıt bulunursa mükerrer gönderime gerek kalmadan başarı ekranı gösterilir.
+    const kurtarilan = isWebAppReady() && data.submissionId
+      ? await pollBasvuruDurumu(data.submissionId)
+      : null;
+    if (kurtarilan && kurtarilan.found) {
+      webAppResult = String(kurtarilan.result || 'ok');
+    } else {
+      setSubmitLoadingVisible(false);
+      setSubmitButtonBusy(false);
+      const netMsg = I18N[formLocale].errNetwork;
+      // Bloklayan alert'ten önce yükleme ekranının kapanışını boyamaya izin ver.
+      setTimeout(function () { alert(netMsg); }, 260);
+      return;
+    }
+  }
+
+  // Onaylanmış başvuru: sunucu yeniden gönderimi reddetti (yarış durumu). Kabul ekranını göster.
+  if (webAppResult === 'already-approved') {
+    setSubmitLoadingVisible(false);
+    setSubmitButtonBusy(false);
+    showAcceptedScreen();
+    return;
+  }
+
+  if (webAppResult !== null && webAppResult !== 'ok') {
+    console.error('WEB_APP_EXEC_URL beklenmedik yanıt döndürdü: ' + webAppResult);
+    setSubmitLoadingVisible(false);
+    showSubmitError(webAppResult);
+    setSubmitButtonBusy(false);
+    return;
+  }
+
+  const unvan = data.unvan;
+  const ad = data.ad;
+  const soyad = data.soyad;
+  const email = data.email;
+  const pack = I18N[formLocale];
+  const baslik =
+    formLocale === 'en'
+      ? data.baslikEn
+      : data.baslikTr || data.baslikEn;
+  const formsNote =
+    isWebAppReady() || isGoogleFormReady()
+      ? ''
+      : '<div class="row"><span>' +
+        escapeHtml(pack.successNoteLabel) +
+        '</span><span>' +
+        escapeHtml(pack.successNotConfigured) +
+        '</span></div>';
+
+  const statusRow =
+    '<div class="row"><span>' +
+    escapeHtml(pack.successRowStatusLabel) +
+    '</span><span class="success-pill">' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' +
+    escapeHtml(pack.successStatus) +
+    '</span></div>';
+
+  const baslikShort = baslik.length > 50 ? baslik.slice(0, 50) + '…' : baslik;
+  const baslikLang = formLocale === 'en' ? 'en' : 'tr';
+  const nameLine =
+    '<span lang="tr">' + escapeHtml(unvan + ' ' + ad + ' ' + soyad).trim() + '</span>';
+  const titleLine = '<span lang="' + baslikLang + '">' + escapeHtml(baslikShort) + '</span>';
+
+  const katilimSecim =
+    (document.getElementById('katilim') && document.getElementById('katilim').value.trim()) || '';
+  const katilimRow = katilimSecim
+    ? '<div class="row"><span>' +
+      escapeHtml(pack.labelKatilim) +
+      '</span><span>' +
+      escapeHtml(katilimSecim) +
+      '</span></div>'
+    : '';
+  document.getElementById('success-summary').innerHTML =
+    '<div class="row"><span>' +
+    escapeHtml(pack.successName) +
+    '</span><span>' +
+    nameLine +
+    '</span></div>' +
+    '<div class="row"><span>' +
+    escapeHtml(pack.successEmail) +
+    '</span><span>' +
+    escapeHtml(email) +
+    '</span></div>' +
+    '<div class="row"><span>' +
+    escapeHtml(pack.successPaperTitle) +
+    '</span><span>' +
+    titleLine +
+    '</span></div>' +
+    katilimRow +
+    statusRow +
+    '<div class="row"><span>' +
+    escapeHtml(pack.successReply) +
+    '</span><span>' +
+    escapeHtml(pack.successReplyVal) +
+    '</span></div>' +
+    formsNote;
+
+  ['step1', 'step2', 'step3'].forEach(function (id) {
+    document.getElementById(id)?.classList.remove('active');
+  });
+  ['tab1', 'tab2', 'tab3'].forEach(function (id) {
+    const t = document.getElementById(id);
+    if (t) {
+      t.classList.remove('active');
+      t.classList.add('done');
+    }
+  });
+  document.getElementById('step-success').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  setSubmitLoadingVisible(false);
+  setSubmitButtonBusy(false);
+}
+
+// Live remove error on typing
+document.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('input', () => {
+    el.closest('.field')?.classList.remove('invalid');
+  });
+  el.addEventListener('change', () => {
+    el.closest('.field')?.classList.remove('invalid');
+  });
+});
+
+// Authors UI boot + actions
+document.getElementById('authors-limit') &&
+  (document.getElementById('authors-limit').textContent = String(AUTHORS_UI_MAX));
+
+document.getElementById('btn-locale-tr')?.addEventListener('click', function () {
+  setFormLocale('tr');
+});
+document.getElementById('btn-locale-en')?.addEventListener('click', function () {
+  setFormLocale('en');
+});
+setFormLocale(formLocale);
+
+// Düzeltme linki: onaylı ref ise formu göstermeden "kabul edildi" ekranına geç.
+if (DUZELTME_REF) {
+  hideFormForRefCheck();
+  refKabulKontrol();
+}
+
+const mainFormRoot = document.querySelector('.main');
+if (mainFormRoot) {
+  mainFormRoot.addEventListener('input', updateConsentCheckboxesState);
+  mainFormRoot.addEventListener('change', updateConsentCheckboxesState);
+}
+
+// Telefon alanına yazı girilmesini engelle: yalnızca rakam, +, boşluk, ( ) ve - kabul et.
+document.addEventListener('input', function (ev) {
+  const t = ev.target;
+  if (!(t instanceof HTMLInputElement)) return;
+  if (t.getAttribute('data-author-field') !== 'telefon') return;
+  const temiz = t.value.replace(/[^0-9+()\s-]/g, '');
+  if (temiz !== t.value) {
+    const pos = t.selectionStart;
+    t.value = temiz;
+    try { t.setSelectionRange(pos - 1, pos - 1); } catch (ignore) {}
+  }
+});
+
+document.getElementById('cb-kvkk')?.addEventListener('change', function () {
+  document.getElementById('label-wrap-kvkk')?.classList.toggle('selected', this.checked);
+  if (document.getElementById('cb-kvkk')?.checked && document.getElementById('cb-gizlilik')?.checked) {
+    clearConsentSubmitError();
+  }
+});
+document.getElementById('cb-gizlilik')?.addEventListener('change', function () {
+  document.getElementById('label-wrap-gizlilik')?.classList.toggle('selected', this.checked);
+  if (document.getElementById('cb-kvkk')?.checked && document.getElementById('cb-gizlilik')?.checked) {
+    clearConsentSubmitError();
+  }
+});
+
+document.addEventListener('click', function (ev) {
+  const t = ev.target;
+  if (!(t instanceof Element)) return;
+  const openId = t.getAttribute('data-open-modal');
+  if (openId) {
+    ev.preventDefault();
+    openLegalModal(openId);
+    return;
+  }
+  const closeId = t.getAttribute('data-close-modal');
+  if (closeId) {
+    ev.preventDefault();
+    closeLegalModal(closeId);
+    return;
+  }
+  if (t.classList.contains('legal-modal-overlay') && t.classList.contains('is-open')) {
+    closeLegalModal(t.id);
+  }
+});
+
+document.addEventListener('keydown', function (ev) {
+  if (ev.key !== 'Escape') return;
+  ['modal-kvkk', 'modal-gizlilik'].forEach(function (id) {
+    const el = document.getElementById(id);
+    if (el && el.classList.contains('is-open')) closeLegalModal(id);
+  });
+});
+
+document.getElementById('btn-add-author')?.addEventListener('click', function () {
+  const current = getAuthorsFromUI();
+  if (current.length >= AUTHORS_UI_MAX) {
+    alert(I18N[formLocale].maxAuthorsAlert.replace('{n}', String(AUTHORS_UI_MAX)));
+    return;
+  }
+  current.push({});
+  renderAuthors(current);
+  updateConsentCheckboxesState();
+});
+
+document.addEventListener('click', function (ev) {
+  const t = ev.target;
+  if (!(t instanceof Element)) return;
+  const btn = t.closest('[data-action="remove-author"]');
+  if (!btn) return;
+  const ix = Number(btn.getAttribute('data-index'));
+  const current = getAuthorsFromUI();
+  if (isNaN(ix) || ix < 0 || ix >= current.length) return;
+  current.splice(ix, 1);
+  if (!current.length) current.push({});
+  renderAuthors(current);
+  updateConsentCheckboxesState();
+});
+</script>
+
+</body>
+</html>
