@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seminer Kayıt Formu — WriteTec Bilgi Teknolojileri</title>
+    <meta name="description"
+        content="WriteTec Bilgi Teknolojileri seminer kayıt formunu doldurarak etkinliğimizde yerinizi alın." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            /* — WriteTec Açık Renkli Marka Paleti — */
+            --navy: #0B2D5A;
+            --navy-2: #143A72;
+            --brand-blue: #2F67B8;
+            --brand-blue-light: #E0EFFF;
+            --brand-ice: #F0F6FC;
+            --gold: #C9A84C;
+            --gold-light: #E8C97A;
+            --gold-dark: #9C7B33;
+            --cream: #ffffff;
+            --page-light: #F7FAFC; /* Yeni açık zemin */
+            --page-mid: #EDF2F7;
+            --panel: #FFFFFF;
+            --panel-strong: #FAFAFA;
+            --white: #ffffff;
+            --gray: #4B5563;
+            --gray-soft: #9CA3AF;
+            --border-soft: rgba(11, 45, 90, 0.08);
+            --input-bg: #F8FAFC;
+            --error: #E11D48;
+            --success: #059669;
+            --radius: 24px;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Source Sans 3', system-ui, sans-serif;
+            
+            /* Glassmorphism tokenları */
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px rgba(11, 45, 90, 0.05);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--page-light);
+            color: var(--navy);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ═══════════════════════════════════════
+       SAYFA — açık, şık ve renkli zemin
+    ═══════════════════════════════════════ */
+        .page {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(47, 103, 184, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(201, 168, 76, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 100%),
+                #F4F8FB; /* Açık mavi/gri zemin */
+        }
+
+        .page-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: floatBlob 10s ease-in-out infinite alternate;
+            display: block;
+        }
+
+        .page-blob.blob-blue {
+            left: -10vw;
+            top: 10vh;
+            height: 50vw;
+            width: 50vw;
+            max-width: 600px;
+            max-height: 600px;
+            background: rgba(47, 103, 184, 0.15);
+        }
+
+        .page-blob.blob-gold {
+            right: -10vw;
+            top: 40vh;
+            height: 45vw;
+            width: 45vw;
+            max-width: 550px;
+            max-height: 550px;
+            background: rgba(201, 168, 76, 0.15);
+            animation-delay: -5s;
+        }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -50px) scale(1.1); }
+        }
+
+        .page-inner {
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 40px 20px 64px;
+            flex: 1;
+            z-index: 1;
+        }
+
+        /* ── geri dön ── */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(11, 45, 90, 0.15);
+            background: var(--glass-bg);
+            padding: 9px 18px 9px 15px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--navy);
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(11, 45, 90, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            border-color: var(--brand-blue);
+            background: #fff;
+            color: var(--brand-blue);
+            box-shadow: 0 6px 16px rgba(47, 103, 184, 0.12);
+        }
+
+        .back-link svg {
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-link:hover svg {
+            transform: translateX(-3px);
+        }
+
+        /* ═══════════════════════════════════════
+       MARKA / BAŞLIK
+    ═══════════════════════════════════════ */
+        .brand-row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-mark img {
+            height: 52px;
+            width: 52px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(11, 45, 90, 0.08));
+        }
+
+        .brand-mark .brand-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.15;
+        }
+
+        .brand-mark .brand-text strong {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+        }
+
+        .brand-mark .brand-text span {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--brand-blue);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 28px;
+            border-radius: 999px;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            background: rgba(201, 168, 76, 0.1);
+            padding: 6px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+        }
+
+        .eyebrow .dot {
+            height: 6px;
+            width: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+            box-shadow: 0 0 8px var(--gold);
+        }
+
+        .site-header {
+            margin-top: 16px;
+        }
+
+        .site-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .site-header h1 span {
+            color: var(--brand-blue);
+            background: linear-gradient(135deg, var(--brand-blue), var(--navy-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .site-header p {
+            margin-top: 16px;
+            font-size: 1.05rem;
+            color: var(--gray);
+            font-weight: 400;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════
+       KART
+    ═══════════════════════════════════════ */
+        .card-wrap {
+            margin-top: 40px;
+            perspective: 1000px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            box-shadow: 
+                0 20px 40px rgba(11, 45, 90, 0.05),
+                0 1px 3px rgba(11, 45, 90, 0.05),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+            padding: clamp(30px, 6vw, 46px);
+            position: relative;
+            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 24px 48px rgba(11, 45, 90, 0.08),
+                0 1px 3px rgba(11, 45, 90, 0.05),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--brand-blue), var(--gold), var(--brand-blue));
+            background-size: 200% auto;
+            animation: gradientMove 4s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ═══════════════════════════════════════
+       FORM
+    ═══════════════════════════════════════ */
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--navy-2);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .form-group label .req {
+            color: var(--error);
+            margin-left: 3px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            background: #fff;
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--navy);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            outline: none;
+            appearance: none;
+            box-shadow: 0 2px 6px rgba(11, 45, 90, 0.02) inset;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--gray-soft);
+        }
+
+        .form-group input:hover,
+        .form-group textarea:hover,
+        .form-group select:hover {
+            border-color: rgba(47, 103, 184, 0.3);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--brand-blue);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(47, 103, 184, 0.15), 0 2px 6px rgba(11, 45, 90, 0.02) inset;
+            transform: translateY(-1px);
+        }
+
+        .form-group input.error,
+        .form-group textarea.error,
+        .form-group select.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 108px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
+        .field-error {
+            font-size: 0.8rem;
+            color: var(--error);
+            margin-top: 6px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .field-error.visible {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .consent-card {
+            background: var(--brand-ice);
+            border: 1px solid rgba(47, 103, 184, 0.1);
+            border-left: 4px solid var(--brand-blue);
+            border-radius: 16px;
+            padding: 22px 24px;
+            margin-bottom: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .consent-card:hover {
+            background: #E8F2FC;
+        }
+
+        .consent-item {
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 12px 16px;
+            align-items: start;
+        }
+
+        .consent-item-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .consent-item-check {
+            margin-top: 2px;
+            width: 22px;
+            height: 22px;
+            accent-color: var(--brand-blue);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+        
+        .consent-item-check:hover {
+            transform: scale(1.1);
+        }
+
+        .consent-text {
+            font-size: 14px;
+            color: var(--navy);
+            line-height: 1.6;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .btn-legal {
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--brand-blue);
+            background: #fff;
+            border: 1px solid rgba(47, 103, 184, 0.2);
+            padding: 8px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(11, 45, 90, 0.04);
+        }
+
+        .btn-legal:hover {
+            background: var(--brand-blue);
+            color: #fff;
+            border-color: var(--brand-blue);
+            box-shadow: 0 4px 12px rgba(47, 103, 184, 0.2);
+        }
+
+        /* Dialog CSS */
+        dialog.legal-dialog:not([open]) {
+            display: none;
+        }
+
+        dialog.legal-dialog[open] {
+            position: fixed;
+            inset: 0;
+            width: min(640px, calc(100vw - 24px));
+            max-width: calc(100vw - 24px);
+            max-height: min(85vh, 720px);
+            height: fit-content;
+            margin: auto;
+            padding: 0;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 24px 60px rgba(11, 45, 90, 0.15);
+            color: var(--navy);
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: dialogIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        @keyframes dialogIn {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        dialog.legal-dialog::backdrop {
+            background: rgba(11, 45, 90, 0.3);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .legal-dialog-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-soft);
+            background: var(--brand-ice);
+            flex-shrink: 0;
+        }
+
+        .legal-dialog-header h2 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.3;
+            color: var(--navy);
+        }
+
+        .legal-dialog-close {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--border-soft);
+            background: #fff;
+            color: var(--navy);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .legal-dialog-close:hover {
+            border-color: var(--error);
+            color: var(--error);
+            background: #FFF1F2;
+        }
+
+        .legal-dialog-body {
+            padding: 24px 28px;
+            overflow-y: auto;
+            flex: 1;
+            min-height: 0;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--gray);
+        }
+
+        .legal-dialog-body h3 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--navy);
+            margin: 24px 0 10px;
+        }
+
+        .legal-dialog-body h3:first-child {
+            margin-top: 0;
+        }
+
+        .legal-dialog-body p {
+            margin: 0 0 12px;
+        }
+
+        .legal-dialog-body ul {
+            margin: 0 0 16px 1.2em;
+            padding: 0;
+        }
+
+        .legal-dialog-body li {
+            margin-bottom: 8px;
+        }
+
+        /* ── section label ── */
+        .section-label {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0;
+            color: var(--navy);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            border-radius: 4px;
+            background: linear-gradient(180deg, var(--brand-blue), var(--navy-2));
+            flex-shrink: 0;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(47,103,184,0.2), transparent);
+        }
+
+        /* ═══════════════════════════════════════
+       BUTTON
+    ═══════════════════════════════════════ */
+        .btn-submit {
+            width: 100%;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--navy-2) 100%);
+            color: #fff;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 20px rgba(47, 103, 184, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(47, 103, 184, 0.35);
+        }
+        
+        .btn-submit:hover:not(:disabled)::before {
+            left: 100%;
+        }
+
+        .btn-submit:active:not(:disabled) {
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(47, 103, 184, 0.2);
+        }
+
+        .btn-submit:disabled {
+            background: var(--gray-soft);
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ok ikonu animasyonu */
+        .btn-arrow {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-submit:hover:not(:disabled) .btn-arrow {
+            transform: translateX(6px);
+        }
+
+        /* spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: none;
+            flex-shrink: 0;
+        }
+
+        .btn-submit.loading .spinner {
+            display: inline-block;
+        }
+
+        .btn-submit.loading .btn-text {
+            opacity: 0.9;
+        }
+
+        /* ═══════════════════════════════════════
+       TOAST / OVERLAY
+    ═══════════════════════════════════════ */
+        #toast {
+            display: none;
+            padding: 16px 20px;
+            border-radius: 14px;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.5;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #toast.success {
+            background: #ECFDF5;
+            border: 1px solid #34D399;
+            color: #065F46;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.1);
+        }
+
+        #toast.error-msg {
+            background: #FFF1F2;
+            border: 1px solid #FDA4AF;
+            color: var(--error);
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.1);
+        }
+
+        #success-overlay {
+            display: none;
+            text-align: center;
+            padding: 16px 0 20px;
+            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+            font-size: 40px;
+            color: #fff;
+            animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+            animation-delay: 0.2s;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        #success-overlay h2 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        #success-overlay p {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .btn-reset {
+            margin-top: 24px;
+            padding: 12px 28px;
+            background: transparent;
+            border: 2px solid var(--brand-blue);
+            color: var(--brand-blue);
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-reset:hover {
+            background: var(--brand-blue);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(47, 103, 184, 0.2);
+        }
+
+        .btn-back {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--brand-blue) 100%);
+            border: none;
+            color: #fff;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(11, 45, 90, 0.2);
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(11, 45, 90, 0.3);
+            color: #fff;
+        }
+
+        /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+        .site-footer {
+            width: 100%;
+            padding: 30px 24px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin-top: 20px;
+        }
+
+        .site-footer p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .site-footer a {
+            color: var(--brand-blue);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.2s;
+        }
+
+        .site-footer a:hover {
+            color: var(--navy);
+            text-decoration: underline;
+        }
+
+        /* ═══════════════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════════════ */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ═══════════════════════════════════════
+       CUBE ANIMATION MODAL
+    ═══════════════════════════════════════ */
+        #cube-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            background: rgba(240, 246, 252, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            align-items: center;
+            justify-content: center;
+            animation: cubeModalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        #cube-modal.active {
+            display: flex;
+        }
+
+        #cube-modal.fade-out {
+            animation: cubeModalOut 0.5s ease forwards;
+        }
+
+        @keyframes cubeModalIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes cubeModalOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .cube-modal-card {
+            background: #fff;
+            border-radius: 28px;
+            padding: 48px 40px 40px;
+            box-shadow: 0 40px 100px rgba(11, 45, 90, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+            animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+            max-width: 360px;
+            width: 90vw;
+            border: 1px solid rgba(11, 45, 90, 0.05);
+        }
+
+        .cube-modal-card .wt-brand {
+            font-family: var(--font-sans);
+            font-weight: 800;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: wt-pl-pulse 1.6s ease-in-out infinite;
+        }
+
+        .cube-modal-card .wt-brand small {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 0.24em;
+            color: var(--brand-blue);
+        }
+
+        .cube-modal-text {
+            font-family: var(--font-sans);
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--navy);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .cube-modal-sub {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        /* Küçültülmüş küp animasyonu - Renkleri güncellendi */
+        .cube-modal-card .wt-loader {
+            --duration: 3s;
+            --primary: #3B82F6;
+            --primary-light: #60A5FA;
+            --primary-rgba: rgba(59,130,246,0);
+            width: 200px;
+            height: 320px;
+            position: relative;
+            transform-style: preserve-3d;
+            zoom: 0.5;
+        }
+
+        @media (max-width: 480px) {
+            .cube-modal-card .wt-loader { zoom: 0.4; }
+            .cube-modal-card { padding: 36px 28px 32px; }
+        }
+
+        .cube-modal-card .wt-loader:before,
+        .cube-modal-card .wt-loader:after {
+            --r: 20.5deg;
+            content: "";
+            width: 320px;
+            height: 140px;
+            position: absolute;
+            right: 32%;
+            bottom: -11px;
+            background: #fff;
+            transform: translateZ(200px) rotate(var(--r));
+            animation: wt-mask var(--duration) linear forwards 1;
+        }
+
+        .cube-modal-card .wt-loader:after {
+            --r: -20.5deg;
+            right: auto;
+            left: 32%;
+        }
+
+        .cube-modal-card .wt-loader .ground {
+            position: absolute;
+            left: -50px;
+            bottom: -120px;
+            transform-style: preserve-3d;
+            transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1);
+        }
+
+        .cube-modal-card .wt-loader .ground div {
+            transform: rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(0);
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary) 0%, var(--primary) 50%, var(--primary-light) 50%, var(--primary-light) 100%);
+            transform-style: preserve-3d;
+            animation: wt-ground var(--duration) linear forwards 1;
+        }
+
+        .cube-modal-card .wt-loader .ground div:before,
+        .cube-modal-card .wt-loader .ground div:after {
+            --rx: 90deg; --ry: 0deg; --x: 44px; --y: 162px; --z: -50px;
+            content: "";
+            width: 156px;
+            height: 300px;
+            opacity: 0;
+            background: linear-gradient(var(--primary), var(--primary-rgba));
+            position: absolute;
+            transform: rotateX(var(--rx)) rotateY(var(--ry)) translate(var(--x), var(--y)) translateZ(var(--z));
+            animation: wt-ground-shine var(--duration) linear forwards 1;
+        }
+
+        .cube-modal-card .wt-loader .ground div:after {
+            --rx: 90deg; --ry: 90deg; --x: 0; --y: 177px; --z: 150px;
+        }
+
+        .cube-modal-card .wt-loader .box {
+            --x: 0; --y: 0;
+            position: absolute;
+            animation: var(--duration) linear forwards 1;
+            transform: translate(var(--x), var(--y));
+        }
+
+        .cube-modal-card .wt-loader .box div {
+            width: 48px;
+            height: 48px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: var(--duration) ease forwards 1;
+            background-color: #60A5FA;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.3);
+            transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0);
+        }
+
+        .cube-modal-card .wt-loader .box div:before,
+        .cube-modal-card .wt-loader .box div:after {
+            --rx: 90deg; --ry: 0deg; --z: 24px; --y: -24px; --x: 0;
+            content: "";
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.3);
+            transform: rotateX(var(--rx)) rotateY(var(--ry)) translate(var(--x), var(--y)) translateZ(var(--z));
+        }
+
+        .cube-modal-card .wt-loader .box div:before { background-color: #3B82F6; }
+        .cube-modal-card .wt-loader .box div:after { --rx: 0deg; --ry: 90deg; --x: 24px; --y: 0; background-color: #1E3A8A; }
+
+        .cube-modal-card .wt-loader .box.box7 { display: none; }
+        .cube-modal-card .wt-loader .box.box5 div:after { background-color: #0F172A; box-shadow: inset 0 0 0 1px rgba(255,255,255,.4); }
+        .cube-modal-card .wt-loader .box.box6 div { background-color: #0F172A; box-shadow: inset 0 0 0 1px rgba(255,255,255,.4); }
+        .cube-modal-card .wt-loader .box.box4 div:before { background-color: #020617; box-shadow: inset 0 0 0 1px rgba(255,255,255,.4); }
+
+        .cube-modal-card .wt-loader .box.box0 { --x: -220px; --y: -120px; left: 58px; top: 108px; animation-name: wt-box-move0; }
+        .cube-modal-card .wt-loader .box.box0 div { animation-name: wt-box-scale0; }
+        .cube-modal-card .wt-loader .box.box1 { --x: -260px; --y: 120px; left: 25px; top: 120px; animation-name: wt-box-move1; }
+        .cube-modal-card .wt-loader .box.box1 div { animation-name: wt-box-scale1; }
+        .cube-modal-card .wt-loader .box.box2 { --x: 120px; --y: -190px; left: 58px; top: 64px; animation-name: wt-box-move2; }
+        .cube-modal-card .wt-loader .box.box2 div { animation-name: wt-box-scale2; }
+        .cube-modal-card .wt-loader .box.box3 { --x: 280px; --y: -40px; left: 91px; top: 120px; animation-name: wt-box-move3; }
+        .cube-modal-card .wt-loader .box.box3 div { animation-name: wt-box-scale3; }
+        .cube-modal-card .wt-loader .box.box4 { --x: 60px; --y: 200px; left: 58px; top: 132px; animation-name: wt-box-move4; }
+        .cube-modal-card .wt-loader .box.box4 div { animation-name: wt-box-scale4; }
+        .cube-modal-card .wt-loader .box.box5 { --x: -220px; --y: -120px; left: 25px; top: 76px; animation-name: wt-box-move5; }
+        .cube-modal-card .wt-loader .box.box5 div { animation-name: wt-box-scale5; }
+        .cube-modal-card .wt-loader .box.box6 { --x: -260px; --y: 120px; left: 91px; top: 76px; animation-name: wt-box-move6; }
+        .cube-modal-card .wt-loader .box.box6 div { animation-name: wt-box-scale6; }
+        .cube-modal-card .wt-loader .box.box7 { --x: -240px; --y: 200px; left: 58px; top: 87px; animation-name: wt-box-move7; }
+        .cube-modal-card .wt-loader .box.box7 div { animation-name: wt-box-scale7; }
+
+        @keyframes wt-pl-pulse { 0%,100% { opacity: .7; } 50% { opacity: 1; } }
+        @keyframes wt-box-move0 { 12% { transform: translate(var(--x),var(--y)); } 25%,52% { transform: translate(0,0); } 80% { transform: translate(0,-32px); } 90%,100% { transform: translate(0,188px); } }
+        @keyframes wt-box-scale0 { 6% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0); } 14%,100% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1); } }
+        @keyframes wt-box-move1 { 16% { transform: translate(var(--x),var(--y)); } 29%,52% { transform: translate(0,0); } 80% { transform: translate(0,-32px); } 90%,100% { transform: translate(0,188px); } }
+        @keyframes wt-box-scale1 { 10% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0); } 18%,100% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1); } }
+        @keyframes wt-box-move2 { 20% { transform: translate(var(--x),var(--y)); } 33%,52% { transform: translate(0,0); } 80% { transform: translate(0,-32px); } 90%,100% { transform: translate(0,188px); } }
+        @keyframes wt-box-scale2 { 14% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0); } 22%,100% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1); } }
+        @keyframes wt-box-move3 { 24% { transform: translate(var(--x),var(--y)); } 37%,52% { transform: translate(0,0); } 80% { transform: translate(0,-32px); } 90%,100% { transform: translate(0,188px); } }
+        @keyframes wt-box-scale3 { 18% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0); } 26%,100% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1); } }
+        @keyframes wt-box-move4 { 28% { transform: translate(var(--x),var(--y)); } 41%,52% { transform: translate(0,0); } 80% { transform: translate(0,-32px); } 90%,100% { transform: translate(0,188px); } }
+        @keyframes wt-box-scale4 { 22% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0); } 30%,100% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1); } }
+        @keyframes wt-box-move5 { 32% { transform: translate(var(--x),var(--y)); } 45%,52% { transform: translate(0,0); } 80% { transform: translate(0,-32px); } 90%,100% { transform: translate(0,188px); } }
+        @keyframes wt-box-scale5 { 26% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0); } 34%,100% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1); } }
+        @keyframes wt-box-move6 { 36% { transform: translate(var(--x),var(--y)); } 49%,52% { transform: translate(0,0); } 80% { transform: translate(0,-32px); } 90%,100% { transform: translate(0,188px); } }
+        @keyframes wt-box-scale6 { 30% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0); } 38%,100% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1); } }
+        @keyframes wt-box-move7 { 40% { transform: translate(var(--x),var(--y)); } 53%,52% { transform: translate(0,0); } 80% { transform: translate(0,-32px); } 90%,100% { transform: translate(0,188px); } }
+        @keyframes wt-box-scale7 { 34% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0); } 42%,100% { transform: rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1); } }
+        @keyframes wt-ground { 0%,65% { transform: rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(0); } 75%,90% { transform: rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(1); } 100% { transform: rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(0); } }
+        @keyframes wt-ground-shine { 0%,70% { opacity: 0; } 75%,87% { opacity: .2; } 100% { opacity: 0; } }
+        @keyframes wt-mask { 0%,65% { opacity: 0; } 66%,100% { opacity: 1; } }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="page-blob blob-blue" aria-hidden="true"></div>
+        <div class="page-blob blob-gold" aria-hidden="true"></div>
+
+        <div class="page-inner">
+
+            <a href="/seminerler" class="back-link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5" />
+                    <path d="M12 19l-7-7 7-7" />
+                </svg>
+                Seminerlere Dön
+            </a>
+
+            <!-- ░░ MARKA + BAŞLIK ░░ -->
+            <div class="brand-row">
+                <div class="brand-mark">
+                    <img src="/logo-mark.png" alt="WriteTec Bilgi Teknolojileri" />
+                    <span class="brand-text">
+                        <strong>WriteTec</strong>
+                        <span>Bilgi Teknolojileri</span>
+                    </span>
+                </div>
+
+                <p class="eyebrow">
+                    <span class="dot"></span>
+                    Seminer Kaydı
+                </p>
+
+                <header class="site-header">
+                    <h1>Seminer <span>Kayıt Formu</span></h1>
+                    <p>Seminerimize katılmak için lütfen aşağıdaki bilgileri eksiksiz doldurun.</p>
+                </header>
+            </div>
+
+            <!-- ░░ KART ░░ -->
+            <div class="card-wrap">
+                <div class="card" id="form-card">
+
+                    <!-- Başarı ekranı -->
+                    <div id="success-overlay">
+                        <div class="success-icon">✓</div>
+                        <h2>Kaydınız Tamamlandı!</h2>
+                        <p>
+                            Teşekkür ederiz. Seminer kaydınız başarıyla oluşturuldu.<br />
+                            Kayıt detayları az sonra e-posta adresinize iletilecektir.
+                        </p>
+                        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 22px;">
+                            <a href="/seminerler" class="btn-back" style="text-decoration: none;">Seminerlere Dön</a>
+                            <button class="btn-reset" id="btn-reset" style="margin-top: 0;">Yeni Kayıt Yap</button>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <form id="basvuru-form" novalidate>
+
+                        <p class="section-label">İletişim Bilgileri</p>
+
+                        <!-- Ad / Soyad -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Ad <span class="req">*</span></label>
+                                <input type="text" id="name" name="name" placeholder="Barış" autocomplete="given-name" />
+                                <div class="field-error" id="name-error">Lütfen adınızı girin.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="surname">Soyad <span class="req">*</span></label>
+                                <input type="text" id="surname" name="surname" placeholder="Güdül"
+                                    autocomplete="family-name" />
+                                <div class="field-error" id="surname-error">Lütfen soyadınızı girin.</div>
+                            </div>
+                        </div>
+
+                        <!-- E-posta -->
+                        <div class="form-group">
+                            <label for="email">E-posta Adresi <span class="req">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="ornek@gmail.com" autocomplete="email" />
+                            <div class="field-error" id="email-error">Geçerli bir e-posta adresi girin.</div>
+                        </div>
+
+                        <!-- Telefon -->
+                        <div class="form-group">
+                            <label for="phone">Telefon Numarası <span class="req">*</span></label>
+                            <input type="tel" inputmode="tel" id="phone" name="phone" placeholder="+90 5xx xxx xx xx" autocomplete="tel" />
+                            <div class="field-error" id="phone-error">Lütfen telefon numaranızı girin.</div>
+                        </div>
+
+                        <!-- YÖKDİL Alanı (sadece YÖKDİL semineri için gösterilir) -->
+                        <div class="form-group" id="f-examGroup" style="display:none;">
+                            <label for="examGroup">Sınav Alanı <span class="req">*</span></label>
+                            <select id="examGroup" name="examGroup">
+                                <option value="">Seçiniz</option>
+                                <option value="Fen Bilimleri">Fen Bilimleri</option>
+                                <option value="Sosyal Bilimler">Sosyal Bilimler</option>
+                                <option value="Sağlık Bilimleri">Sağlık Bilimleri</option>
+                            </select>
+                            <div class="field-error" id="examGroup-error">Lütfen sınav alanınızı seçin.</div>
+                        </div>
+
+                        <!-- Onaylar -->
+                        <div class="consent-card">
+                            <div class="consent-item">
+                                <input type="checkbox" id="kvkkCheck" name="kvkkCheck" class="consent-item-check" />
+                                <div class="consent-item-col">
+                                    <label for="kvkkCheck" class="consent-text">6698 sayılı Kişisel Verilerin Korunması Kanunu
+                                        kapsamındaki <strong>Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metni</strong>’ni
+                                        okudum ve kişisel verilerimin belirtilen amaçlarla işlenmesine onay veriyorum.</label>
+                                    <button type="button" class="btn-legal" id="btnOpenKvkk">Aydınlatma metnini
+                                        görüntüle</button>
+                                </div>
+                            </div>
+                            <div class="consent-item">
+                                <input type="checkbox" id="privacyCheck" name="privacyCheck" class="consent-item-check" />
+                                <div class="consent-item-col">
+                                    <label for="privacyCheck" class="consent-text"><strong>Gizlilik ve Güvenlik
+                                            Politikası</strong>’nı okudum ve kabul ediyorum.</label>
+                                    <button type="button" class="btn-legal" id="btnOpenPrivacy">Gizlilik politikasını
+                                        görüntüle</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="btn-submit" id="btn-submit">
+                            <span class="spinner"></span>
+                            <span class="btn-text">Kaydı Tamamla <span class="btn-arrow">→</span></span>
+                        </button>
+
+                        <div id="toast"></div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ░░ FOOTER ░░ -->
+        <footer class="site-footer">
+            <p>
+                <a href="https://writetecbt.com" target="_blank" rel="noopener">writetecbt.com</a>
+                &nbsp;·&nbsp; +90 (530) 471 8078
+            </p>
+            <p>© <span id="footer-year">2024</span> WriteTec Bilgi Teknolojileri. Tüm hakları saklıdır.</p>
+        </footer>
+    </div>
+
+    <!-- ░░ CUBE ANIMATION MODAL ░░ -->
+    <div id="cube-modal">
+        <div class="cube-modal-card">
+            <div class="wt-loader">
+                <div class="box box0"><div></div></div>
+                <div class="box box1"><div></div></div>
+                <div class="box box2"><div></div></div>
+                <div class="box box3"><div></div></div>
+                <div class="box box4"><div></div></div>
+                <div class="box box5"><div></div></div>
+                <div class="box box6"><div></div></div>
+                <div class="box box7"><div></div></div>
+                <div class="ground"><div></div></div>
+            </div>
+            <div class="cube-modal-text">
+                Başvurunuz Alınıyor…
+                <div class="cube-modal-sub">Lütfen bekleyiniz</div>
+            </div>
+            <div class="wt-brand">
+                WRITETEC<small>BİLGİ TEKNOLOJİLERİ</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- KVKK ve Gizlilik Politikası Modalları -->
+    <dialog id="dlgKvkk" class="legal-dialog" aria-labelledby="dlgKvkkTitle">
+        <div class="legal-dialog-header">
+            <h2 id="dlgKvkkTitle">6698 sayılı KVKK — Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metni</h2>
+            <button type="button" class="legal-dialog-close" data-close="dlgKvkk">Kapat</button>
+        </div>
+        <div class="legal-dialog-body">
+            <h3>Veri sorumlusu</h3>
+            <p>6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca, kişisel verileriniz WriteTec Bilgi
+                Teknolojileri (“Şirket”) tarafından veri sorumlusu sıfatıyla işlenmektedir.</p>
+
+            <h3>Adres</h3>
+            <p>Çünür Mah. 5421. Sokak No: 26 D:17 Merkez/Isparta</p>
+
+            <h3>Telefon</h3>
+            <p>+90 530 471 80 78</p>
+
+            <h3>E-posta</h3>
+            <p>writetecbt@gmail.com</p>
+
+            <h3>Kişisel verilerin hangi amaçlarla işlendiği</h3>
+            <p>Şirket tarafından, aşağıdaki amaçlarla sınırlı ve ölçülü olarak kişisel verileriniz işlenebilir:</p>
+            <ul>
+                <li>Akademik kitap derleme ve yayın süreçlerinin yürütülmesi</li>
+                <li>Bölüm/yazar başvurularının alınması, değerlendirilmesi ve geri bildirim sağlanması</li>
+                <li>İletişim taleplerinin yanıtlanması; bilgilendirme ve danışmanlık süreçlerinin yönetilmesi</li>
+                <li>Hizmet kalitesinin artırılması, operasyonel süreçlerin planlanması ve güvenliğin sağlanması</li>
+                <li>Yetkili kurum ve kuruluşlara bilgi verilmesi dahil yasal yükümlülüklerin yerine getirilmesi</li>
+                <li>İstatistiksel analiz, raporlama ve arşivleme (anonim veya kimlikten arındırılmış hallerde mümkün
+                    olduğu ölçüde)</li>
+            </ul>
+
+            <h3>İşlenen kişisel veri kategorileri</h3>
+            <p>Hizmetin niteliğine bağlı olarak; kimlik (ad-soyad, ünvan), iletişim (telefon, e-posta), kurum bilgisi,
+                akademik kimlik (ORCID), işlem güvenliği (log, IP, cihaz bilgisi) ve pazarlama (açık rıza ile) verileri
+                işlenebilir.</p>
+
+            <h3>Kişisel verilerin işlenme şartı ve hukuki sebepler</h3>
+            <p>Kişisel verileriniz; KVKK md. 5 ve md. 6 kapsamında, açık rızanızın bulunması, sözleşmenin kurulması veya
+                ifasıyla doğrudan doğruya ilgili olması, veri sorumlusunun hukuki yükümlülüğünü yerine getirebilmesi
+                için zorunlu olması veya meşru menfaat gibi hukuki sebeplere dayanılarak işlenir.</p>
+
+            <h3>Kişisel verilerin aktarılması</h3>
+            <p>Kişisel verileriniz; hizmetin gerektirdiği ölçüde iş ortaklarımıza, tedarikçilerimize (ör. barındırma,
+                iletişim altyapısı), yetkili kamu kurum ve kuruluşlarına ve yasal düzenlemelerin öngördüğü hallerde
+                üçüncü kişilere KVKK’ya uygun olarak aktarılabilir.</p>
+
+            <h3>Kişisel verilerin toplanma yöntemi</h3>
+            <p>Verileriniz; web sitemiz, iletişim formları, e-posta, telefon, WhatsApp ve yazar paneli gibi kanallar
+                aracılığıyla otomatik veya kısmen otomatik yollarla toplanabilir.</p>
+
+            <h3>İlgili kişinin KVKK md. 11 kapsamındaki hakları</h3>
+            <p>KVKK’nın 11. maddesi uyarınca veri sahipleri olarak aşağıdaki haklara sahipsiniz:</p>
+            <ul>
+                <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+                <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+                <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+                <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</li>
+                <li>Eksik veya yanlış işlenmişse düzeltilmesini isteme</li>
+                <li>KVKK’nın 7. maddesi çerçevesinde silinmesini veya yok edilmesini isteme</li>
+                <li>Düzeltme, silme, yok etme işlemlerinin aktarıldığı üçüncü kişilere bildirilmesini isteme</li>
+                <li>Münhasıran otomatik sistemler ile analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına
+                    itiraz etme</li>
+                <li>Kanuna aykırı işlenmesi sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme</li>
+            </ul>
+
+            <h3>Başvuru yolu</h3>
+            <p>Yukarıdaki haklarınızı kullanmak için taleplerinizi writetecbt@gmail.com adresine e-posta göndererek veya
+                yazılı olarak Şirket adresimize iletebilirsiniz. Başvurularınız, KVKK ve ilgili mevzuat çerçevesinde
+                sonuçlandırılır.</p>
+            <p>Şikâyetlerinizi Kişisel Verileri Koruma Kurulu’na iletme hakkınız saklıdır (www.kvkk.gov.tr).</p>
+            <p>Ayrıca Gizlilik ve Güvenlik Politikası metnimizi inceleyebilirsiniz.</p>
+        </div>
+    </dialog>
+
+    <dialog id="dlgPrivacy" class="legal-dialog" aria-labelledby="dlgPrivacyTitle">
+        <div class="legal-dialog-header">
+            <h2 id="dlgPrivacyTitle">Gizlilik ve Güvenlik Politikası</h2>
+            <button type="button" class="legal-dialog-close" data-close="dlgPrivacy">Kapat</button>
+        </div>
+        <div class="legal-dialog-body">
+            <p>Bu politika, kişisel verilerin korunmasına ilişkin ilke ve uygulamaları açıklar.</p>
+
+            <h3>Amaç ve Kapsam</h3>
+            <p>Bu politika, WriteTec Bilgi Teknolojileri (bundan sonra “Şirket” olarak anılacaktır) tarafından toplanan,
+                işlenen ve saklanan kişisel verilerin korunmasına ilişkin ilke ve uygulamaları açıklar.</p>
+            <p><strong>Amaç:</strong> Kişisel verilerin güvenliğini sağlamak, mevzuata uygun hareket etmek ve
+                müşterilerimizin/çalışanlarımızın güvenini korumaktır.</p>
+            <p><strong>Kapsam:</strong> Bu politika, Şirket’in müşterileri, çalışanları, tedarikçileri ve iş ortakları
+                ile ilişkili tüm kişisel verileri kapsar.</p>
+
+            <h3>Tanımlar</h3>
+            <ul>
+                <li><strong>Kişisel Veri:</strong> Kimliği belirli veya belirlenebilir gerçek kişiye ilişkin her türlü
+                    bilgi.</li>
+                <li><strong>İşlenen Kişisel Veri:</strong> Amaçlanan ve yetkili kişilerce gerçekleştirilen kayıt,
+                    saklama, aktarım ve kullanım süreçleri.</li>
+                <li><strong>Veri Sorumlusu:</strong> Kişisel verilerin işlenme amaçlarını ve vasıtalarını belirleyen
+                    gerçek veya tüzel kişi.</li>
+                <li><strong>Veri Güvenliği:</strong> Kişisel verilerin yetkisiz erişim, ihlal, kayıp, bozulma veya yok
+                    edilmeden korunmasını sağlama eylem ve önlemleri.</li>
+            </ul>
+
+            <h3>İlkeler</h3>
+            <ul>
+                <li><strong>Yasalara Uygunluk:</strong> Kişisel veriler, yürürlükteki veri koruma mevzuatına uygun
+                    işlenir.</li>
+                <li><strong>Amaçla Sınırlama:</strong> Veriler, belirlenen amaç için ve bu amaçla sınırlı olarak
+                    işlenir.</li>
+                <li><strong>Şeffaflık:</strong> Veri sahiplerine hangi verilerin niçin işlendiği konusunda net bilgi
+                    verilir.</li>
+                <li><strong>Güvenlik:</strong> Kişisel verilerin güvenliğini sağlamak için uygun teknik ve
+                    organizasyonel önlemler alınır.</li>
+                <li><strong>Sadece Yetkilendirilmiş Erişim:</strong> Verilere erişim, yetkilendirilmiş personelle
+                    sınırlıdır.</li>
+            </ul>
+
+            <h3>Veri Sınıflandırması</h3>
+            <ul>
+                <li><strong>Gizli Veri:</strong> Yasal olarak korunması gereken ve yüksek güvenlik gerektiren veriler
+                    (ör. mali bilgiler, kimlik belgeleri).</li>
+                <li><strong>Kısıtlı Veri:</strong> Erişimi sınırlı olan kişisel veriler.</li>
+                <li><strong>Genel Veri:</strong> Kamuya açık veya düşük güvenlik gerektiren veriler.</li>
+            </ul>
+            <p>Verilere ilişkin sınıflandırma, ilgili süreçler ve kullanıcı grupları için net olarak tanımlanır.</p>
+
+            <h3>Veri İşleme Amaçları</h3>
+            <p>Hizmet sunumu, müşteri desteği, hesap yönetimi, güvenlik izlemesi, yasal uyum vb. Amaçlar açıkça
+                belgelenir ve dışa aktarım veya paylaşım durumlarında veri sahiplerine gerekli bilgilendirme yapılır.
+            </p>
+
+            <h3>Hukuki Dayanak</h3>
+            <p>Kişisel verilerin işlenmesi, uygulanabilir mevzuata uygun olarak gerçekleştirilir. Gerekli hallerde açık
+                rıza, sözleşme gerekliliği veya meşru menfaatler gibi hukuki sebepler kullanılır.</p>
+
+            <h3>Kişisel Verilerin Saklanması ve İmha Edilmesi</h3>
+            <p>Veriler, amaç için gerekli süre boyunca saklanır ve bu sürenin bitiminde güvenli bir şekilde imha edilir.
+                Saklama süreleri politika dokümanında veya ilgili prosedürlerde belirtilir.</p>
+
+            <h3>Güvenlik Önlemleri</h3>
+            <p><strong>Teknik önlemler:</strong> Şifreleme, güvenlik duvarları, güncel yama yönetimi, güvenli yedekleme,
+                izinsiz erişim tespit sistemleri.</p>
+            <p><strong>Organizasyonel önlemler:</strong> Erişim kontrolü, en az ayrıcalık prensibi, farkındalık eğitimi,
+                güvenlik politikalarının düzenli denetimi.</p>
+            <p><strong>Fiziksel önlemler:</strong> Kritik altyapı için güvenli fiziksel alanlar, ziyaretçi yönetimi.</p>
+
+            <h3>Veri üçüncü taraf işleyicileri</h3>
+            <p>Taşeronlar ile veri işleme sözleşmeleri ve güvenlik şartları.</p>
+
+            <h3>Erişim ve Yetkilendirme</h3>
+            <p>Tüm çalışanlar ve üçüncü taraflar için rol tabanlı erişim kontrolü uygulanır. Yetkisiz erişim durumunda
+                acil durum prosedürleri devreye alınır ve olay kaydı tutulur.</p>
+
+            <h3>Veri İhlali Bildirimi</h3>
+            <p>Kişisel verilerin güvenliğini tehdit eden olaylar tespit edildiğinde, gerekli mevzuat kapsamında ilgili
+                taraflara ve yetkili mercilere bildirim yapılır. İhlal yönetimi için olay müdahale planı (IRP)
+                uygulanır.</p>
+
+            <h3>Sorumluluk ve Yetkili Kişiler</h3>
+            <p>Veri Koruma Görevlisi (DPO) veya yetkili biri, veri koruma ile ilgili sorumlulukları yürütür ve
+                denetimleri koordine eder. Şirket içi birimlerden görev tanımları ve iletişim kanalları belirlenmiştir.
+            </p>
+
+            <h3>Üçüncü Taraflarla Paylaşım</h3>
+            <p>Kişisel veriler yalnızca yasa ve mevzuata uygun olarak paylaşılır. Taşeronlar ile veri işleme
+                sözleşmeleri yapılır ve güvenlik yükümlülükleri açıkça belirlenir.</p>
+
+            <h3>Çocuk Verileri</h3>
+            <p>Çocuklardan elde edilen veriler özel koruma önlemlerine tabidir ve gerekli izinler alınır.</p>
+
+            <h3>Uluslararası Veri Aktarımı</h3>
+            <p>Uluslararası veri aktarımlarında uygun koruma önlemleri ve yasal mekanizmalar kullanılır (ör. uygunluk
+                beyanları, standart sözleşme maddeleri).</p>
+
+            <h3>Değişiklikler ve Güncellemeler</h3>
+            <p>Bu politika, mevzuat ve uygulama ihtiyaçlarına göre güncellenebilir. Güncellemeler ilgili paydaşlara
+                duyurulur.</p>
+            <p>Gizlilik politikamızla ilgili her türlü sorularınız için writetecbt@gmail.com adresine e-posta
+                gönderebilirsiniz.</p>
+
+            <h3>İletişim</h3>
+            <p><strong>Unvan:</strong> WriteTec Bilgi Teknolojileri</p>
+            <p><strong>Adres:</strong> Çünür Mah. 5421. Sokak No: 26 D:17 Merkez/Isparta</p>
+            <p><strong>Telefon:</strong> +90 530 471 80 78</p>
+            <p><strong>E-posta:</strong> writetecbt@gmail.com</p>
+            <p>KVKK kapsamındaki haklarınız için Aydınlatma Metni sayfamızı inceleyebilirsiniz.</p>
+        </div>
+    </dialog>
+
+    <script>
+        // ── Google Apps Script Web App URL'nizi buraya yazın ───────────────────
+        var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz9zniBcPXWeVZ6KvOTRQbNtvyAkt2C3yqHZtxgPu8FewpdLCzP1aZhlEMLMXx3VPc5bA/exec";
+        // ───────────────────────────────────────────────────────────────────────
+
+        // Footer telif yılını güncel yıla ayarla (datetime'dan)
+        var footerYearEl = document.getElementById('footer-year');
+        if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
+
+        var urlParams = new URLSearchParams(window.location.search);
+        var seminarName = urlParams.get('seminar') || '';
+        var seminarDate = urlParams.get('date') || '';
+        var seminarTime = urlParams.get('time') || '';
+        var seminarLocation = urlParams.get('location') || '';
+
+        var fullSeminarName = seminarName;
+        if (seminarDate) fullSeminarName += " - " + seminarDate;
+        if (seminarTime) fullSeminarName += " - Saat: " + seminarTime;
+        if (seminarLocation) fullSeminarName += " (" + seminarLocation + ")";
+
+        // YÖKDİL semineri için "Sınav Alanı" (Fen/Sosyal/Sağlık) seçimi zorunlu.
+        var isYokdilSeminar = /y[öo]kd[iıİI]l/i.test(seminarName);
+        var examGroupGroup = document.getElementById("f-examGroup");
+        if (isYokdilSeminar && examGroupGroup) {
+            examGroupGroup.style.display = "block";
+        }
+
+        if (seminarName) {
+            var formTitle = document.querySelector(".site-header h1");
+            if (formTitle) {
+                formTitle.innerHTML = seminarName + "<br><span>Kayıt Formu</span>";
+
+                if (seminarDate || seminarTime || seminarLocation) {
+                    var infoEl = document.createElement("div");
+                    infoEl.style.marginTop = "14px";
+                    infoEl.style.fontSize = "1rem";
+                    infoEl.style.color = "var(--gray)";
+                    infoEl.style.fontWeight = "600";
+                    infoEl.style.letterSpacing = "0.02em";
+                    infoEl.style.lineHeight = "1.6";
+
+                    var html = "";
+                    if (seminarDate) html += "Etkinlik Tarihi: <span style='color: var(--brand-blue); font-weight:800;'>" + seminarDate + "</span><br>";
+                    if (seminarTime) html += "Etkinlik Saati: <span style='color: var(--brand-blue); font-weight:800;'>" + seminarTime + "</span><br>";
+                    if (seminarLocation) html += "Lokasyon: <span style='color: var(--brand-blue); font-weight:800;'>" + seminarLocation + "</span>";
+
+                    infoEl.innerHTML = html;
+                    formTitle.parentNode.insertBefore(infoEl, formTitle.nextSibling);
+                }
+            }
+        }
+
+        var form = document.getElementById("basvuru-form");
+        var btnSubmit = document.getElementById("btn-submit");
+        var toast = document.getElementById("toast");
+        var overlay = document.getElementById("success-overlay");
+        var btnReset = document.getElementById("btn-reset");
+
+        function showToast(msg, type) {
+            toast.textContent = msg;
+            toast.className = type === "success" ? "success" : "error-msg";
+            toast.style.display = "block";
+        }
+        function hideToast() { toast.style.display = "none"; }
+
+        function setLoading(on) {
+            btnSubmit.disabled = on;
+            btnSubmit.classList.toggle("loading", on);
+        }
+
+        function markError(fieldId, errorId, show) {
+            var field = document.getElementById(fieldId);
+            var err = document.getElementById(errorId);
+            if (!field || !err) return;
+            field.classList.toggle("error", show);
+            err.classList.toggle("visible", show);
+        }
+
+        function validateEmail(v) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        }
+
+        function validate() {
+            var name = document.getElementById("name").value.trim();
+            var surname = document.getElementById("surname").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var phone = document.getElementById("phone").value.trim();
+
+            var nameOk = name.length > 0;
+            var surnameOk = surname.length > 0;
+            var emailOk = validateEmail(email);
+            var phoneOk = phone.length >= 7;
+            var examGroupOk = true;
+            if (isYokdilSeminar) {
+                examGroupOk = document.getElementById("examGroup").value.trim().length > 0;
+                markError("examGroup", "examGroup-error", !examGroupOk);
+            }
+
+            markError("name", "name-error", !nameOk);
+            markError("surname", "surname-error", !surnameOk);
+            markError("email", "email-error", !emailOk);
+            markError("phone", "phone-error", !phoneOk);
+
+            return nameOk && surnameOk && emailOk && phoneOk && examGroupOk;
+        }
+
+        ["name", "surname", "email", "phone"].forEach(function (id) {
+            document.getElementById(id).addEventListener("input", function () {
+                markError(id, id + "-error", false);
+            });
+        });
+
+        if (isYokdilSeminar) {
+            document.getElementById("examGroup").addEventListener("change", function () {
+                markError("examGroup", "examGroup-error", false);
+            });
+        }
+
+        // Telefon alanına yazı girilmesini engelle: yalnızca rakam, +, boşluk, ( ) ve - kabul et.
+        (function () {
+            var phoneInput = document.getElementById("phone");
+            if (!phoneInput) return;
+            phoneInput.addEventListener("input", function () {
+                var temiz = phoneInput.value.replace(/[^0-9+()\s-]/g, "");
+                if (temiz !== phoneInput.value) {
+                    var pos = phoneInput.selectionStart;
+                    phoneInput.value = temiz;
+                    try { phoneInput.setSelectionRange(pos - 1, pos - 1); } catch (ignore) {}
+                }
+            });
+        })();
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            hideToast();
+
+            var isValid = validate();
+            var kvkk = document.getElementById("kvkkCheck").checked;
+            var priv = document.getElementById("privacyCheck").checked;
+
+            if (!isValid || !kvkk || !priv) {
+                if (!isValid) {
+                    showToast("Lütfen zorunlu alanları eksiksiz doldurun.", "error");
+                } else if (!kvkk || !priv) {
+                    showToast("Lütfen KVKK ve Gizlilik onay kutularını işaretleyin.", "error");
+                }
+                return;
+            }
+
+            var name = document.getElementById("name").value.trim();
+            var surname = document.getElementById("surname").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var phone = document.getElementById("phone").value.trim();
+
+            var payload = {
+                seminarName: fullSeminarName,
+                seminarBaseName: seminarName,
+                name: name + " " + surname,
+                email: email,
+                phone: phone,
+                examGroup: isYokdilSeminar ? document.getElementById("examGroup").value.trim() : "",
+                kvkkAccepted: kvkk,
+                privacyAccepted: priv
+            };
+
+            var cubeModal = document.getElementById('cube-modal');
+            var animStart = Date.now();
+
+            // Disable button to prevent double-clicks (no spinner)
+            btnSubmit.disabled = true;
+
+            // Show cube animation immediately
+            cubeModal.classList.add('active');
+
+            fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(payload)
+            })
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                    if (data.status === "success") {
+                        // Wait for at least one full animation cycle (3s) before transitioning
+                        var elapsed = Date.now() - animStart;
+                        var remaining = Math.max(0, 3000 - elapsed);
+                        setTimeout(function () {
+                            cubeModal.classList.add('fade-out');
+                            setTimeout(function () {
+                                cubeModal.classList.remove('active', 'fade-out');
+                                form.style.display = "none";
+                                overlay.style.display = "block";
+                            }, 500);
+                        }, remaining);
+                    } else {
+                        cubeModal.classList.add('fade-out');
+                        setTimeout(function () {
+                            cubeModal.classList.remove('active', 'fade-out');
+                            btnSubmit.disabled = false;
+                            showToast("Bir hata oluştu: " + (data.message || "Bilinmeyen hata."), "error");
+                        }, 500);
+                    }
+                })
+                .catch(function () {
+                    cubeModal.classList.add('fade-out');
+                    setTimeout(function () {
+                        cubeModal.classList.remove('active', 'fade-out');
+                        btnSubmit.disabled = false;
+                        showToast("Bağlantı hatası. Lütfen tekrar deneyin.", "error");
+                    }, 500);
+                });
+        });
+
+        btnReset.addEventListener("click", function () {
+            form.reset();
+            hideToast();
+            btnSubmit.disabled = false;
+            form.style.display = "block";
+            overlay.style.display = "none";
+        });
+
+        /* Dialog Açma Kapatma İşlemleri */
+        var btnOpenKvkk = document.getElementById('btnOpenKvkk');
+        var btnOpenPrivacy = document.getElementById('btnOpenPrivacy');
+        var dlgKvkk = document.getElementById('dlgKvkk');
+        var dlgPrivacy = document.getElementById('dlgPrivacy');
+
+        if (btnOpenKvkk && dlgKvkk) {
+            btnOpenKvkk.addEventListener('click', function () {
+                dlgKvkk.showModal();
+            });
+        }
+
+        if (btnOpenPrivacy && dlgPrivacy) {
+            btnOpenPrivacy.addEventListener('click', function () {
+                dlgPrivacy.showModal();
+            });
+        }
+
+        document.querySelectorAll('.legal-dialog [data-close]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var id = btn.getAttribute('data-close');
+                var dlg = document.getElementById(id);
+                if (dlg) dlg.close();
+            });
+        });
+
+        ['dlgKvkk', 'dlgPrivacy'].forEach(function (id) {
+            var dlg = document.getElementById(id);
+            if (!dlg) return;
+            dlg.addEventListener('click', function (e) {
+                if (e.target === dlg) dlg.close();
+            });
+        });
+    </script>
+</body>
+
+</html>
