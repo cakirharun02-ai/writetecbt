@@ -1,0 +1,222 @@
+{
+  "task": "WriteTec seminer kartları için görsel üretimi",
+  "description": "Aşağıdaki 20 seminerin her biri için, web sitesinin marka kimliğiyle tam tutarlı, metin içermeyen, konuyla alakalı birer kapak görseli üret. Görseller hepsi bir set gibi görünmeli (aynı stil, aynı palet, aynı kompozisyon dili). Her görseli ilgili dosya adına kaydet ve ardından veri dosyasındaki image alanını güncelle.",
+  "global_instructions": {
+    "aspect_ratio": "3:4 (dikey / portrait — kart görsel alanı aspect-[3/4])",
+    "recommended_dimensions": "1200x1600 px",
+    "format": "jpg (kaliteli, ~85), web için optimize",
+    "consistency_rule": "20 görselin tamamı tek bir sanat yönetimiyle üretilmeli: aynı renk paleti, aynı ışık, aynı soyutlama seviyesi, aynı kompozisyon mantığı. Yan yana dizildiğinde bir seri gibi durmalı.",
+    "no_text_rule": "Görsellerde KESİNLİKLE yazı, harf, rakam, kelime, tipografi, logo, filigran veya okunabilir sembol olmayacak. Tamamen görsel/kavramsal anlatım."
+  },
+  "art_direction": {
+    "style": "Premium, modern, editöryel kavramsal illüstrasyon. Yarı-soyut, hafif 3D derinlikli, minimal ve zarif. Kurumsal ama sıcak; güven veren, sakin, prestijli bir hava.",
+    "palette": {
+      "navy": "#0b2d5a",
+      "brand_blue": "#2f67b8",
+      "brand_sky": "#4da8e5",
+      "brand_ice": "#eef4fb",
+      "cream": "#f3f7fc",
+      "gold": "#c9a84c",
+      "gold_light": "#e8c97a"
+    },
+    "palette_usage": "Arka plan derin lacivert (#0b2d5a) ile marka mavisi (#2f67b8) arasında yumuşak gradyan; gök mavisi (#4da8e5) ışıltı vurguları; altın (#c9a84c / #e8c97a) ince aksan ve ışık detayları. Açık varyantlarda krem/buz (#f3f7fc, #eef4fb) zemin kullanılabilir ama set genelinde lacivert hâkim olmalı.",
+    "lighting": "Yumuşak hacimsel ışık, hafif ışık huzmeleri, narin glow; sert gölge yok.",
+    "composition": "Merkezi, ikonik, tek bir güçlü kavramsal obje/sahne; bol negatif alan; dikey dengeli kadraj. Görselin üst veya alt üçte birinde sakin alan bırak (kart üzerinde başlık metni bu görselin DIŞINDA, kartın altında duruyor — yine de nefes alan kompozisyon iyi durur).",
+    "rendering": "Temiz vektörel-3D karışımı, ince degradeler, hafif grain yok ya da çok az; cam/ışık/parlak metal dokunuşları altın aksanlarda.",
+    "mood": "Bilgi, gelecek, güven, gelişim.",
+    "negative_prompt": "yazı, harf, rakam, kelime, tipografi, yazı tahtası, kitap üzerinde okunabilir metin, logo, marka adı, filigran, imza, UI öğesi, stok-fotoğraf yüzü, bozuk eller, fazladan parmak, çarpık geometri, abartılı satürasyon, neon kitsch, dağınık kompozisyon, düşük çözünürlük, jpeg artefaktı"
+  },
+  "output": {
+    "directory": "public/seminars/",
+    "filename_pattern": "<slug>.jpg",
+    "after_generation": {
+      "action": "Her görsel üretildikten sonra lib/seminars.ts dosyasında ilgili seminerin image alanını güncelle.",
+      "from": "image: null",
+      "to": "image: \"/seminars/<slug>.jpg\"",
+      "note": "Slug ile dosya adı birebir eşleşmeli. image alanı dolu olduğunda kart, placeholder yerine bu görseli gösterir."
+    }
+  },
+  "shared_style_suffix": "Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c / #e8c97a) accents and light rays. Centered iconic subject, generous negative space, calm and trustworthy corporate mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark.",
+  "seminars": [
+    {
+      "order": 1,
+      "slug": "cost-semineri",
+      "title": "COST Semineri",
+      "output_path": "public/seminars/cost-semineri.jpg",
+      "image_field_value": "/seminars/cost-semineri.jpg",
+      "concept": "Avrupa bilim ve araştırma iş birliği ağı — bağlı düğümler, soyut kıta haritası, bilim motifleri",
+      "prompt": "A luminous network of interconnected research hubs and glowing nodes spanning a stylized abstract map of Europe, fine gold connection lines linking the points, subtle science motifs (atom orbit, molecule, lightbulb) woven into the network, conveying scientific collaboration across borders. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c / #e8c97a) accents and light rays. Centered iconic subject, generous negative space, calm and trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 2,
+      "slug": "yapay-zeka-caginda-kariyer-ve-yabanci-dil",
+      "title": "Yapay Zeka Çağında Kariyer ve Yabancı Dilin Geleceği",
+      "output_path": "public/seminars/yapay-zeka-caginda-kariyer-ve-yabanci-dil.jpg",
+      "image_field_value": "/seminars/yapay-zeka-caginda-kariyer-ve-yabanci-dil.jpg",
+      "concept": "Yapay zeka + kariyer + küresel iletişim/dil",
+      "prompt": "A glowing abstract neural network of connected nodes flowing into a translucent globe of communication, fine gold circuit lines weaving through it suggesting careers and global language, a subtle ascending path of light. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm and trustworthy corporate mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 3,
+      "slug": "akran-zorbaligina-karsi-koruyucu-yaklasimlar",
+      "title": "Akran Zorbalığına Karşı Koruyucu Yaklaşımlar",
+      "output_path": "public/seminars/akran-zorbaligina-karsi-koruyucu-yaklasimlar.jpg",
+      "image_field_value": "/seminars/akran-zorbaligina-karsi-koruyucu-yaklasimlar.jpg",
+      "concept": "Çocukları koruma / şefkat / güvenli alan",
+      "prompt": "A gentle protective dome of soft light sheltering small abstract child figures standing together, a caring open hand forming a shield around them, warm gold glow of safety against cool navy. Conveys protection, empathy and belonging, hopeful not fearful. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm and trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 4,
+      "slug": "ustun-yetenekli-cocuklarin-kesfi",
+      "title": "Anne Gözünden Üstün Yetenekli Çocukların Keşfi ve Desteklenmesi",
+      "output_path": "public/seminars/ustun-yetenekli-cocuklarin-kesfi.jpg",
+      "image_field_value": "/seminars/ustun-yetenekli-cocuklarin-kesfi.jpg",
+      "concept": "Üstün yetenek / parlayan potansiyelin keşfi",
+      "prompt": "An abstract child silhouette with a radiant glowing star-spark blooming from the mind, surrounded by floating delicate gold sparkles and constellation lines, a soft magnifying lens of light gently discovering the spark. Suggests hidden talent and nurturing. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c / #e8c97a) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 5,
+      "slug": "cocugunuzun-gelecegi-icin-5-kritik-beceri",
+      "title": "Çocuğunuzun Geleceği İçin 5 Kritik Beceri",
+      "output_path": "public/seminars/cocugunuzun-gelecegi-icin-5-kritik-beceri.jpg",
+      "image_field_value": "/seminars/cocugunuzun-gelecegi-icin-5-kritik-beceri.jpg",
+      "concept": "5 temel beceri / gelişim basamakları",
+      "prompt": "Five elegant abstract glowing pillars or ascending building blocks of light rising at increasing heights like growth steps, a small luminous figure climbing toward a bright horizon, gold-tipped crystalline forms. Suggests skills, growth and future readiness. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 6,
+      "slug": "cocuklarda-kariyer-farkindaligi",
+      "title": "Çocuklarda Kariyer Farkındalığı",
+      "output_path": "public/seminars/cocuklarda-kariyer-farkindaligi.jpg",
+      "image_field_value": "/seminars/cocuklarda-kariyer-farkindaligi.jpg",
+      "concept": "Kendini keşif / kariyer yolu / pusula",
+      "prompt": "A small abstract child figure standing before a softly glowing compass and several diverging paths of light leading to floating minimal profession symbols (gear, brush, atom, screen) rendered iconically without any text. Suggests self-discovery and choosing a path. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 7,
+      "slug": "dijital-bagimlilik-ve-aileye-etkileri",
+      "title": "Dijital Bağımlılık ve Aileye Etkileri",
+      "output_path": "public/seminars/dijital-bagimlilik-ve-aileye-etkileri.jpg",
+      "image_field_value": "/seminars/dijital-bagimlilik-ve-aileye-etkileri.jpg",
+      "concept": "Ekran bağımlılığı ile aile bağı arasında denge",
+      "prompt": "A balanced scale concept: on one side a glowing device emitting cool light, on the other a warm gold heart connecting two abstract family figures; threads of light pulling between screen and human connection, finding balance. Thoughtful, not alarming. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 8,
+      "slug": "turkiye-yuzyili-maarif-modeli",
+      "title": "Türkiye Yüzyılı Maarif Modeli ve Geleceğin Becerileri",
+      "output_path": "public/seminars/turkiye-yuzyili-maarif-modeli.jpg",
+      "image_field_value": "/seminars/turkiye-yuzyili-maarif-modeli.jpg",
+      "concept": "Eğitim modeli / geleceğin becerileri",
+      "prompt": "An open glowing book whose pages dissolve into rising particles of light that transform into futuristic skill icons and a graduation-cap-like form made of light, blending classic education with future technology. Inspiring and forward-looking. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 9,
+      "slug": "yapay-zeka-caginda-cocuk-yetistirmek",
+      "title": "Yapay Zeka Çağında Çocuk Yetiştirmek",
+      "output_path": "public/seminars/yapay-zeka-caginda-cocuk-yetistirmek.jpg",
+      "image_field_value": "/seminars/yapay-zeka-caginda-cocuk-yetistirmek.jpg",
+      "concept": "Ebeveyn rehberliği + yapay zeka",
+      "prompt": "An abstract parent figure gently guiding a small child figure toward a softly glowing sphere of AI made of orbiting nodes and gold circuit arcs, a guiding hand of light between them. Warmth and guidance in a digital age. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 10,
+      "slug": "borsada-bilincli-yatirimin-ilk-adimlari",
+      "title": "Borsada Bilinçli Yatırımın İlk Adımları",
+      "output_path": "public/seminars/borsada-bilincli-yatirimin-ilk-adimlari.jpg",
+      "image_field_value": "/seminars/borsada-bilincli-yatirimin-ilk-adimlari.jpg",
+      "concept": "Borsa / yükselen yatırım grafiği",
+      "prompt": "An elegant abstract rising candlestick and line chart made of glowing bars climbing upward, a luminous upward arrow and floating coin-like gold discs, subtle grid of light. Confident, growth-oriented financial concept. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c / #e8c97a) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 11,
+      "slug": "para-yonetimi-bilmeyen-sirketler",
+      "title": "Para Yönetimi Bilmeyen Şirketler Neden Batar?",
+      "output_path": "public/seminars/para-yonetimi-bilmeyen-sirketler.jpg",
+      "image_field_value": "/seminars/para-yonetimi-bilmeyen-sirketler.jpg",
+      "concept": "Nakit akışı / finansal yönetim / sağlam temel",
+      "prompt": "An abstract company structure depicted as a stable glowing building/cube supported by flowing streams of golden coins and cash-flow ribbons of light circulating in a healthy loop, a steady foundation. Conveys financial management and stability. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 12,
+      "slug": "ise-alimda-en-cok-yapilan-10-hata",
+      "title": "İşe Alımda En Çok Yapılan 10 Hata",
+      "output_path": "public/seminars/ise-alimda-en-cok-yapilan-10-hata.jpg",
+      "image_field_value": "/seminars/ise-alimda-en-cok-yapilan-10-hata.jpg",
+      "concept": "İşe alım / doğru adayı seçme",
+      "prompt": "A softly glowing magnifying lens of light hovering over a neat row of abstract candidate profile silhouettes, one highlighted with a warm gold aura as the right choice, subtle selection checkmark made purely of light (no characters). Recruitment and careful selection. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 13,
+      "slug": "ise-alim-surecinde-yasal-riskler",
+      "title": "İşe Alım Sürecinde Yasal Riskler",
+      "output_path": "public/seminars/ise-alim-surecinde-yasal-riskler.jpg",
+      "image_field_value": "/seminars/ise-alim-surecinde-yasal-riskler.jpg",
+      "concept": "İşe alımda hukuk / denge / koruma",
+      "prompt": "Balanced scales of justice rendered in elegant glowing lines, beside an abstract human profile silhouette and a softly glowing document shape with a protective shield of light, a discreet gold gavel form. Legal compliance and protection in hiring. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 14,
+      "slug": "ab-hibeleri-ile-proje-yazmak",
+      "title": "AB Hibeleri ile Proje Yazmadan Para Bulmak",
+      "output_path": "public/seminars/ab-hibeleri-ile-proje-yazmak.jpg",
+      "image_field_value": "/seminars/ab-hibeleri-ile-proje-yazmak.jpg",
+      "concept": "AB hibe fonları / yıldız halkası / projeye akan fon",
+      "prompt": "A graceful circular ring of glowing gold stars (evoking European cooperation, abstract — not an exact flag) with streams of light and coins flowing from the ring into a glowing project hub of connected nodes. Funding and project opportunity. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c / #e8c97a) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 15,
+      "slug": "temel-hukuk-bilgileri",
+      "title": "Herkesin Bilmesi Gereken Temel Hukuk Bilgileri",
+      "output_path": "public/seminars/temel-hukuk-bilgileri.jpg",
+      "image_field_value": "/seminars/temel-hukuk-bilgileri.jpg",
+      "concept": "Temel hukuk / adalet terazisi / hukuk kitabı",
+      "prompt": "An elegant glowing balance scale of justice above a closed law book of light and a single classical column, harmonious and approachable, gold highlights on the scale beams. Foundational legal knowledge for everyone. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 16,
+      "slug": "anayasa-haklarimiz",
+      "title": "Vatandaş Olarak Haklarımızı Ne Kadar Biliyoruz?",
+      "output_path": "public/seminars/anayasa-haklarimiz.jpg",
+      "image_field_value": "/seminars/anayasa-haklarimiz.jpg",
+      "concept": "Anayasal haklar / sütunlar / güvence",
+      "prompt": "Stately abstract classical columns of light forming a small temple-like facade, with a glowing protective shield and rays symbolizing constitutional rights and guarantees, dignified gold accents on the capitals. Civic, dignified, reassuring. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 17,
+      "slug": "devletle-is-yaparken-haklarimiz",
+      "title": "Devletle İş Yaparken Haklarınızı Biliyor musunuz?",
+      "output_path": "public/seminars/devletle-is-yaparken-haklarimiz.jpg",
+      "image_field_value": "/seminars/devletle-is-yaparken-haklarimiz.jpg",
+      "concept": "Vatandaş - devlet ilişkisi / idari süreç",
+      "prompt": "An abstract official government building facade of light on one side and a single citizen silhouette on the other, connected by a glowing bridge or handshake of light and a softly glowing document, gold accents. Fair dealings with public institutions. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 18,
+      "slug": "sirket-kurarken-hukuki-hatalar",
+      "title": "Şirket Kurarken Yapılan Hukuki Hatalar",
+      "output_path": "public/seminars/sirket-kurarken-hukuki-hatalar.jpg",
+      "image_field_value": "/seminars/sirket-kurarken-hukuki-hatalar.jpg",
+      "concept": "Şirket kuruluşu / sağlam hukuki temel / sözleşme",
+      "prompt": "An abstract company being built from glowing geometric blocks resting on a solid foundation, a glowing contract scroll and a discreet justice scale ensuring the structure stands firm, gold accents on the foundation. Sound legal setup for a new company. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 19,
+      "slug": "muhasebe-bilmeyen-girisimci",
+      "title": "Muhasebe Bilmeyen Girişimci Para Kaybeder",
+      "output_path": "public/seminars/muhasebe-bilmeyen-girisimci.jpg",
+      "image_field_value": "/seminars/muhasebe-bilmeyen-girisimci.jpg",
+      "concept": "Muhasebe / gelir-gider / bilanço",
+      "prompt": "An abstract glowing ledger and balance-sheet panels with two harmonized columns of light (income and expense in balance), floating gold coins and a small bar chart, a subtle calculator form made of light. Clear, organized accounting concept. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    },
+    {
+      "order": 20,
+      "slug": "ekonomiyi-anlayan-kazanir",
+      "title": "Ekonomiyi Anlayan Kazanır: Türkiye ve Dünya Ekonomisi",
+      "output_path": "public/seminars/ekonomiyi-anlayan-kazanir.jpg",
+      "image_field_value": "/seminars/ekonomiyi-anlayan-kazanir.jpg",
+      "concept": "Türkiye ve dünya ekonomisi / küresel grafik",
+      "prompt": "A luminous translucent globe wrapped with flowing economic graph lines and ascending trend curves, connected nodes spanning continents (abstract world map of light), gold accent highlights on key trade routes. Macro-economic, global, insightful. Portrait 3:4 composition. Premium modern conceptual editorial illustration, semi-abstract with subtle 3D depth. Deep navy (#0b2d5a) to brand-blue (#2f67b8) gradient background, soft sky-blue (#4da8e5) glow, elegant thin gold (#c9a84c / #e8c97a) accents and light rays. Centered iconic subject, generous negative space, calm trustworthy mood, soft volumetric lighting. Absolutely no text, letters, numbers, words, typography, logos or watermark."
+    }
+  ]
+}
