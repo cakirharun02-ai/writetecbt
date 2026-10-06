@@ -1,0 +1,422 @@
+/** 7. Uluslararası Sosyal Bilimler ve Sağlık Bilimleri Kongresi alt sitesi — TR kaynak metinleri (pages.sosyal) */
+export const sosyalTr = {
+  nav: {
+    home: "Anasayfa",
+    congressInfo: "Kongre Bilgileri",
+    publications: "Yayın İmkanları",
+    registration: "Kayıt ve Konaklama",
+    application: "Başvuru",
+    ourCongresses: "Kongrelerimiz",
+    contact: "İletişim",
+    duzenlemeKurulu: "Düzenleme Kurulu",
+    bilimKurulu: "Bilim ve Danışma Kurulu",
+    yabanciDilKurulu: "Yabancı Dil Editör Kurulu",
+    takvim: "Kongre Takvimi",
+    konular: "Kongre Konuları",
+    yukselmeTesvik: "Akademik Yükselme ve Teşvik Bilgisi",
+    degerlendirmeSureci: "Kongre Bildiri Özeti Değerlendirme Süreci",
+    kongreYeri: "Kongre Yeri",
+    konusmaci: "Davetli Konuşmacı",
+    bildiriKitabi: "Kongre Bildiri Kitabında Yayın",
+    bildiriYukleme: "Bildiri Yükleme",
+    makale: "Dergide Makale Olarak Yayın",
+    editorluKitap: "Editörlü ve Hakemli Kitapta Bölüm Olarak Yayın",
+    kayitBilgisi: "Kongre Kayıt Bilgisi",
+    odemeBildirimi: "Ödeme Bildirimi",
+    konaklama: "Kongre Konaklama Bilgisi",
+    sosyalEtkinlik: "Sosyal Etkinlik",
+    basvuruFormu: "Başvuru Formu",
+    katilimKurallari: "Katılım Kuralları",
+    basvuruSureci: "Başvuru Süreci",
+    yazimKurallari: "Yazım Kuralları",
+    firstCongress: "7. Kongremiz",
+    menu: "Menü",
+    menuClose: "Menüyü kapat",
+    ariaCongress: "Sosyal Bilimler ve Sağlık Bilimleri Kongresi",
+    ariaNav: "Sosyal Bilimler ve Sağlık Bilimleri",
+    ariaNavMobile: "Sosyal Bilimler ve Sağlık Bilimleri mobil",
+  },
+  breadcrumb: {
+    series: "Sosyal Bilimler ve Sağlık Bilimleri Kongresi",
+  },
+  footer: {
+    title: "WriteTec — Sosyal Bilimler ve Sağlık Bilimleri Kongresi",
+    about:
+      "WriteTec Bilgi Teknolojileri olarak, bilişim teknolojileri alanında faaliyet gösteren bir şirketiz. Misyonumuz, müşterilerimize yenilikçi, güvenilir ve etkili çözümler sunarak dijital dönüşüm süreçlerine katkıda bulunmaktır.",
+    coursesTitle: "Kurslarımız",
+    englishCourses: "İngilizce Kurslarımız",
+    vocationalCourses: "Mesleki Kurslarımız",
+    contactTitle: "İletişim",
+    phoneLabel: "Telefon",
+    emailLabel: "E-posta",
+    addressLabel: "Adres",
+    quickTitle: "Hızlı Erişim",
+    quickHome: "Anasayfa",
+    quickTakvim: "Kongre Takvimi",
+    quickKonular: "Kongre Konuları",
+    quickKayit: "Kayıt Bilgisi",
+    quickBasvuru: "Başvuru Formu",
+    quickIletisim: "İletişim",
+    backMain: "← WriteTec Kongrelerimiz ana sayfasına dön",
+    copyright: "WriteTec Bilgi Teknolojileri. Tüm hakları saklıdır.",
+    instagram: "Instagram",
+    whatsapp: "WhatsApp",
+  },
+  common: {
+    comingSoon: "Güncellenecektir",
+    contentSoon: "Bu sayfanın içeriği yakında eklenecektir.",
+    secretariat: "Kongre Sekreteryası",
+    secretariatName: "Mehmet Barış GÜDÜL",
+    bookCoverAlt: "Yayınlanan kitap kapağı",
+  },
+  eyebrow: {
+    congressInfo: "Kongre Bilgileri",
+    publications: "Yayın İmkanları",
+    registration: "Kayıt ve Konaklama",
+    application: "Başvuru",
+    contact: "İletişim",
+  },
+  home: {
+    badge: "Aktif Kongre · 2026",
+    title: "7. Uluslararası WriteTec Yapay Zeka Çağında Sosyal Bilimler ve Sağlık Bilimleri Kongresi",
+    theme: "Ana Tema: Yapay Zeka Çağında Sosyal Bilimler ve Sağlık Bilimleri",
+    dates: "28 Ağustos – 2 Eylül 2026 · ANTALYA / ALANYA · Yüz Yüze + Online",
+    ctaApply: "Hemen Başvur",
+    ctaTopics: "Kongre Konuları",
+    datesTitle: "Önemli Tarihler",
+    dateAbstract: "Özet Gönderimi Son Tarihi",
+    dateAbstractValue: "25 Ağustos 2026",
+    dateEarly: "Erken Kayıt Son Tarihi",
+    dateEarlyValue: "22 Ağustos 2026",
+    dateLate: "Geç Kayıt Son Tarihi",
+    dateLateValue: "25 Ağustos 2026",
+    dateProgram: "Kongre Programı Duyurusu",
+    dateProgramValue: "26 Ağustos 2026",
+    dateFull: "Tam Metin (e-kitap) Son Tarihi",
+    dateFullValue: "20 Eylül 2026",
+    dateCongress: "Kongre / Online Sunum",
+    dateCongressValue: "28 Ağustos – 2 Eylül 2026",
+    allCalendar: "Tüm takvim →",
+    quickTitle: "Sık Kullanılan Bağlantılar",
+    quickBasvuru: "Başvuru Formu",
+    quickKayit: "Kongre Kayıt Bilgisi",
+    quickKatilim: "Katılım Kuralları",
+    quickSurec: "Başvuru Süreci",
+    quickKonaklama: "Konaklama Bilgisi",
+    pubTitle: "Yayın İmkanları",
+    pubBildiri: "Kongre Bildiri Kitabında Yayın",
+    pubScopus: "SCOPUS İndeksli Dergide Yayın",
+    pubTrDizin: "TR Dizinli Dergilerde Yayın",
+    pubOther: "Diğer Dergilerde Yayın",
+    pubBook: "Başta SCOPUS tarafından taranan yayınevi, BKCI kapsamında taranan endeksli yayınevleri olmak üzere uluslararası yayınevlerinden Sosyal Bilimler ve Sağlık Bilimleri ile ilgili editörlü kitaplarda yayınlar yer almaktadır.",
+    pubDetails: "Detaylar →",
+    aboutTitle: "7. Uluslararası WriteTec Yapay Zeka Çağında Sosyal Bilimler ve Sağlık Bilimleri Kongresi",
+    aboutP1:
+      "İnsanlığın bilgi birikimi, sosyal bilimlerin topluma dair derin kavrayışı ile sağlık bilimlerinin yaşamı koruma gücünün birleştiği noktada anlam kazanır. Bugün ise bu iki büyük alanı geleceğe taşıyan en güçlü kuvvet, yapay zekanın dönüştürücü etkisidir.",
+    aboutP2:
+      "Yapay zeka; sosyal bilimlerde insan davranışını, toplumsal eğilimleri ve büyük ölçekli verileri anlamlandırmaktan, sağlık bilimlerinde teşhis, tedavi ve halk sağlığı süreçlerini iyileştirmeye kadar geniş bir yelpazede yeni imkanlar sunmaktadır. Disiplinler arasındaki sınırlar inceldikçe, ortak çalışma kültürü daha da değer kazanmaktadır.",
+    aboutP3:
+      "Doğal dil işleme, makine öğrenmesi ve veri analitiği gibi yöntemler; eğitimden ekonomiye, psikolojiden kamu yönetimine, hemşirelikten halk sağlığına kadar pek çok alanda araştırmaların kapsamını ve etkisini genişletmektedir. Bunlar artık geleceğin değil, bugünün bilimsel gerçekliğidir.",
+    aboutP4:
+      "WriteTec olarak inancımız şudur: Yapay zeka, hem toplumsal sorunların çözümünde hem de sağlıkta fırsat eşitliğinin sağlanmasında en büyük güçlerden biridir. Doğru, etik ve sorumlu bir şekilde kullanıldığında bilgiye erişimi demokratikleştirir ve bilimsel üretimi hızlandırır.",
+    aboutP5:
+      "Bu kongre, sosyal bilimler ile sağlık bilimlerinin yapay zeka ile kesiştiği noktada çalışan bilim insanlarını, klinisyenleri, araştırmacıları ve uygulayıcıları bir araya getirmeyi hedeflemektedir. Bildiriler, paneller ve oturumlarla yapay zekanın getirdiği yenilikleri tartışacak, etik sorumluluklarımızı masaya yatıracak ve daha iyi bir gelecek için ortak bir yol haritası çizeceğiz.",
+    aboutP6:
+      "Siz de bu birikimin bir parçası olun. Bilimin, teknolojinin ve insanlığın buluştuğu bu eşsiz platformda yerinizi alın. Çünkü daha iyi bir gelecek, ancak birlikte üretilen bilgi ile mümkündür.",
+    quote:
+      "“Yapay zeka çağında bilgi; paylaşıldıkça çoğalan, disiplinler birleştikçe güçlenen ortak bir değerdir.”",
+    closing1:
+      "Kongrede yapılacak çalışmaların, gelecekteki araştırmalara ilham kaynağı olacağına inanıyor, uzmanlığınızı ve deneyimlerinizi bizimle paylaşmanızdan mutluluk duyacağımızı belirtmek istiyoruz. Bütün bu duygu ve düşüncelerle sizleri kongremizde aramızda görmekten ve ağırlamaktan büyük bir memnuniyet duyacağımızı belirtir, hürmetlerimizi sunarız.",
+    closingRegards: "Saygılarımızla.",
+    closingBoard: "KONGRE DÜZENLEME KURULU",
+    ctaCalendar: "Takvim",
+    ctaProcess: "Başvuru Süreci",
+  },
+  duzenlemeKurulu: {
+    title: "Düzenleme Kurulu",
+    chairTitle: "Düzenleme Kurulu Başkanı",
+    membersTitle: "Düzenleme Kurulu",
+  },
+  bilimKurulu: {
+    title: "Bilim ve Danışma Kurulu",
+  },
+  yabanciDilKurulu: {
+    title: "Yabancı Dil Editör Kurulu",
+  },
+  takvim: {
+    title: "Kongre Takvimi",
+    row0label: "Özet Gönderimi Son Tarihi",
+    row0date: "25 Ağustos 2026",
+    row1label: "Erken Kayıt Ücreti Ödeme Son Tarihi",
+    row1date: "22 Ağustos 2026",
+    row2label: "Geç Kayıt Ücreti Ödeme Son Tarihi",
+    row2date: "25 Ağustos 2026",
+    row3label: "Bildiri E-Kitabı İçin Tam Metin Gönderimi Son Tarihi",
+    row3date: "20 Eylül 2026",
+    row4label: "Kongre Programı Duyurulması",
+    row4date: "26 Ağustos 2026",
+    row5label: "Online Sunum Tarihi",
+    row5date: "28 Ağustos – 2 Eylül 2026",
+    row6label: "Kongre Tarihi",
+    row6date: "28 Ağustos – 2 Eylül 2026",
+  },
+  konular: {
+    title: "Kongre Konuları",
+    frameTitle: "TEMATİK ÇERÇEVE:",
+    frameBody:
+      "Kongremizde öncelikle sosyal bilimler ve sağlık bilimleri alanlarında araştırma, uygulama, eğitim ve politikaların yapay zekâ ile kesiştiği çalışmalar yer alır.",
+    healthTitle: "SOSYAL BİLİMLER VE SAĞLIK BİLİMLERİ (ÖRNEK ALANLAR):",
+    healthBody:
+      "Sosyal bilimler kapsamında eğitim bilimleri, psikoloji, sosyoloji, iktisat ve işletme, kamu yönetimi, iletişim, hukuk, tarih, dil ve edebiyat, ilahiyat ve felsefe; sağlık bilimleri kapsamında tıbbın ana bilim dalları, hemşirelik, ebelik, diş hekimliği, eczacılık, fizyoterapi ve rehabilitasyon, beslenme ve diyetetik, halk sağlığı, sağlık yönetimi, iş sağlığı ve güvenliği ile bağlı multidisipliner alanlar. Yapay zekâ kullanılmayan özgün çalışmalar da bildiri özeti uygun olduğu sürece değerlendirmeye alınabilir.",
+    aiTitle: "YAPAY ZEKA VE VERİ ALT BAŞLIKLARI (ÖNERİLEN):",
+    aiBody:
+      "Karar destek sistemleri; metin ve görüntü analizi; doğal dil işleme; veri gizliliği ve güvenliği; açıklanabilir yapay zekâ; üretici yapay zekâ araçları ve etik ilkeleri; dijital dönüşüm uygulamaları ile makine öğrenmesi / derin öğrenme yöntemleri.",
+    interTitle: "DİSİPLİNLERARASI VE SINIR ALAN ÇALIŞMALAR:",
+    interBody:
+      "Etik ve hukuk, ekonomi ve politika, eğitim ve toplum, sağlık hizmeti sunumu ile doğrudan toplumsal veya bireysel çıktılarla ilişkili disiplinlerarası bildiriler kongre çerçevesine uygun kabul edilir.",
+  },
+  yukselmeTesvik: {
+    title: "Akademik Yükseltme, Teşvik ve Doçentlik Bilgisi",
+    intro:
+      "ÜAK mevzuatına göre kongremiz uluslararası niteliktedir. Öğretim üyeliği kadrolarına atamalarda esas alınan kriterleri karşılamaktadır. Doçentlik başvurusu için gerekli olan kongre düzenleme kurulu resmi görevlendirmesine ilişkin üst yazılar kongre sonrası kongre e-kitabına eklenecektir.",
+    incentiveTitle: "AKADEMİK TEŞVİK:",
+    incentiveBody:
+      "YÖK akademik teşvik mevzuatına göre, uluslararası bir kongrenin akademik teşvik şartlarını karşılayabilmesi için sunulan bildirilerin yarıdan fazlasının Türkiye dışından olması ve kongreye en az 5 ülkeden (Türkiye hariç) katılım sağlanması gerekmektedir. Kongremiz kapsamında Türkiye için %40 kontenjan ayrılmıştır. Türkiye'den gelen başvurular bu kota korunacak şekilde değerlendirmeye alınacaktır. Kongremizin akademik teşvik koşullarını da sağlaması öngörülmektedir.",
+    evalTitle: "KONGRE BİLDİRİ ÖZETİ DEĞERLENDİRME SÜRECİ",
+    evalLi1:
+      "Kongremize gönderilen bilimsel çalışmaların yayımlanmamış ve sözlü veya poster sunum olarak başka yerde yayınlanmamış ve değerlendirmeye alınmamış olması gerekir.",
+    evalLi2:
+      "Kongremize gönderilen bildiri özetleri çifte kör hakem değerlendirme sürecinden geçmektedir. Hakem değerlendirmeleri sonucu kabul edilen bildiri özetleri kongre programına alınmaktadır.",
+    evalLi3: "Kongremizin bilim kurulunda farklı ülkelerden bilim insanları yer almaktadır.",
+    evalLi4: "Kongre sonrası ISBN numarası olan kongre e-Bildiri kitabı yayınlanmaktadır.",
+  },
+  degerlendirmeSureci: {
+    title: "Kongre Bildiri Özeti Değerlendirme Süreci",
+    li1: "Kongremize gönderilen bilimsel çalışmaların yayımlanmamış ve sözlü veya poster sunum olarak başka yerde yayınlanmamış ve değerlendirmeye alınmamış olması gerekir.",
+    li2: "Kongremize gönderilen bildiri özetleri çifte kör hakem değerlendirme sürecinden geçmektedir. Hakem değerlendirmeleri sonucu kabul edilen bildiri özetleri kongre programına alınmaktadır.",
+    li3: "Kongre sonrası ISBN numarası olan kongre e-Bildiri kitabı yayınlanmaktadır.",
+  },
+  kongreYeri: {
+    title: "Kongre Yeri",
+    body: "7. Uluslararası WriteTec Yapay Zeka Çağında Sosyal Bilimler ve Sağlık Bilimleri Kongremiz, 28 Ağustos – 2 Eylül 2026 tarihlerinde Noxinn Club Hotel Alanya (Antalya / Alanya) ev sahipliğinde gerçekleştirilecektir. Kongremizde yüz yüze katılımın yanı sıra çevrimiçi (online) sunum imkânı da sunulmaktadır. Konaklama ve ulaşım ayrıntıları için Kongre Konaklama Bilgisi sayfasını inceleyebilirsiniz.",
+  },
+  konusmaci: {
+    title: "Davetli Konuşmacı",
+  },
+  bildiriKitabi: {
+    title: "Kongre E-Bildiri Kitabında Yayın",
+    body: "Özet ve tam metinleriniz kongre sonrası ISBN numarası ile e-kitap olarak kongre bildiri kitabında yayınlanacaktır. Kongremize tam metin gönderimi zorunlu değildir.",
+  },
+  makale: {
+    title: "Dergilerde Makale Olarak Yayın",
+    intro:
+      "Kongre katılımcılarımız diledikleri takdirde tam metinlerini, dergi hakem sürecinden geçmek koşuluyla, kongre kapsamındaki dergilerde makale olarak yayınlatabilirler. Makale yayınlama süreci tamamen ilgili derginin yayın politikasına bağlı olup, kongre düzenleme kurulu ve bilim kurulu üyelerinin herhangi bir müdahalesi söz konusu değildir.",
+    scopusTitle: "SCOPUS İndeksli Dergi:",
+    scopusJournal: "International Journal of Business and Economic Studies",
+    scopusNote: "(SCOPUS indeksli dergi ücretli bir dergidir.)",
+    trDizinTitle: "TR Dizinli Dergiler:",
+    trDizinJournal: "İnsan ve Toplum Bilimleri Araştırmaları Dergisi (itobiad)",
+    otherTitle: "Diğer Dergiler:",
+    otherIntro:
+      "Kongreye sunulan bildirilerin özellikleri ve kapsamları doğrultusunda, uygun hakem değerlendirmesi ve derginin yayın ilkelerine tabi olarak aşağıdaki ve güncellenen liste kapsamındaki yayın seçenekleri değerlendirilebilir.",
+  },
+  editorluKitap: {
+    title: "Editörlü ve Hakemli Kitapta Bölüm Olarak Yayın",
+    subtitle: "(Uluslararası Yayınevi Tarafından)",
+    body: "Başta SCOPUS tarafından taranan yayınevi, BKCI kapsamında taranan endeksli yayınevleri olmak üzere uluslararası yayınevlerinden Sosyal Bilimler ve Sağlık Bilimleri ile ilgili editörlü kitaplarda yayınlar yer almaktadır.",
+  },
+  kayitBilgisi: {
+    title: "Kongre Kayıt Ücret Bilgileri",
+    earlyTitle: "Kongre Erken Kayıt",
+    lateTitle: "Kongre Geç Kayıt",
+    lateType: "Online",
+    feeType: "Kayıt Türü",
+    feePapers: "Bildiri Sayısı",
+    feeSingle: "Tek Bildiri",
+    feeDouble: "İki Bildiri",
+    feeAmount: "Katılım Ücreti",
+    feeDeadline: "Son Kayıt Tarihi",
+    earlySingle: "4.000 TL.",
+    earlyDouble: "7.000 TL.",
+    earlyDeadline: "22 Ağustos 2026",
+    lateSingle: "5.000 TL.",
+    lateDouble: "8.500 TL.",
+    lateDeadline: "25 Ağustos 2026",
+    note1:
+      "Katılım ücretine; Özet ve Tam Metinlerin ISBN'li E-Bildiri Kitapçığında Yayınlama ücreti dahildir. Fiyatlara KDV dahildir. Kongre kayıt ücreti, konaklama ücretinden ayrıdır; konaklama ayrıntıları için Kongre Konaklama Bilgisi sayfasına bakınız.",
+    accountsTitle: "Kongre Kayıt Ücreti için Hesap Bilgileri",
+    accountTry: "Türk Lirası Ödemeleri için Hesap Bilgileri",
+    accountUsd: "Account Information For Dollar Payments (DOLLAR-$)",
+    accountSwift: "Attendance for Other Countries — Swift",
+    onlineTitle: "Başvurularda:",
+    onlineP1:
+      "Katılım ücreti sadece sunum yapacak yazarı kapsamaktadır. Diğer yazarların ve kongre dışı misafirlerin kongreye katılması durumunda dış katılımcı ücreti yatırmaları gerekmektedir. Kongre katılımcılarımızın bu konuya hassasiyet göstermeleri bizleri mutlu edecektir.",
+    onlineP2:
+      "Katılımcılar tarafından, katılım ücreti en geç son kayıt tarihine kadar belirtilen hesap numarasına yatırılarak, dekont writetecbt@gmail.com e-mail adresine gönderilmelidir.",
+    cancelTitle: "İptal Koşulları:",
+    cancelP1Before: "Son kayıt tarihine kadar iptal talebinin gönderilmesi halinde yatırılan katılım bedelinin %50'si iade edilmektedir. ",
+    cancelLink: "Kongre takviminde",
+    cancelP1After:
+      " ilan edilen son kayıt tarihinden sonra gönderilen iptal taleplerinde yatırılan katılım bedelinin %10'u iade edilecektir.",
+    onlineP3:
+      "Karşılıklı olarak herhangi bir mağduriyet yaşanmaması için siz değerli katılımcılarımızın yukarıda belirtilen hususlara azami dikkat göstermesi rica olunur.",
+    onlineP4:
+      "Kabul mektubu aldığı halde kayıt işlemi yapmayan veya herhangi bir nedenle kongreye katılmayan yüksek lisans ve doktora öğrencilerinin bağlı bulunduğu enstitüye \"Kabul Mektubu İptal Yazısı\" gönderilmektedir.",
+    importantNote:
+      "ÖNEMLİ NOT: Kabul edilen bildirilerin kongrede (yüz yüze veya çevrimiçi) sunulması gerekmektedir. Sunumu yapılmamış bildiriler için katılım belgesi düzenlenmeyecek ve kongre kitapçığında yer almayacaktır.",
+  },
+  konaklama: {
+    title: "Kongre Konaklama Bilgisi",
+    intro:
+      "7. Uluslararası WriteTec Yapay Zeka Çağında Sosyal Bilimler ve Sağlık Bilimleri Kongremiz, 28 Ağustos – 2 Eylül 2026 tarihlerinde Noxinn Club Hotel Alanya (Antalya / Alanya) ev sahipliğinde gerçekleştirilecektir.",
+    priceNote:
+      "Fiyatlar; 5 gece 6 gündüz her şey dâhil toplam konaklama fiyatlarını göstermektedir. Fiyatlara KDV dâhildir.",
+    childNote: "11 yaş ve altı bir çocuk ücretsiz, ikinci çocuk %50 indirimlidir.",
+    roomTypeLabel: "Oda Türü",
+    totalLabel: "Toplam",
+    roomSingle: "Tek Kişilik Oda",
+    roomDouble: "Çift Kişilik Oda",
+    roomTriple: "Üç Kişilik Oda",
+    roomExternal: "Dış Katılım",
+    earlyTitle: "Erken Kayıt",
+    earlyDeadline: "Erken Kayıt Son Tarihi: 22 Ağustos 2026",
+    earlySingle: "22.500 TL.",
+    earlyDouble: "30.000 TL.",
+    earlyTriple: "40.500 TL.",
+    earlyExternal: "3.500 TL.",
+    lateTitle: "Geç Kayıt",
+    lateDeadline: "Geç Kayıt Son Tarihi: 25 Ağustos 2026",
+    lateSingle: "26.000 TL.",
+    lateDouble: "32.500 TL.",
+    lateTriple: "43.000 TL.",
+    lateExternal: "3.500 TL.",
+    hotelTitle: "Konaklama Bilgisi İçin",
+    hotelName: "Noxinn Club Hotel Alanya, ANTALYA",
+    hotelPhone: "+90 543 543 96 48",
+  },
+  sosyalEtkinlik: {
+    title: "Sosyal Etkinlik Bilgilendirmesi",
+    body: "7. Uluslararası WriteTec Yapay Zeka Çağında Sosyal Bilimler ve Sağlık Bilimleri Kongremiz kapsamındaki sosyal etkinlik bilgileri yakında duyurulacaktır.",
+  },
+  bildiriYukleme: {
+    title: "Bildiri Yükleme",
+    introBefore:
+      "Kongre sonrasında özet veya tam metin bildirinizi Word (.docx) belgesi olarak yükleyebilirsiniz. Yüklediğiniz bildiri, kongrenin ",
+    introLink: "bildiri kitabına",
+    introAfter:
+      " otomatik olarak eklenir ve işlem tamamlandığında tüm yazarlara onay e-postası gönderilir.",
+    formTitle: "Bildiri Yükleme Formu",
+    formHint:
+      "Aşağıdaki butona tıklayarak bildiri yükleme formunu açabilir ve belgenizi yükleyebilirsiniz.",
+    ruleType:
+      "Özet bildiri veya tam metin bildiri yükleyebilirsiniz; tür seçimi form içinde yapılır.",
+    ruleFormat:
+      "Yalnızca .docx formatındaki belgeler kabul edilir (en fazla 20 MB). Şekil ve tablolar belge içine gömülü olmalıdır.",
+    ruleMail:
+      "Bildiriniz bildiri kitabına eklendiğinde formda belirttiğiniz tüm yazarlara onay e-postası gönderilir.",
+    openForm: "Bildiri Yükleme Formunu Aç",
+    writingRules: "Yazım Kuralları (PDF)",
+    contactTitle: "Bildiri ve İletişim",
+    contactHint: "Sorularınız için bize e-posta veya WhatsApp üzerinden ulaşabilirsiniz.",
+    whatsapp: "WhatsApp · +90 530 471 80 78",
+  },
+  odemeBildirimi: {
+    title: "Ödeme Bildirimi",
+    introBefore:
+      "Kabul edilen bildiri sahipleri, kongre kayıt ücretini ödedikten sonra dekontlarını ve kabul mailinde yer alan ",
+    introLink: "referans numaralarını",
+    introAfter:
+      " aşağıdaki formdan yükleyebilir. Ödemeniz onaylandığında kaydınızın kesinleştiğini bildiren bir e-posta alacaksınız.",
+    formTitle: "Ödeme Bildirim Formu",
+    formHint:
+      "Aşağıdaki butona tıklayarak formu açabilir, referans numaranız ve dekontunuzla ödeme bildiriminizi gönderebilirsiniz.",
+    ruleRef:
+      "Referans numaranız kabul mailinizde yer alır (WT- ile başlar); eşleştirme bu numara üzerinden yapılır.",
+    ruleFormat: "Dekontunuzu PDF, JPG veya PNG formatında yükleyebilirsiniz.",
+    ruleApprove:
+      "Yüklediğiniz dekont incelenip onaylandığında kaydınızın kesinleştiğini bildiren bir e-posta alırsınız.",
+    openForm: "Ödeme Bildirim Formunu Aç",
+    contactTitle: "Ödeme ve İletişim",
+    contactHint: "Sorularınız için bize e-posta veya WhatsApp üzerinden ulaşabilirsiniz.",
+    whatsapp: "WhatsApp · +90 530 471 80 78",
+  },
+  basvuruFormu: {
+    title: "Başvuru Formu",
+    introBefore: "Kongremize başvuru yapmak için başvuru formunu doldurarak bildirinizin Türkçe ve İngilizce özetlerini ilgili alanlara giriniz. Form gönderildiğinde başvurunuz otomatik olarak kaydedilir. Başvuru sürecinin tüm adımları için ",
+    introLink: "Başvuru Süreci",
+    introAfter: " sayfasını inceleyiniz.",
+    formTitle: "Başvuru Formu",
+    formHint: "Aşağıdaki butona tıklayarak başvuru formunu açabilir ve doldurabilirsiniz.",
+    openForm: "Başvuru Formunu Aç",
+    writingRules: "Yazım Kuralları (PDF)",
+    contactTitle: "Başvuru ve İletişim",
+    contactHint: "Sorularınız için bize e-posta veya WhatsApp üzerinden ulaşabilirsiniz.",
+    whatsapp: "WhatsApp · +90 530 471 80 78",
+  },
+  katilimKurallari: {
+    title: "Katılım Kuralları",
+    intro:
+      "Kongreye, yurt içi ve yurt dışından akademisyenler, lisans, yüksek lisans ve doktora öğrencileri, araştırmacılar, STK temsilcileri, şirket temsilcileri ve kongre konusuyla ilgili taraflar katılabilir.",
+    conditionsTitle: "KONGRE KATILIM ŞARTLARI:",
+    rule1: "Kongre dili Türkçe ve İngilizcedir.",
+    rule2: "Sözlü bildiri sunmak için kongreye katılım sağlanabilir. Ayrıca kongreye bildiri sunmadan dış katılımcı olarak da katılmak mümkündür.",
+    rule3:
+      "Kongrede bildirileri kabul edilen katılımcılar ve dış katılımcılar, kongre düzenleme kurulunun almış olduğu kararlara, kongre takvimine ve iptal koşullarına uymayı kabul etmiş sayılır.",
+    rule4:
+      "Kongremize gönderilen bilimsel çalışmaların yayımlanmamış ve sözlü veya poster sunum olarak başka yerde yayınlanmamış ve değerlendirmeye alınmamış olması gerekir.",
+    rule5:
+      "Kongremize gönderilen bildiri özetleri çifte kör hakem değerlendirme sürecinden geçmektedir. Hakem değerlendirmeleri sonucu kabul edilen bildiri özetleri kongre programına alınmaktadır.",
+    rule6Before: "Bildiri özetleri, ",
+    rule6Link: "kongre başvuru formu",
+    rule6After:
+      " belirtilen alanlara ve kurallara uygun şekilde hazırlanmalı ve başvuru formu üzerinden iletilmelidir.",
+    rule7: "Kongre sonrası katılımcıların sunmuş olduğu bildiriler katılımcının yayın tercihine göre yayınlanmaktadır.",
+    rule8:
+      "Kabul mektubu aldığı halde kayıt işlemi yapmayan veya herhangi bir nedenle kongreye katılmayanlara katılım belgesi verilmemekte ve e-bildiri kitabında yer alamamaktadır.",
+    rule9:
+      "Kabul mektubu aldığı halde kayıt işlemi yapmayan veya herhangi bir nedenle kongreye katılmayan yüksek lisans ve doktora öğrencilerinin bağlı bulunduğu enstitüye \"Kabul Mektubu İptal Yazısı\" gönderilmektedir.",
+    rule10: "Katılımcılar kongreye en fazla 2 bildiri ile katılabilirler.",
+  },
+  basvuruSureci: {
+    title: "Kongre Başvuru Süreci",
+    intro:
+      "Başvuru ve kayıt sürecini aşağıdaki adımlara göre tamamlayabilirsiniz. Sürece başlamadan önce kongre takvimini incelemeniz önerilir.",
+    ctaForm: "Başvuru formuna başla",
+    ctaKayit: "Kayıt bilgileri",
+    ctaTakvim: "Kongre takvimi",
+    step1Title: "1. Adım: Başvuru formunun doldurulması ve bildiri özetinin gönderimi",
+    step1Before: "",
+    step1Link: "Başvuru formunu",
+    step1After:
+      " doldurarak bildirinizin Türkçe ve İngilizce özetlerini ilgili alanlara giriniz. (Hatırlatma: Bildiri özetleri, başvuru formu içinde ayrılan yere yazılmalıdır.)",
+    step2Title: "2. Adım: Bildiri özetinin hakem değerlendirmesine gönderimi",
+    step2Body: "Kongremize gönderilen bildiri özetleri çifte kör hakem değerlendirme sürecinden geçmektedir.",
+    step3Title: "3. Adım: Hakem değerlendirme sonucunun bildirilmesi",
+    step3Body:
+      "Hakem değerlendirmeleri sonucu kabul edilen bildiri özetleri için kongre kabul belgesi düzenlenerek katılımcının e-posta adresine gönderilir ve bildiri kongre programına eklenir. (Hatırlatma: Düzeltme alan çalışmalar yeniden düzenlenerek tekrar gönderilebilir.)",
+    step4Title: "4. Adım: Kongre kayıt işlemleri",
+    step4Before:
+      "Bildiri özeti kabul edilen katılımcılarımızın kongre kayıt işlemlerini gerçekleştirmesi gerekmektedir. Katılım ücreti ve banka hesap bilgileri için ",
+    step4Link: "Kongre Kayıt Bilgisi",
+    step4After:
+      " sayfasını inceleyiniz. Dekontun writetecbt@gmail.com adresine iletilmesi gerekir. (Hatırlatma: Kabul mektubu aldığı halde kayıt işlemini gerçekleştirmeyen katılımcıların bildirileri kongre programına alınmamaktadır.)",
+    step5Title: "5. Adım: Konaklama bilgisi",
+    step5Before:
+      "Kongremiz Noxinn Club Hotel Alanya'da (Antalya / Alanya) gerçekleştirilecektir. Konaklama seçenekleri, oda türleri ve ücretler için ",
+    step5Link: "Kongre Konaklama Bilgisi",
+    step5After: " sayfasına bakınız.",
+    step6Title: "6. Adım: Kongre programının ilan edilmesi",
+    step6Reminder: "Hatırlatma:",
+    step6Before: "Katılımcıların ",
+    step6LinkTakvim: "kongre takvimine",
+    step6After:
+      " göre hareket etmesi büyük önem taşımaktadır. Kabul mektubu aldığı halde kayıt işlemi yapmayan katılımcılar kongre programına alınmayacaktır.",
+  },
+  iletisim: {
+    title: "İletişim",
+    heading: "Kongre genel bilgisi için iletişim:",
+    whatsapp: "WhatsApp",
+    instagram: "Instagram",
+    addressLabel: "Adres",
+  },
+} as const;

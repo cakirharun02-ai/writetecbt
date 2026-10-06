@@ -1,0 +1,2972 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kitap Bölümü Gönderim Sistemi</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0b2d5a;
+      --brand-blue: #2f67b8;
+      --brand-sky: #4da8e5;
+      --brand-ice: #eef4fb;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --cream: #f3f7fc;
+      --white: #ffffff;
+      --gray: #6b7280;
+      --border: rgba(11, 45, 90, 0.14);
+      --success: #2d6a4f;
+      --error: #9b2335;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    @keyframes headerFadeUp {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 14px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes headerDividerWipe {
+      from {
+        transform: scaleX(0);
+        opacity: 0;
+      }
+
+      to {
+        transform: scaleX(1);
+        opacity: 0.4;
+      }
+    }
+
+    @keyframes headerBgDrift {
+      0% {
+        transform: translate3d(-1.2%, -0.6%, 0);
+      }
+
+      100% {
+        transform: translate3d(1.2%, 0.6%, 0);
+      }
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--navy) 0%, #143a72 35%, var(--brand-blue) 100%);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header a {
+      color: inherit;
+    }
+
+    header .header-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(900px 300px at 12% 18%, rgba(77, 168, 229, 0.28) 0%, rgba(77, 168, 229, 0.0) 55%),
+        radial-gradient(800px 260px at 88% 28%, rgba(201, 168, 76, 0.18) 0%, rgba(201, 168, 76, 0.0) 62%),
+        radial-gradient(700px 260px at 68% 110%, rgba(77, 168, 229, 0.20) 0%, rgba(77, 168, 229, 0.0) 60%);
+      opacity: 0.85;
+      pointer-events: none;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+      animation: headerBgDrift 18s ease-in-out infinite alternate;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: -60px;
+      width: 300px;
+      height: 300px;
+      border: 1px solid rgba(77, 168, 229, 0.16);
+      border-radius: 50%;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -40px;
+      width: 400px;
+      height: 400px;
+      border: 1px solid rgba(201, 168, 76, 0.12);
+      border-radius: 50%;
+    }
+
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 28px 32px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+      opacity: 0;
+      transform: translate3d(0, 14px, 0);
+      animation: headerFadeUp 700ms cubic-bezier(.2, .7, .2, 1) 80ms forwards;
+    }
+
+    .header-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      padding: 10px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .brand-logo {
+      height: 52px;
+      width: auto;
+      max-width: 220px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+    }
+
+    .header-brand:hover {
+      transform: translate3d(0, -1px, 0);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+
+    .header-brand:focus-visible {
+      outline: 3px solid rgba(77, 168, 229, 0.55);
+      outline-offset: 4px;
+      border-radius: 10px;
+    }
+
+    .system-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.10);
+      padding: 6px 14px;
+      border-radius: 999px;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.16);
+      opacity: 0;
+      transform: translate3d(0, 14px, 0);
+      animation: headerFadeUp 650ms cubic-bezier(.2, .7, .2, 1) 160ms forwards;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .header-title-wrap {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 4vw, 36px);
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 12px;
+      letter-spacing: 0.2px;
+      opacity: 0;
+      transform: translate3d(0, 14px, 0);
+      animation: headerFadeUp 800ms cubic-bezier(.2, .7, .2, 1) 220ms forwards;
+    }
+
+    header h1 span {
+      color: var(--gold);
+    }
+
+    header p {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 620px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translate3d(0, 12px, 0);
+      animation: headerFadeUp 650ms cubic-bezier(.2, .7, .2, 1) 320ms forwards;
+    }
+
+    .brand-logo {
+      height: 48px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.25));
+    }
+
+    @media (max-width: 600px) {
+      .brand-logo {
+        height: 42px;
+      }
+
+      .header-title-wrap {
+        text-align: left;
+      }
+
+      header p {
+        margin: 0;
+      }
+    }
+
+    .header-divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(201, 168, 76, 0.9) 0%, rgba(77, 168, 229, 0.5) 35%, transparent 100%);
+      margin-top: 32px;
+      opacity: 0;
+      transform-origin: left center;
+      transform: scaleX(0);
+      animation: headerDividerWipe 800ms cubic-bezier(.2, .7, .2, 1) 420ms forwards;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 32px 60px;
+    }
+
+    /* SECTION HEADERS */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold) 0%, rgba(201, 168, 76, 0.0) 100%);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(77, 168, 229, 0.55) 0%, rgba(11, 45, 90, 0.18) 55%, rgba(11, 45, 90, 0.06) 100%);
+    }
+
+    .section-label .section-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.18);
+      flex-shrink: 0;
+    }
+
+    /* STEP CONTAINERS */
+    .step {
+      display: none;
+      animation: stepFadeIn 380ms cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    @keyframes stepFadeIn {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 12px, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    /* STEP INDICATOR */
+    .step-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: -16px 0 36px;
+      flex-wrap: wrap;
+    }
+
+    .step-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px 8px 8px;
+      border-radius: 999px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--gray);
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
+
+    .step-pill.active {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--brand-blue) 100%);
+      color: var(--white);
+      border-color: transparent;
+      box-shadow: 0 14px 28px rgba(11, 45, 90, 0.20);
+    }
+
+    .step-pill.completed {
+      background: rgba(45, 106, 79, 0.08);
+      color: var(--success);
+      border-color: rgba(45, 106, 79, 0.28);
+    }
+
+    .step-pill .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--cream);
+      color: var(--gray);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid var(--border);
+    }
+
+    .step-pill.active .step-num {
+      background: var(--gold);
+      color: var(--navy);
+      border-color: transparent;
+      box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.25);
+    }
+
+    .step-pill.completed .step-num {
+      background: var(--success);
+      color: var(--white);
+      border-color: transparent;
+    }
+
+    .step-connector {
+      width: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--border) 0%, var(--border) 100%);
+      border-radius: 2px;
+    }
+
+    /* BOOK SELECTION */
+    .book-intro {
+      text-align: center;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .book-intro::before,
+    .book-intro::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold) 100%);
+      opacity: 0.55;
+    }
+
+    .book-intro::before {
+      left: calc(50% - 240px);
+    }
+
+    .book-intro::after {
+      right: calc(50% - 240px);
+      transform: scaleX(-1);
+    }
+
+    .book-intro .intro-eyebrow {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      padding: 5px 14px;
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      border-radius: 999px;
+      background: rgba(201, 168, 76, 0.06);
+    }
+
+    .book-intro h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 3vw, 30px);
+      color: var(--navy);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .book-intro h2 em {
+      font-style: italic;
+      color: var(--brand-blue);
+    }
+
+    .book-intro p {
+      font-size: 14.5px;
+      color: var(--gray);
+      line-height: 1.65;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 720px) {
+
+      .book-intro::before,
+      .book-intro::after {
+        display: none;
+      }
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+
+    .book-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+      text-align: left;
+      transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s, background 0.28s;
+      display: flex;
+      flex-direction: column;
+      min-height: 180px;
+      border-radius: 14px;
+      overflow: hidden;
+      isolation: isolate;
+      font-family: inherit;
+    }
+
+    .book-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold) 0%, rgba(201, 168, 76, 0.35) 100%);
+      opacity: 0.5;
+      transition: opacity 0.25s, width 0.25s;
+      z-index: 1;
+    }
+
+    .book-card::after {
+      content: '';
+      position: absolute;
+      right: -32px;
+      bottom: -36px;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle at center, rgba(201, 168, 76, 0.14) 0%, transparent 70%);
+      transition: all 0.35s;
+      z-index: 0;
+    }
+
+    .book-card-watermark {
+      position: absolute;
+      right: -12px;
+      bottom: -16px;
+      color: var(--navy);
+      opacity: 0.04;
+      z-index: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+    }
+
+    .book-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px 0 22px;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .book-card-num {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .book-card-body {
+      padding: 14px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      position: relative;
+      z-index: 2;
+      justify-content: center;
+    }
+
+    .book-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.28;
+      letter-spacing: -0.2px;
+    }
+
+    .book-card-imprint {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 0.78em;
+      color: var(--brand-blue);
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    .book-card .book-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      background: var(--white);
+      transition: all 0.25s;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(11, 45, 90, 0.04);
+    }
+
+    .book-card:hover {
+      border-color: var(--brand-blue);
+      box-shadow: 0 22px 44px rgba(11, 45, 90, 0.13);
+      transform: translateY(-3px);
+    }
+
+    .book-card:hover::before {
+      opacity: 1;
+      width: 5px;
+    }
+
+    .book-card:hover::after {
+      width: 220px;
+      height: 220px;
+    }
+
+    .book-card:hover .book-card-watermark {
+      opacity: 0.07;
+      transform: translate(-4px, -4px);
+    }
+
+    .book-card:hover .book-check {
+      border-color: var(--brand-blue);
+    }
+
+    .book-card.selected {
+      border-color: var(--brand-blue);
+      background: linear-gradient(135deg, rgba(77, 168, 229, 0.07) 0%, rgba(201, 168, 76, 0.05) 100%);
+      box-shadow: 0 22px 44px rgba(47, 103, 184, 0.18);
+    }
+
+    .book-card.selected::before {
+      opacity: 1;
+      width: 5px;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--brand-blue) 100%);
+    }
+
+    .book-card.selected .book-check {
+      background: var(--brand-blue);
+      border-color: var(--brand-blue);
+      color: var(--white);
+      box-shadow: 0 8px 18px rgba(47, 103, 184, 0.35);
+    }
+
+    .book-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .book-counter {
+      font-size: 13px;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    .book-counter strong {
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .btn-continue {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--brand-blue) 100%);
+      color: var(--white);
+      border: none;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 999px;
+      box-shadow: 0 14px 28px rgba(11, 45, 90, 0.20);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-continue::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
+      transition: left 0.6s;
+    }
+
+    .btn-continue:hover {
+      filter: brightness(1.05) saturate(1.05);
+      transform: translateY(-1px);
+      box-shadow: 0 18px 36px rgba(11, 45, 90, 0.25);
+    }
+
+    .btn-continue:hover::after {
+      left: 100%;
+    }
+
+    .btn-continue:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      filter: grayscale(0.4);
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-continue:disabled::after {
+      display: none;
+    }
+
+    /* SELECTED BOOK BADGE (on step 2) */
+    .selected-book-bar {
+      background: linear-gradient(135deg, var(--white) 0%, var(--brand-ice) 100%);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 14px 32px rgba(11, 45, 90, 0.07);
+    }
+
+    .selected-book-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--brand-blue) 100%);
+    }
+
+    .selected-book-bar::after {
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .selected-book-bar .sbb-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .selected-book-bar .sbb-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .selected-book-bar .sbb-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.25;
+      letter-spacing: -0.2px;
+    }
+
+    .selected-book-bar .sbb-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--brand-blue) 100%);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 10px 22px rgba(11, 45, 90, 0.22);
+    }
+
+    .btn-change-book {
+      background: var(--white);
+      border: 1px solid rgba(47, 103, 184, 0.30);
+      color: var(--brand-blue);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 9px 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-change-book:hover {
+      background: var(--brand-blue);
+      color: var(--white);
+      border-color: var(--brand-blue);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(47, 103, 184, 0.30);
+    }
+
+    /* FORM CARD */
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 36px 40px;
+      margin-bottom: 24px;
+      position: relative;
+      border-radius: 14px;
+      box-shadow: 0 16px 36px rgba(11, 45, 90, 0.06);
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold) 0%, rgba(201, 168, 76, 0.35) 100%);
+    }
+
+    .form-card::after {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(77, 168, 229, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-row.full {
+      grid-template-columns: 1fr;
+    }
+
+    .form-row.three {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--navy);
+      text-transform: uppercase;
+    }
+
+    .field label .req {
+      color: var(--gold);
+      margin-left: 2px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      border: 1px solid var(--border);
+      padding: 11px 14px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 15px;
+      color: var(--navy);
+      background: var(--cream);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--brand-blue);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(77, 168, 229, 0.16);
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .field .hint {
+      font-size: 12px;
+      color: var(--gray);
+      font-weight: 300;
+    }
+
+    .field input.error,
+    .field select.error {
+      border-color: var(--error);
+    }
+
+    .field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      cursor: pointer;
+    }
+
+    /* AUTHOR BLOCKS */
+    .author-block {
+      border: 1px solid var(--border);
+      padding: 24px 28px;
+      margin-bottom: 16px;
+      position: relative;
+      background: linear-gradient(135deg, var(--white) 0%, var(--cream) 100%);
+      border-radius: 14px;
+      box-shadow: 0 12px 26px rgba(11, 45, 90, 0.05);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .author-block:hover {
+      box-shadow: 0 18px 36px rgba(11, 45, 90, 0.09);
+      transform: translateY(-1px);
+    }
+
+    .author-block.is-corresponding::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold) 0%, rgba(201, 168, 76, 0.35) 100%);
+      border-radius: 14px 0 0 14px;
+    }
+
+    .author-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .author-num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .btn-remove {
+      background: none;
+      border: 1px solid rgba(155, 35, 53, 0.3);
+      color: var(--error);
+      font-size: 12px;
+      padding: 4px 12px;
+      cursor: pointer;
+      font-family: 'Source Sans 3', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .btn-remove:hover {
+      background: var(--error);
+      color: white;
+    }
+
+    .btn-add-author {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 1px dashed rgba(47, 103, 184, 0.7);
+      color: var(--brand-blue);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 10px 20px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+
+    .btn-add-author:hover {
+      background: rgba(77, 168, 229, 0.12);
+      color: var(--navy);
+      border-color: rgba(77, 168, 229, 0.85);
+    }
+
+    /* FILE UPLOAD */
+    .file-zone {
+      border: 2px dashed var(--border);
+      padding: 44px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .file-zone::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 100%, rgba(77, 168, 229, 0.10) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .file-zone:hover,
+    .file-zone.dragover {
+      border-color: var(--brand-blue);
+      background: linear-gradient(135deg, rgba(77, 168, 229, 0.06) 0%, var(--white) 100%);
+      transform: translateY(-1px);
+    }
+
+    .file-zone:hover::after,
+    .file-zone.dragover::after {
+      opacity: 1;
+    }
+
+    .file-zone input[type=file] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .file-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .file-zone p {
+      font-size: 15px;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+
+    .file-zone strong {
+      color: var(--navy);
+    }
+
+    .file-zone .file-types {
+      font-size: 12px;
+      color: var(--gray);
+      font-weight: 300;
+    }
+
+    .file-selected {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: rgba(45, 106, 79, 0.08);
+      border: 1px solid rgba(45, 106, 79, 0.3);
+      margin-top: 12px;
+    }
+
+    .file-selected.show {
+      display: flex;
+    }
+
+    .file-selected span {
+      font-size: 14px;
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .file-selected .fname {
+      font-weight: 400;
+      color: var(--navy);
+    }
+
+    /* Progress moved to Modal overlay */
+
+    /* SUBMIT */
+    .submit-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .submit-note {
+      font-size: 13px;
+      color: var(--gray);
+      font-weight: 300;
+      max-width: 360px;
+      line-height: 1.5;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--brand-blue) 100%);
+      color: var(--white);
+      border: none;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-submit::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(201, 168, 76, 0.95) 0%, rgba(77, 168, 229, 0.8) 55%, rgba(255, 255, 255, 0) 100%);
+      transition: width 0.3s;
+    }
+
+    .btn-submit:hover::before {
+      width: 100%;
+    }
+
+    .btn-submit:hover {
+      filter: brightness(1.05) saturate(1.05);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* CONSENT + LEGAL DIALOG */
+    .consent-card {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .consent-row label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .consent-row input[type="checkbox"],
+    .consent-item-check {
+      margin-top: 3px;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .consent-row input[type="checkbox"]:disabled,
+    .consent-item-check:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .consent-row label:has(input:disabled) {
+      cursor: not-allowed;
+    }
+
+    .consent-text {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      flex: 1;
+      min-width: 0;
+      display: block;
+      cursor: pointer;
+    }
+
+    .consent-item {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px 14px;
+      align-items: start;
+    }
+
+    .consent-item-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .consent-item label.consent-text {
+      cursor: pointer;
+      margin: 0;
+    }
+
+    .consent-item-check:disabled+.consent-item-col label.consent-text {
+      cursor: not-allowed;
+    }
+
+    .btn-legal {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand-blue);
+      background: rgba(47, 103, 184, 0.1);
+      border: 1px solid rgba(47, 103, 184, 0.35);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-legal:hover {
+      background: rgba(47, 103, 184, 0.16);
+      border-color: var(--brand-blue);
+    }
+
+    .consent-lock-banner {
+      font-size: 13px;
+      color: var(--navy);
+      line-height: 1.55;
+      padding: 12px 14px 12px 16px;
+      border-radius: 10px;
+      background: var(--brand-ice);
+      border: 1px solid rgba(47, 103, 184, 0.2);
+      border-left: 4px solid var(--gold);
+    }
+
+    .consent-lock-banner[hidden] {
+      display: none !important;
+    }
+
+    dialog.legal-dialog:not([open]) {
+      display: none;
+    }
+
+    dialog.legal-dialog[open] {
+      position: fixed;
+      inset: 0;
+      width: min(640px, calc(100vw - 24px));
+      max-width: calc(100vw - 24px);
+      max-height: min(85vh, 720px);
+      height: fit-content;
+      margin: auto;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 24px 60px rgba(11, 45, 90, 0.22);
+      color: var(--navy);
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    dialog.legal-dialog::backdrop {
+      background: rgba(11, 45, 90, 0.45);
+      backdrop-filter: blur(2px);
+    }
+
+    .legal-dialog-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--brand-ice);
+      flex-shrink: 0;
+    }
+
+    .legal-dialog-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(17px, 2.5vw, 22px);
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.25;
+    }
+
+    .legal-dialog-close {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--navy);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .legal-dialog-close:hover {
+      border-color: var(--brand-blue);
+      color: var(--brand-blue);
+    }
+
+    .legal-dialog-body {
+      padding: 18px 22px 22px;
+      overflow-y: auto;
+      flex: 1;
+      min-height: 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--navy);
+    }
+
+    .legal-dialog-body h3 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--brand-blue);
+      margin: 20px 0 8px;
+    }
+
+    .legal-dialog-body h3:first-child {
+      margin-top: 0;
+    }
+
+    .legal-dialog-body p {
+      margin: 0 0 10px;
+      color: var(--gray);
+    }
+
+    .legal-dialog-body ul {
+      margin: 0 0 12px 1.1em;
+      padding: 0;
+      color: var(--gray);
+    }
+
+    .legal-dialog-body li {
+      margin-bottom: 6px;
+    }
+
+    /* MESSAGES */
+    .msg {
+      padding: 16px 8px;
+      font-size: 14px;
+      margin-top: 24px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .msg.show {
+      display: block;
+      animation: stepFadeIn 400ms cubic-bezier(.2, .7, .2, 1);
+    }
+
+    /* Success msg moved to modal overlay */
+
+    .msg.error-msg {
+      background: rgba(155, 35, 53, 0.07);
+      border-left: 3px solid var(--error);
+      color: var(--error);
+    }
+
+    /* FOOTER */
+    footer {
+      background: linear-gradient(135deg, var(--navy) 0%, #143a72 35%, var(--brand-blue) 100%);
+      padding: 30px 24px;
+      color: rgba(255, 255, 255, 0.72);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-left strong {
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-right a {
+      color: rgba(255, 255, 255, 0.86);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(11, 45, 90, 0.14);
+    }
+
+    .footer-right a:hover {
+      background: rgba(11, 45, 90, 0.22);
+      border-color: rgba(201, 168, 76, 0.30);
+    }
+
+    .footer-right a.footer-social {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .footer-inner {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row.three {
+        grid-template-columns: 1fr;
+      }
+
+      .form-card {
+        padding: 24px 20px;
+      }
+
+      main {
+        padding: 24px 16px 48px;
+      }
+
+      .header-inner {
+        padding: 32px 20px;
+      }
+
+      .submit-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-submit {
+        text-align: center;
+      }
+
+      .book-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .selected-book-bar {
+        padding: 14px 16px;
+      }
+
+      .selected-book-bar .sbb-name {
+        font-size: 16px;
+      }
+    }
+
+    /* SUBMISSION OVERLAY */
+    .submit-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      background: rgba(240, 244, 248, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .submit-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .submit-modal {
+      background: #ffffff;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 580px;
+      padding: 40px 32px;
+      box-shadow: 0 16px 48px rgba(11, 45, 90, 0.12), 0 4px 12px rgba(11, 45, 90, 0.04);
+      transform: translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      display: block;
+    }
+
+    .submit-overlay.show .submit-modal {
+      transform: translateY(0);
+    }
+
+    .modal-state {
+      display: none;
+      animation: stepFadeIn 0.5s ease;
+    }
+
+    .modal-state.active {
+      display: block;
+    }
+
+    /* ── SUBMIT LOADING OVERLAY (kongre formundaki loader'ın birebir portu) ── */
+    .submit-loading-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(13, 35, 64, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.22s ease, visibility 0.22s ease;
+    }
+    .submit-loading-overlay.is-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .submit-loading-card {
+      max-width: 340px;
+      width: 90vw;
+      background: #eef1f6;
+      border-radius: 20px;
+      padding: 40px 36px 36px;
+      box-shadow: 0 30px 80px rgba(11, 26, 62, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      animation: slo-fadeUp 0.5s ease 0.15s both;
+    }
+    @keyframes slo-fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .submit-loading-spinner { display: none; }
+    .submit-loading-title {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #122050;
+      text-align: center;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .submit-loading-body {
+      margin: 0;
+      font-size: 0.82rem;
+      color: #5A6787;
+      font-weight: 400;
+      text-align: center;
+    }
+    .submit-loading-card .wt-brand {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+      color: #0d1424;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      animation: wt-pl-pulse 1.6s ease-in-out infinite;
+    }
+    .submit-loading-card .wt-brand small {
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      color: #9aa4b2;
+    }
+    .submit-loading-card .wt-loader {
+      --duration:3s;--primary:#2456e6;--primary-light:#17b4e8;--primary-rgba:rgba(36,86,230,0);
+      width:200px;height:320px;position:relative;transform-style:preserve-3d;zoom:0.45;
+    }
+    @media(max-width:480px){.submit-loading-card .wt-loader{zoom:0.35}.submit-loading-card{padding:30px 24px 28px}}
+    .submit-loading-card .wt-loader:before,.submit-loading-card .wt-loader:after{--r:20.5deg;content:"";width:320px;height:140px;position:absolute;right:32%;bottom:-11px;background:#eef1f6;transform:translateZ(200px) rotate(var(--r));animation:wt-mask var(--duration) linear forwards infinite}
+    .submit-loading-card .wt-loader:after{--r:-20.5deg;right:auto;left:32%}
+    .submit-loading-card .wt-loader .ground{position:absolute;left:-50px;bottom:-120px;transform-style:preserve-3d;transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}
+    .submit-loading-card .wt-loader .ground div{transform:rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(0);width:200px;height:200px;background:linear-gradient(45deg,var(--primary) 0%,var(--primary) 50%,var(--primary-light) 50%,var(--primary-light) 100%);transform-style:preserve-3d;animation:wt-ground var(--duration) linear forwards infinite}
+    .submit-loading-card .wt-loader .ground div:before,.submit-loading-card .wt-loader .ground div:after{--rx:90deg;--ry:0deg;--x:44px;--y:162px;--z:-50px;content:"";width:156px;height:300px;opacity:0;background:linear-gradient(var(--primary),var(--primary-rgba));position:absolute;transform:rotateX(var(--rx)) rotateY(var(--ry)) translate(var(--x),var(--y)) translateZ(var(--z));animation:wt-ground-shine var(--duration) linear forwards infinite}
+    .submit-loading-card .wt-loader .ground div:after{--rx:90deg;--ry:90deg;--x:0;--y:177px;--z:150px}
+    .submit-loading-card .wt-loader .box{--x:0;--y:0;position:absolute;animation:var(--duration) linear forwards infinite;transform:translate(var(--x),var(--y))}
+    .submit-loading-card .wt-loader .box div{width:48px;height:48px;position:relative;transform-style:preserve-3d;animation:var(--duration) ease forwards infinite;background-color:#17b4e8;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}
+    .submit-loading-card .wt-loader .box div:before,.submit-loading-card .wt-loader .box div:after{--rx:90deg;--ry:0deg;--z:24px;--y:-24px;--x:0;content:"";position:absolute;width:inherit;height:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);transform:rotateX(var(--rx)) rotateY(var(--ry)) translate(var(--x),var(--y)) translateZ(var(--z))}
+    .submit-loading-card .wt-loader .box div:before{background-color:#2456e6}
+    .submit-loading-card .wt-loader .box div:after{--rx:0deg;--ry:90deg;--x:24px;--y:0;background-color:#0a3a6b}
+    .submit-loading-card .wt-loader .box.box7{display:none}
+    .submit-loading-card .wt-loader .box.box5 div:after{background-color:#0a0a0a;box-shadow:inset 0 0 0 1px rgba(255,255,255,.34)}
+    .submit-loading-card .wt-loader .box.box6 div{background-color:#0a0a0a;box-shadow:inset 0 0 0 1px rgba(255,255,255,.34)}
+    .submit-loading-card .wt-loader .box.box4 div:before{background-color:#000;box-shadow:inset 0 0 0 1px rgba(255,255,255,.34)}
+    .submit-loading-card .wt-loader .box.box0{--x:-220px;--y:-120px;left:58px;top:108px;animation-name:wt-box-move0}
+    .submit-loading-card .wt-loader .box.box0 div{animation-name:wt-box-scale0}
+    .submit-loading-card .wt-loader .box.box1{--x:-260px;--y:120px;left:25px;top:120px;animation-name:wt-box-move1}
+    .submit-loading-card .wt-loader .box.box1 div{animation-name:wt-box-scale1}
+    .submit-loading-card .wt-loader .box.box2{--x:120px;--y:-190px;left:58px;top:64px;animation-name:wt-box-move2}
+    .submit-loading-card .wt-loader .box.box2 div{animation-name:wt-box-scale2}
+    .submit-loading-card .wt-loader .box.box3{--x:280px;--y:-40px;left:91px;top:120px;animation-name:wt-box-move3}
+    .submit-loading-card .wt-loader .box.box3 div{animation-name:wt-box-scale3}
+    .submit-loading-card .wt-loader .box.box4{--x:60px;--y:200px;left:58px;top:132px;animation-name:wt-box-move4}
+    .submit-loading-card .wt-loader .box.box4 div{animation-name:wt-box-scale4}
+    .submit-loading-card .wt-loader .box.box5{--x:-220px;--y:-120px;left:25px;top:76px;animation-name:wt-box-move5}
+    .submit-loading-card .wt-loader .box.box5 div{animation-name:wt-box-scale5}
+    .submit-loading-card .wt-loader .box.box6{--x:-260px;--y:120px;left:91px;top:76px;animation-name:wt-box-move6}
+    .submit-loading-card .wt-loader .box.box6 div{animation-name:wt-box-scale6}
+    .submit-loading-card .wt-loader .box.box7{--x:-240px;--y:200px;left:58px;top:87px;animation-name:wt-box-move7}
+    .submit-loading-card .wt-loader .box.box7 div{animation-name:wt-box-scale7}
+    @keyframes wt-box-move0{12%{transform:translate(var(--x),var(--y))}25%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+    @keyframes wt-box-scale0{6%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}14%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+    @keyframes wt-box-move1{16%{transform:translate(var(--x),var(--y))}29%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+    @keyframes wt-box-scale1{10%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}18%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+    @keyframes wt-box-move2{20%{transform:translate(var(--x),var(--y))}33%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+    @keyframes wt-box-scale2{14%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}22%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+    @keyframes wt-box-move3{24%{transform:translate(var(--x),var(--y))}37%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+    @keyframes wt-box-scale3{18%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}26%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+    @keyframes wt-box-move4{28%{transform:translate(var(--x),var(--y))}41%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+    @keyframes wt-box-scale4{22%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}30%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+    @keyframes wt-box-move5{32%{transform:translate(var(--x),var(--y))}45%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+    @keyframes wt-box-scale5{26%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}34%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+    @keyframes wt-box-move6{36%{transform:translate(var(--x),var(--y))}49%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+    @keyframes wt-box-scale6{30%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}38%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+    @keyframes wt-box-move7{40%{transform:translate(var(--x),var(--y))}53%,52%{transform:translate(0,0)}80%{transform:translate(0,-32px)}90%,100%{transform:translate(0,188px)}}
+    @keyframes wt-box-scale7{34%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(0)}42%,100%{transform:rotateY(-47deg) rotateX(-15deg) rotateZ(15deg) scale(1)}}
+    @keyframes wt-ground{0%,65%{transform:rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(0)}75%,90%{transform:rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(1)}100%{transform:rotateX(90deg) rotateY(0deg) translate(-48px,-120px) translateZ(100px) scale(0)}}
+    @keyframes wt-ground-shine{0%,70%{opacity:0}75%,87%{opacity:.2}100%{opacity:0}}
+    @keyframes wt-mask{0%,65%{opacity:0}66%,100%{opacity:1}}
+
+    @keyframes wt-pl-pulse {
+
+      0%,
+      100% {
+        opacity: .55;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    #modalSuccessState {
+      text-align: center;
+    }
+
+    .modal-success-icon {
+      width: 64px;
+      height: 64px;
+      background: #e6f6ec;
+      color: #10b981;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .modal-success-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      margin: 0 0 12px;
+    }
+
+    .modal-success-subtitle {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin: 0 auto 32px;
+      max-width: 440px;
+    }
+
+    .modal-summary-table {
+      background: #f0f7ff;
+      border: 1px solid #e0e7ff;
+      border-radius: 12px;
+      padding: 8px 20px;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+
+    .summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(11, 45, 90, 0.06);
+      font-size: 13px;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .summary-key {
+      color: var(--gray);
+      flex-shrink: 0;
+    }
+
+    .summary-val {
+      color: var(--navy);
+      font-weight: 600;
+      text-align: right;
+      max-width: 65%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .summary-val.status-val {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .modal-success-footer {
+      font-size: 12px;
+      color: var(--gray);
+      border-top: 1px solid rgba(11, 45, 90, 0.08);
+      padding-top: 16px;
+    }
+
+    /* MODAL CLOSE BUTTON */
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(11, 45, 90, 0.06);
+      color: var(--gray);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(11, 45, 90, 0.12);
+      color: var(--navy);
+      transform: scale(1.1);
+    }
+
+    .modal-close-btn.visible {
+      display: flex;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-bg"></div>
+    <div class="header-inner">
+      <div class="header-title-wrap">
+        <div class="header-logo-wrap">
+          <a class="header-brand" href="https://www.congress.writetecbt.com/" target="_blank" rel="noopener"
+            aria-label="WRITETEC web sitesine git">
+            <img class="brand-logo" src="/img/writetec-logo.png" width="200" height="60" alt="WRITETEC">
+          </a>
+        </div>
+        <div class="system-badge">Kitap Bölümü Gönderim Sistemi</div>
+        <h1>WRITETEC <span>Akademik Kitap</span><br>Bölüm Gönderim Sistemi</h1>
+        <p>Önce katkı sağlamak istediğiniz kitabı seçiniz, ardından formu eksiksiz doldurarak tam metin Word belgenizi
+          yükleyiniz.</p>
+      </div>
+      <div class="header-divider"></div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ADIM GÖSTERGESİ -->
+    <div class="step-indicator" aria-label="Adım göstergesi">
+      <div class="step-pill" id="stepPill1">
+        <span class="step-num">1</span>
+        <span>Kitap Seçimi</span>
+      </div>
+      <span class="step-connector" aria-hidden="true"></span>
+      <div class="step-pill" id="stepPill2">
+        <span class="step-num">2</span>
+        <span>Form &amp; Belge</span>
+      </div>
+    </div>
+
+    <!-- ======================== ADIM 1: KİTAP SEÇİMİ ======================== -->
+    <section id="step-book" class="step active">
+      <div class="book-intro">
+        <span class="intro-eyebrow">Adım 1 — Kitap Seçimi</span>
+        <h2>Hangi kitap için <em>bölüm</em> gönderiyorsunuz?</h2>
+        <p>Aşağıdaki sekiz kitaptan birini seçiniz. Bölümünüz yalnızca seçtiğiniz kitabın derlemesine eklenecek; her
+          kitabın ayrı bir editör hattı ve takvimi vardır.</p>
+      </div>
+      <div id="bookGrid" class="book-grid"></div>
+      <div class="book-actions">
+        <div class="book-counter" id="bookCounter">Henüz kitap seçilmedi</div>
+        <button class="btn-continue" id="btnContinue" onclick="goToForm()" disabled>
+          Devam Et
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================== ADIM 2: FORM ======================== -->
+    <section id="step-form" class="step">
+
+      <div class="selected-book-bar">
+        <div class="sbb-info">
+          <div class="sbb-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 016.5 17H20V4H6.5A2.5 2.5 0 004 6.5v13z" />
+              <path d="M4 19.5A2.5 2.5 0 016.5 22H20v-5" />
+            </svg>
+          </div>
+          <div style="min-width:0;">
+            <span class="sbb-label">Seçilen Kitap</span>
+            <div class="sbb-name" id="sbbName">—</div>
+          </div>
+        </div>
+        <button class="btn-change-book" onclick="goBackToBookSelection()">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Kitabı Değiştir
+        </button>
+      </div>
+
+      <!-- ======================== BÖLÜM BİLGİLERİ ======================== -->
+      <div class="section-label">Bölüm Bilgileri</div>
+      <div class="form-card">
+        <div class="form-row full">
+          <div class="field">
+            <label>Bölüm Başlığı <span class="req">*</span></label>
+            <input type="text" id="title" placeholder="Bölümünüzün tam başlığını giriniz">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="field">
+            <label>Konu Alanı <span class="req">*</span></label>
+            <input type="text" id="subject" placeholder="Örn. Para politikası, dış ticaret, sosyal güvenlik…">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="field">
+            <label>Anahtar Kelimeler <span class="req">*</span></label>
+            <input type="text" id="keywords" placeholder="Virgülle ayırarak giriniz: kelime1, kelime2, kelime3">
+            <span class="hint">En az 3, en fazla 6 anahtar kelime giriniz.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================== YAZAR BİLGİLERİ ======================== -->
+      <div class="section-label">Yazar Bilgileri</div>
+      <div id="author-container"></div>
+      <button class="btn-add-author" onclick="addAuthor()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        Ortak Yazar Ekle
+      </button>
+
+      <!-- ======================== DOSYA YÜKLEME ======================== -->
+      <div class="section-label" style="margin-top:36px;">Tam Metin Belgesi</div>
+      <div class="form-card">
+        <div class="file-zone" id="dropzone">
+          <input type="file" id="docFile" accept=".docx" onchange="handleFile(this)">
+          <span class="file-icon">📄</span>
+          <p><strong>Belgeyi buraya sürükleyin</strong> veya tıklayın</p>
+          <p class="file-types">Kabul edilen format: .docx &nbsp;|&nbsp; Maksimum: 20 MB &nbsp;|&nbsp; Tam metin seçilen
+            kitaba otomatik eklenir</p>
+        </div>
+        <div class="file-selected" id="fileSelected">
+          <svg width="18" height="18" fill="none" stroke="#2d6a4f" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+          <span>Seçilen dosya: <span class="fname" id="fileName">—</span></span>
+        </div>
+
+        <div class="form-row full" style="margin-top:20px; margin-bottom:0">
+          <div class="field">
+            <label>Şekil ve tablolar</label>
+            <span class="hint">Şekiller belgede gömülü değilse lütfen belge içine taşıyınız. Ayrı dosya kabul
+              edilmemektedir.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================== ONAYLAR ======================== -->
+      <div class="section-label" style="margin-top:36px;">Onaylar</div>
+      <div class="form-card consent-card" style="padding:24px 40px;">
+        <div class="consent-row">
+          <label for="ethicsCheck">
+            <input type="checkbox" id="ethicsCheck">
+            <span class="consent-text">Sunulan kitap bölümünün özgün ve daha önce başka bir yerde yayımlanmamış
+              olduğunu, etik kurul onayı gerektiren çalışmalar için gerekli izinlerin alındığını ve yazar listesinin
+              doğru olduğunu beyan ederim.</span>
+          </label>
+        </div>
+
+        <div class="consent-lock-banner" id="kvkkPrivacyLockBanner" role="note" aria-live="polite">
+          <strong>KVKK ve gizlilik onayları</strong> — Önce tüm zorunlu alanları doldurup geçerli bir
+          <strong>.docx</strong> dosyası yükleyiniz; ardından aşağıdaki iki kutuyu işaretleyebilirsiniz.
+        </div>
+
+        <div class="consent-item">
+          <input type="checkbox" id="kvkkCheck" class="consent-item-check" disabled
+            aria-describedby="kvkkPrivacyLockBanner">
+          <div class="consent-item-col">
+            <label for="kvkkCheck" class="consent-text">6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamındaki
+              <strong>Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metni</strong>’ni okudum ve kişisel verilerimin
+              belirtilen amaçlarla işlenmesine onay veriyorum.</label>
+            <button type="button" class="btn-legal" id="btnOpenKvkk">Aydınlatma metnini görüntüle</button>
+          </div>
+        </div>
+
+        <div class="consent-item">
+          <input type="checkbox" id="privacyCheck" class="consent-item-check" disabled
+            aria-describedby="kvkkPrivacyLockBanner">
+          <div class="consent-item-col">
+            <label for="privacyCheck" class="consent-text"><strong>Gizlilik ve Güvenlik Politikası</strong>’nı okudum ve
+              kabul ediyorum.</label>
+            <button type="button" class="btn-legal" id="btnOpenPrivacy">Gizlilik politikasını görüntüle</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Yükleniyor ve Başarılı durumları sayfa sonundaki modal içine taşındı -->
+      <div class="msg error-msg" id="msgError"></div>
+
+      <div class="submit-row">
+        <p class="submit-note">
+          Formu gönderdikten sonra değişiklik yapamazsınız, lütfen kontrol ediniz.
+        </p>
+        <button class="btn-submit" id="btnSubmit" onclick="submitForm()">Bölümü Gönder</button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <dialog id="dlgKvkk" class="legal-dialog" aria-labelledby="dlgKvkkTitle">
+    <div class="legal-dialog-header">
+      <h2 id="dlgKvkkTitle">6698 sayılı KVKK — Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metni</h2>
+      <button type="button" class="legal-dialog-close" data-close="dlgKvkk">Kapat</button>
+    </div>
+    <div class="legal-dialog-body">
+      <p><strong>Son güncelleme:</strong> 11 Nisan 2026</p>
+      <h3>Veri sorumlusu</h3>
+      <p>6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca, kişisel verileriniz WriteTec Bilgi
+        Teknolojileri (“Şirket”) tarafından veri sorumlusu sıfatıyla işlenmektedir.</p>
+      <h3>Adres</h3>
+      <p>Çünür Mah. 5421. Sokak No: 26 D:17 Merkez/Isparta</p>
+      <h3>Telefon</h3>
+      <p>+90 530 471 80 78</p>
+      <h3>E-posta</h3>
+      <p>writetecbt@gmail.com</p>
+      <h3>Kişisel verilerin hangi amaçlarla işlendiği</h3>
+      <p>Şirket tarafından, aşağıdaki amaçlarla sınırlı ve ölçülü olarak kişisel verileriniz işlenebilir:</p>
+      <ul>
+        <li>Akademik kitap derleme ve yayın süreçlerinin yürütülmesi</li>
+        <li>Bölüm/yazar başvurularının alınması, değerlendirilmesi ve geri bildirim sağlanması</li>
+        <li>İletişim taleplerinin yanıtlanması; bilgilendirme ve danışmanlık süreçlerinin yönetilmesi</li>
+        <li>Hizmet kalitesinin artırılması, operasyonel süreçlerin planlanması ve güvenliğin sağlanması</li>
+        <li>Yetkili kurum ve kuruluşlara bilgi verilmesi dahil yasal yükümlülüklerin yerine getirilmesi</li>
+        <li>İstatistiksel analiz, raporlama ve arşivleme (anonim veya kimlikten arındırılmış hallerde mümkün olduğu
+          ölçüde)</li>
+      </ul>
+      <h3>İşlenen kişisel veri kategorileri</h3>
+      <p>Hizmetin niteliğine bağlı olarak; kimlik (ad-soyad, ünvan), iletişim (telefon, e-posta), kurum bilgisi,
+        akademik kimlik (ORCID), işlem güvenliği (log, IP, cihaz bilgisi) ve pazarlama (açık rıza ile) verileri
+        işlenebilir.</p>
+      <h3>Kişisel verilerin işlenme şartı ve hukuki sebepler</h3>
+      <p>Kişisel verileriniz; KVKK md. 5 ve md. 6 kapsamında, açık rızanızın bulunması, sözleşmenin kurulması veya
+        ifasıyla doğrudan doğruya ilgili olması, veri sorumlusunun hukuki yükümlülüğünü yerine getirebilmesi için
+        zorunlu olması veya meşru menfaat gibi hukuki sebeplere dayanılarak işlenir.</p>
+      <h3>Kişisel verilerin aktarılması</h3>
+      <p>Kişisel verileriniz; hizmetin gerektirdiği ölçüde iş ortaklarımıza, tedarikçilerimize (ör. barındırma, iletişim
+        altyapısı), yetkili kamu kurum ve kuruluşlarına ve yasal düzenlemelerin öngördüğü hallerde üçüncü kişilere
+        KVKK’ya uygun olarak aktarılabilir.</p>
+      <h3>Kişisel verilerin toplanma yöntemi</h3>
+      <p>Verileriniz; web sitemiz, iletişim formları, e-posta, telefon, WhatsApp ve yazar paneli gibi kanallar
+        aracılığıyla otomatik veya kısmen otomatik yollarla toplanabilir.</p>
+      <h3>İlgili kişinin KVKK md. 11 kapsamındaki hakları</h3>
+      <p>KVKK’nın 11. maddesi uyarınca veri sahipleri olarak aşağıdaki haklara sahipsiniz:</p>
+      <ul>
+        <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+        <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+        <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+        <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</li>
+        <li>Eksik veya yanlış işlenmişse düzeltilmesini isteme</li>
+        <li>KVKK’nın 7. maddesi çerçevesinde silinmesini veya yok edilmesini isteme</li>
+        <li>Düzeltme, silme, yok etme işlemlerinin aktarıldığı üçüncü kişilere bildirilmesini isteme</li>
+        <li>Münhasıran otomatik sistemler ile analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz
+          etme</li>
+        <li>Kanuna aykırı işlenmesi sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme</li>
+      </ul>
+      <h3>Başvuru yolu</h3>
+      <p>Yukarıdaki haklarınızı kullanmak için taleplerinizi writetecbt@gmail.com adresine e-posta göndererek veya
+        yazılı olarak Şirket adresimize iletebilirsiniz. Başvurularınız, KVKK ve ilgili mevzuat çerçevesinde
+        sonuçlandırılır.</p>
+      <p>Şikâyetlerinizi Kişisel Verileri Koruma Kurulu’na iletme hakkınız saklıdır (<a href="https://www.kvkk.gov.tr"
+          target="_blank" rel="noopener">www.kvkk.gov.tr</a>).</p>
+      <p>Ayrıca Gizlilik ve Güvenlik Politikası metnimizi inceleyebilirsiniz.</p>
+    </div>
+  </dialog>
+
+  <dialog id="dlgPrivacy" class="legal-dialog" aria-labelledby="dlgPrivacyTitle">
+    <div class="legal-dialog-header">
+      <h2 id="dlgPrivacyTitle">Gizlilik ve Güvenlik Politikası</h2>
+      <button type="button" class="legal-dialog-close" data-close="dlgPrivacy">Kapat</button>
+    </div>
+    <div class="legal-dialog-body">
+      <p>Bu politika, kişisel verilerin korunmasına ilişkin ilke ve uygulamaları açıklar.</p>
+      <h3>Amaç ve Kapsam</h3>
+      <p>Bu politika, WriteTec Bilgi Teknolojileri (bundan sonra “Şirket” olarak anılacaktır) tarafından toplanan,
+        işlenen ve saklanan kişisel verilerin korunmasına ilişkin ilke ve uygulamaları açıklar.</p>
+      <p><strong>Amaç:</strong> Kişisel verilerin güvenliğini sağlamak, mevzuata uygun hareket etmek ve
+        müşterilerimizin/çalışanlarımızın güvenini korumaktır.</p>
+      <p><strong>Kapsam:</strong> Bu politika, Şirket’in müşterileri, çalışanları, tedarikçileri ve iş ortakları ile
+        ilişkili tüm kişisel verileri kapsar.</p>
+      <h3>Tanımlar</h3>
+      <ul>
+        <li><strong>Kişisel Veri:</strong> Kimliği belirli veya belirlenebilir gerçek kişiye ilişkin her türlü bilgi.
+        </li>
+        <li><strong>İşlenen Kişisel Veri:</strong> Amaçlanan ve yetkili kişilerce gerçekleştirilen kayıt, saklama,
+          aktarım ve kullanım süreçleri.</li>
+        <li><strong>Veri Sorumlusu:</strong> Kişisel verilerin işlenme amaçlarını ve vasıtalarını belirleyen gerçek veya
+          tüzel kişi.</li>
+        <li><strong>Veri Güvenliği:</strong> Kişisel verilerin yetkisiz erişim, ihlal, kayıp, bozulma veya yok edilmeden
+          korunmasını sağlama eylem ve önlemleri.</li>
+      </ul>
+      <h3>İlkeler</h3>
+      <ul>
+        <li><strong>Yasalara Uygunluk:</strong> Kişisel veriler, yürürlükteki veri koruma mevzuatına uygun işlenir.</li>
+        <li><strong>Amaçla Sınırlama:</strong> Veriler, belirlenen amaç için ve bu amaçla sınırlı olarak işlenir.</li>
+        <li><strong>Şeffaflık:</strong> Veri sahiplerine hangi verilerin niçin işlendiği konusunda net bilgi verilir.
+        </li>
+        <li><strong>Güvenlik:</strong> Kişisel verilerin güvenliğini sağlamak için uygun teknik ve organizasyonel
+          önlemler alınır.</li>
+        <li><strong>Sadece Yetkilendirilmiş Erişim:</strong> Verilere erişim, yetkilendirilmiş personelle sınırlıdır.
+        </li>
+      </ul>
+      <h3>Veri Sınıflandırması</h3>
+      <ul>
+        <li><strong>Gizli Veri:</strong> Yasal olarak korunması gereken ve yüksek güvenlik gerektiren veriler (ör. mali
+          bilgiler, kimlik belgeleri).</li>
+        <li><strong>Kısıtlı Veri:</strong> Erişimi sınırlı olan kişisel veriler.</li>
+        <li><strong>Genel Veri:</strong> Kamuya açık veya düşük güvenlik gerektiren veriler.</li>
+      </ul>
+      <p>Verilere ilişkin sınıflandırma, ilgili süreçler ve kullanıcı grupları için net olarak tanımlanır.</p>
+      <h3>Veri İşleme Amaçları</h3>
+      <p>Hizmet sunumu, müşteri desteği, hesap yönetimi, güvenlik izlemesi, yasal uyum vb. Amaçlar açıkça belgelenir ve
+        dışa aktarım veya paylaşım durumlarında veri sahiplerine gerekli bilgilendirme yapılır.</p>
+      <h3>Hukuki Dayanak</h3>
+      <p>Kişisel verilerin işlenmesi, uygulanabilir mevzuata uygun olarak gerçekleştirilir. Gerekli hallerde açık rıza,
+        sözleşme gerekliliği veya meşru menfaatler gibi hukuki sebepler kullanılır.</p>
+      <h3>Kişisel Verilerin Saklanması ve İmha Edilmesi</h3>
+      <p>Veriler, amaç için gerekli süre boyunca saklanır ve bu sürenin bitiminde güvenli bir şekilde imha edilir.
+        Saklama süreleri politika dokümanında veya ilgili prosedürlerde belirtilir.</p>
+      <h3>Güvenlik Önlemleri</h3>
+      <p><strong>Teknik önlemler:</strong> Şifreleme, güvenlik duvarları, güncel yama yönetimi, güvenli yedekleme,
+        izinsiz erişim tespit sistemleri.</p>
+      <p><strong>Organizasyonel önlemler:</strong> Erişim kontrolü, en az ayrıcalık prensibi, farkındalık eğitimi,
+        güvenlik politikalarının düzenli denetimi.</p>
+      <p><strong>Fiziksel önlemler:</strong> Kritik altyapı için güvenli fiziksel alanlar, ziyaretçi yönetimi.</p>
+      <h3>Veri üçüncü taraf işleyicileri</h3>
+      <p>Taşeronlar ile veri işleme sözleşmeleri ve güvenlik şartları.</p>
+      <h3>Erişim ve Yetkilendirme</h3>
+      <p>Tüm çalışanlar ve üçüncü taraflar için rol tabanlı erişim kontrolü uygulanır. Yetkisiz erişim durumunda acil
+        durum prosedürleri devreye alınır ve olay kaydı tutulur.</p>
+      <h3>Veri İhlali Bildirimi</h3>
+      <p>Kişisel verilerin güvenliğini tehdit eden olaylar tespit edildiğinde, gerekli mevzuat kapsamında ilgili
+        taraflara ve yetkili mercilere bildirim yapılır. İhlal yönetimi için olay müdahale planı (IRP) uygulanır.</p>
+      <h3>Sorumluluk ve Yetkili Kişiler</h3>
+      <p>Veri Koruma Görevlisi (DPO) veya yetkili biri, veri koruma ile ilgili sorumlulukları yürütür ve denetimleri
+        koordine eder. Şirket içi birimlerden görev tanımları ve iletişim kanalları belirlenmiştir.</p>
+      <h3>Üçüncü Taraflarla Paylaşım</h3>
+      <p>Kişisel veriler yalnızca yasa ve mevzuata uygun olarak paylaşılır. Taşeronlar ile veri işleme sözleşmeleri
+        yapılır ve güvenlik yükümlülükleri açıkça belirlenir.</p>
+      <h3>Çocuk Verileri</h3>
+      <p>Çocuklardan elde edilen veriler özel koruma önlemlerine tabidir ve gerekli izinler alınır.</p>
+      <h3>Uluslararası Veri Aktarımı</h3>
+      <p>Uluslararası veri aktarımlarında uygun koruma önlemleri ve yasal mekanizmalar kullanılır (ör. uygunluk
+        beyanları, standart sözleşme maddeleri).</p>
+      <h3>Değişiklikler ve Güncellemeler</h3>
+      <p>Bu politika, mevzuat ve uygulama ihtiyaçlarına göre güncellenebilir. Güncellemeler ilgili paydaşlara duyurulur.
+      </p>
+      <p>Gizlilik politikamızla ilgili her türlü sorularınız için writetecbt@gmail.com adresine e-posta
+        gönderebilirsiniz.</p>
+      <h3>İletişim</h3>
+      <p><strong>Unvan:</strong> WriteTec Bilgi Teknolojileri</p>
+      <p><strong>Adres:</strong> Çünür Mah. 5421. Sokak No: 26 D:17 Merkez/Isparta</p>
+      <p><strong>Telefon:</strong> +90 530 471 80 78</p>
+      <p><strong>E-posta:</strong> writetecbt@gmail.com</p>
+      <p>KVKK kapsamındaki haklarınız için Aydınlatma Metni sayfamızı inceleyebilirsiniz.</p>
+    </div>
+  </dialog>
+
+  <!-- SUBMISSION OVERLAY MODAL -->
+  <div class="submit-overlay" id="submitOverlay">
+    <div class="submit-modal">
+
+      <!-- X Close Button (visible only in success) -->
+      <button class="modal-close-btn visible" id="modalCloseBtn" onclick="closeSubmitOverlay()" aria-label="Kapat">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+          stroke-linecap="round">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- SUCCESS STATE -->
+      <div id="modalSuccessState" class="modal-state">
+        <div class="modal-success-icon">
+          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+        </div>
+        <h3 class="modal-success-title">Bölümünüz Yüklendi!</h3>
+        <p class="modal-success-subtitle">Bölümünüz başarıyla yüklendi. Kitap dosyasına eklendiğinde onay e-postası alacaksınız.</p>
+
+        <div class="modal-summary-table">
+          <div class="summary-row">
+            <span class="summary-key">Ad Soyad</span>
+            <span class="summary-val" id="sumAdSoyad">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">E-posta</span>
+            <span class="summary-val" id="sumEmail">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Bölüm Başlığı</span>
+            <span class="summary-val" id="sumBaslik">—</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Kitap</span>
+            <span class="summary-val" id="sumKitap">—</span>
+          </div>
+        </div>
+
+        <div class="modal-success-footer">
+          Sorularınız için: writetecbt@gmail.com · +90 (530) 471 80 78
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMIT LOADING OVERLAY (kongre formundaki loader'ın birebir portu) -->
+  <div
+    id="submit-loading-overlay"
+    class="submit-loading-overlay"
+    aria-hidden="true"
+    role="status"
+    aria-live="polite"
+    aria-busy="false"
+  >
+    <div class="submit-loading-card">
+      <div class="wt-loader">
+        <div class="box box0"><div></div></div>
+        <div class="box box1"><div></div></div>
+        <div class="box box2"><div></div></div>
+        <div class="box box3"><div></div></div>
+        <div class="box box4"><div></div></div>
+        <div class="box box5"><div></div></div>
+        <div class="box box6"><div></div></div>
+        <div class="box box7"><div></div></div>
+        <div class="ground"><div></div></div>
+      </div>
+      <div class="submit-loading-spinner" aria-hidden="true"></div>
+      <p class="submit-loading-title" id="submit-loading-title">Bölümünüz gönderiliyor</p>
+      <p class="submit-loading-body" id="submit-loading-body">
+        Lütfen bekleyin; işlem tamamlanana kadar bu sayfayı kapatmayın.
+      </p>
+      <div class="wt-brand">WRITETEC<small>BİLGİ TEKNOLOJİLERİ</small></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">© <span id="footer-year"></span> <strong>WRITETEC</strong> Bilgi Teknolojileri</div>
+      <div class="footer-right">
+        <a href="https://www.congress.writetecbt.com/" target="_blank" rel="noopener">Web sitesi</a>
+        <a href="mailto:writetecbt@gmail.com">İletişim</a>
+        <a class="footer-social" href="https://www.instagram.com/writeteccongress/" target="_blank"
+          rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a class="footer-social"
+          href="https://api.whatsapp.com/send/?phone=905304718078&text=Merhaba%2C+kitap+b%C3%B6l%C3%BCm%C3%BC+hakk%C4%B1nda+bilgi+almak+istiyorum.&type=phone_number&app_absent=0"
+          target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── APPS SCRIPT WEB APP URL'İNİZİ BURAYA YAZIN ───────────────────────────────
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwdUg6PFSrCwP0ccYMBKZFXRfviz-oilIOIVX7bCFdtWhqNiyn1sclrY5btVJ6QA97q/exec';
+    // ──────────────────────────────────────────────────────────────────────────────
+
+    const BRAND_NAME = 'WRITETEC';
+
+    /** İngilizce imprint (Peter Lang vb.) tr-TR ile büyütülürse i→İ olur. */
+    function formatImprintUpper(imprint) {
+      if (!imprint) return '';
+      const isLatin = /^[A-Za-z\s]+$/.test(imprint);
+      return imprint.toLocaleUpperCase(isLatin ? 'en-US' : 'tr-TR');
+    }
+
+    // ─── 8 KİTAP — key değerleri Apps Script BOOK_CONFIG ile birebir aynı olmalıdır ─
+    const BOOK_LIST = [
+      { key: 'iktisat_politikasi', title: 'İKTİSAT POLİTİKASI', imprint: '' },
+      { key: 'uluslararasi_iktisat', title: 'ULUSLARARASI İKTİSAT', imprint: '' },
+      { key: 'makro_yapay_zeka', title: 'MAKRO İKTİSAT', imprint: 'Yapay Zeka' },
+      { key: 'makro_peter_lang', title: 'MAKRO İKTİSAT', imprint: 'Peter Lang' },
+      { key: 'sosyal_politika', title: 'SOSYAL POLİTİKA', imprint: 'Peter Lang' },
+      { key: 'mikro_iktisat', title: 'MİKRO İKTİSAT', imprint: 'Peter Lang' },
+      { key: 'kamu_yonetimi', title: 'KAMU YÖNETİMİ', imprint: 'Peter Lang' },
+      { key: 'pazarlama', title: 'PAZARLAMA', imprint: 'Peter Lang' },
+    ];
+
+    function bookLabel(b) {
+      return b.imprint ? `${b.title} (${formatImprintUpper(b.imprint)})` : b.title;
+    }
+
+    const UNVANLAR = [
+      'Prof. Dr.', 'Doç. Dr.', 'Dr. Öğr. Üyesi', 'Arş. Gör. Dr.',
+      'Arş. Gör.', 'Öğr. Gör. Dr.', 'Öğr. Gör.', 'Dr.', 'Uzm.', 'Diğer'
+    ];
+
+    let selectedBookKey = null;
+    let authorCount = 0;
+
+    // ─── KİTAP SEÇİMİ ───────────────────────────────────────────────────────────
+    const BOOK_WATERMARK_SVG = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 19.5A2.5 2.5 0 016.5 17H20V4H6.5A2.5 2.5 0 004 6.5v13z"/>
+    <path d="M4 19.5A2.5 2.5 0 016.5 22H20v-5"/>
+    <path d="M8 7h8M8 10h6"/>
+  </svg>`;
+
+    function renderBookSelection() {
+      const grid = document.getElementById('bookGrid');
+      grid.innerHTML = '';
+      BOOK_LIST.forEach((b, i) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'book-card';
+        card.setAttribute('data-key', b.key);
+        const imprintHtml = b.imprint
+          ? ` <span class="book-card-imprint">(${formatImprintUpper(b.imprint)})</span>`
+          : '';
+        card.innerHTML = `
+      <div class="book-card-watermark">${BOOK_WATERMARK_SVG}</div>
+      <div class="book-card-top">
+        <span class="book-card-num">Kitap ${String(i + 1).padStart(2, '0')}</span>
+        <span class="book-check" aria-hidden="true">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+      </div>
+      <div class="book-card-body">
+        <span class="book-card-title">${b.title}${imprintHtml}</span>
+      </div>
+    `;
+        card.addEventListener('click', () => chooseBook(b.key));
+        grid.appendChild(card);
+      });
+    }
+
+    function updateBookCounter() {
+      const el = document.getElementById('bookCounter');
+      if (!el) return;
+      if (!selectedBookKey) {
+        el.innerHTML = `<strong>${BOOK_LIST.length}</strong> kitaptan birini seçiniz`;
+      } else {
+        const b = BOOK_LIST.find(x => x.key === selectedBookKey);
+        el.innerHTML = `Seçilen kitap: <strong>${b ? bookLabel(b) : '—'}</strong>`;
+      }
+    }
+
+    function setStep(n) {
+      const p1 = document.getElementById('stepPill1');
+      const p2 = document.getElementById('stepPill2');
+      if (!p1 || !p2) return;
+      p1.classList.toggle('active', n === 1);
+      p1.classList.toggle('completed', n > 1);
+      p2.classList.toggle('active', n === 2);
+    }
+
+    function chooseBook(key) {
+      selectedBookKey = key;
+      document.querySelectorAll('.book-card').forEach(c => {
+        c.classList.toggle('selected', c.getAttribute('data-key') === key);
+      });
+      document.getElementById('btnContinue').disabled = false;
+      updateBookCounter();
+    }
+
+    function goToForm() {
+      if (!selectedBookKey) return;
+      const book = BOOK_LIST.find(b => b.key === selectedBookKey);
+      if (!book) return;
+      document.getElementById('sbbName').textContent = bookLabel(book);
+      document.getElementById('step-book').classList.remove('active');
+      document.getElementById('step-form').classList.add('active');
+      setStep(2);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goBackToBookSelection() {
+      document.getElementById('step-form').classList.remove('active');
+      document.getElementById('step-book').classList.add('active');
+      setStep(1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ─── YAZARLAR ──────────────────────────────────────────────────────────────
+    function addAuthor(isFirst = false) {
+      authorCount++;
+      const idx = authorCount;
+      const container = document.getElementById('author-container');
+      const div = document.createElement('div');
+      div.className = idx === 1 ? 'form-card author-block is-corresponding' : 'form-card author-block';
+      div.id = `author-${idx}`;
+      div.style.marginBottom = '16px';
+
+      const unvanOptions = UNVANLAR.map(u => `<option value="${u === '—' ? '' : u}">${u}</option>`).join('');
+
+      div.innerHTML = `
+    <div class="author-block-header">
+      <span class="author-num">${idx === 1 ? '★ Sorumlu Yazar' : `${idx}. Ortak Yazar`}</span>
+      ${idx > 1 ? `<button class="btn-remove" onclick="removeAuthor(${idx})">✕ Kaldır</button>` : ''}
+    </div>
+    <div class="form-row three">
+      <div class="field">
+        <label>Ünvan <span class="req">*</span></label>
+        <select id="a${idx}_unvan" onchange="toggleUnvanDiger(${idx})"><option value="">—</option>${unvanOptions}</select>
+        <input type="text" id="a${idx}_unvanDiger" placeholder="Ünvanınızı yazınız" style="display:none; margin-top:6px;">
+      </div>
+      <div class="field">
+        <label>Ad <span class="req">*</span></label>
+        <input type="text" id="a${idx}_ad" placeholder="Ad">
+      </div>
+      <div class="field">
+        <label>Soyad <span class="req">*</span></label>
+        <input type="text" id="a${idx}_soyad" placeholder="Soyad">
+      </div>
+    </div>
+    <div class="form-row full">
+      <div class="field">
+        <label>Kurum / Üniversite <span class="req">*</span></label>
+        <input type="text" id="a${idx}_kurum" placeholder="Bölüm, Fakülte, Üniversite, Şehir, Ülke">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="field">
+        <label>E-posta <span class="req">*</span></label>
+        <input type="email" id="a${idx}_email" placeholder="ornek@universite.edu.tr">
+      </div>
+      <div class="field">
+        <label>ORCID <span class="req">*</span></label>
+        <input type="text" id="a${idx}_orcid" placeholder="0000-0000-0000-0000" maxlength="19" oninput="formatOrcidInput(this)">
+        <span class="hint">Zorunlu — orcid.org'dan edinebilirsiniz (XXXX-XXXX-XXXX-XXXX)</span>
+      </div>
+    </div>
+  `;
+      container.appendChild(div);
+      updateConsentLocks();
+    }
+
+    function removeAuthor(idx) {
+      const el = document.getElementById(`author-${idx}`);
+      if (el) el.remove();
+      updateConsentLocks();
+    }
+
+    // ─── KVKK / GİZLİLİK KİLİDİ ────────────────────────────────────────────────
+    function isCoreFormComplete() {
+      if (!selectedBookKey) return false;
+      const t = document.getElementById('title');
+      const s = document.getElementById('subject');
+      const k = document.getElementById('keywords');
+      if (!t?.value.trim() || !s?.value.trim() || !k?.value.trim()) return false;
+      for (const block of document.querySelectorAll('.author-block')) {
+        const idx = block.id.replace('author-', '');
+        for (const f of ['unvan', 'ad', 'soyad', 'kurum', 'email', 'orcid']) {
+          const el = document.getElementById(`a${idx}_${f}`);
+          if (!el || !el.value.trim()) return false;
+        }
+        // Diğer seçiliyse unvanDiger de dolu olmalı
+        const unvanEl = document.getElementById(`a${idx}_unvan`);
+        if (unvanEl && /^di[ğg]er$/i.test(unvanEl.value)) {
+          const digerEl = document.getElementById(`a${idx}_unvanDiger`);
+          if (!digerEl || !digerEl.value.trim()) return false;
+        }
+        // ORCID format kontrolü
+        const orcidEl = document.getElementById(`a${idx}_orcid`);
+        if (orcidEl && !/^[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}$/.test(orcidEl.value.trim())) return false;
+      }
+      const file = document.getElementById('docFile').files[0];
+      if (!file) return false;
+      const nameLower = (file.name || '').toLowerCase();
+      if (!nameLower.endsWith('.docx')) return false;
+      if (file.size > 20 * 1024 * 1024) return false;
+      return true;
+    }
+
+    function updateConsentLocks() {
+      const kvkk = document.getElementById('kvkkCheck');
+      const priv = document.getElementById('privacyCheck');
+      const hint = document.getElementById('kvkkPrivacyLockBanner');
+      if (!kvkk || !priv) return;
+      const core = isCoreFormComplete();
+      if (!core) {
+        kvkk.disabled = true;
+        kvkk.checked = false;
+        priv.disabled = true;
+        priv.checked = false;
+        if (hint) hint.hidden = false;
+      } else {
+        kvkk.disabled = false;
+        priv.disabled = false;
+        if (hint) hint.hidden = true;
+      }
+    }
+
+    // ─── DOSYA ─────────────────────────────────────────────────────────────────
+    function handleFile(input) {
+      const file = input.files[0];
+      if (!file) {
+        updateConsentLocks();
+        return;
+      }
+      const nameLower = (file.name || '').toLowerCase();
+      if (!nameLower.endsWith('.docx')) {
+        showError('Lütfen sadece .docx formatında dosya yükleyiniz.');
+        input.value = '';
+        document.getElementById('fileSelected').classList.remove('show');
+        document.getElementById('fileName').textContent = '—';
+        updateConsentLocks();
+        return;
+      }
+      const maxMB = 20;
+      if (file.size > maxMB * 1024 * 1024) {
+        showError(`Dosya boyutu ${maxMB} MB'ı aşıyor. Lütfen daha küçük bir dosya seçin.`);
+        input.value = '';
+        updateConsentLocks();
+        return;
+      }
+      document.getElementById('fileName').textContent = file.name;
+      document.getElementById('fileSelected').classList.add('show');
+      updateConsentLocks();
+    }
+
+    const dz = document.getElementById('dropzone');
+    dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('dragover'); });
+    dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+    dz.addEventListener('drop', e => {
+      e.preventDefault(); dz.classList.remove('dragover');
+      const dt = e.dataTransfer;
+      if (dt.files.length) {
+        document.getElementById('docFile').files = dt.files;
+        handleFile(document.getElementById('docFile'));
+      }
+    });
+
+    const mainEl = document.querySelector('main');
+    if (mainEl) {
+      mainEl.addEventListener('input', updateConsentLocks);
+      mainEl.addEventListener('change', updateConsentLocks);
+    }
+
+    document.getElementById('btnOpenKvkk')?.addEventListener('click', () => {
+      document.getElementById('dlgKvkk')?.showModal();
+    });
+    document.getElementById('btnOpenPrivacy')?.addEventListener('click', () => {
+      document.getElementById('dlgPrivacy')?.showModal();
+    });
+    document.querySelectorAll('.legal-dialog [data-close]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-close');
+        document.getElementById(id)?.close();
+      });
+    });
+    ['dlgKvkk', 'dlgPrivacy'].forEach(id => {
+      const dlg = document.getElementById(id);
+      if (!dlg) return;
+      dlg.addEventListener('click', e => {
+        if (e.target === dlg) dlg.close();
+      });
+    });
+
+    // ─── VALİDASYON ────────────────────────────────────────────────────────────
+    function validate() {
+      if (!selectedBookKey) {
+        showError('Lütfen önce katkı sağlayacağınız kitabı seçiniz.');
+        goBackToBookSelection();
+        return false;
+      }
+      let ok = true;
+      const req = (id) => {
+        const el = document.getElementById(id);
+        if (!el || !el.value.trim()) { el && el.classList.add('error'); ok = false; }
+        else el.classList.remove('error');
+      };
+      req('title'); req('subject'); req('keywords');
+
+      document.querySelectorAll('.author-block').forEach(block => {
+        const idx = block.id.replace('author-', '');
+        ['unvan', 'ad', 'soyad', 'kurum', 'email', 'orcid'].forEach(f => {
+          const el = document.getElementById(`a${idx}_${f}`);
+          if (!el || !el.value.trim()) {
+            if (el) el.classList.add('error');
+            ok = false;
+          } else {
+            if (f === 'email') {
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              if (!emailRegex.test(el.value.trim())) {
+                el.classList.add('error');
+                ok = false;
+              } else {
+                el.classList.remove('error');
+              }
+            } else if (f === 'orcid') {
+              const orcidRegex = /^[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}$/;
+              if (!orcidRegex.test(el.value.trim())) {
+                el.classList.add('error');
+                ok = false;
+              } else {
+                el.classList.remove('error');
+              }
+            } else {
+              el.classList.remove('error');
+            }
+          }
+        });
+        // Diğer seçiliyse unvanDiger zorunlu
+        const unvanEl = document.getElementById(`a${idx}_unvan`);
+        if (unvanEl && /^di[ğg]er$/i.test(unvanEl.value)) {
+          const digerEl = document.getElementById(`a${idx}_unvanDiger`);
+          if (!digerEl || !digerEl.value.trim()) {
+            if (digerEl) digerEl.classList.add('error');
+            ok = false;
+          } else {
+            digerEl.classList.remove('error');
+          }
+        }
+      });
+
+      const dz = document.getElementById('dropzone');
+      if (!document.getElementById('docFile').files.length) {
+        dz.style.borderColor = 'var(--error)';
+        ok = false;
+      } else {
+        dz.style.borderColor = '';
+      }
+
+      if (!ok) {
+        showError('Lütfen kırmızı ile işaretlenen zorunlu alanları doldurunuz.');
+        return false;
+      }
+      if (!document.getElementById('ethicsCheck').checked) {
+        showError('Lütfen etik beyan kutusunu işaretleyiniz.');
+        return false;
+      }
+      if (!document.getElementById('kvkkCheck').checked) {
+        showError('Lütfen KVKK aydınlatma metni onay kutusunu işaretleyiniz.');
+        return false;
+      }
+      if (!document.getElementById('privacyCheck').checked) {
+        showError('Lütfen gizlilik ve güvenlik politikası onay kutusunu işaretleyiniz.');
+        return false;
+      }
+      return true;
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('msgError');
+      el.textContent = '⚠ ' + msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 6000);
+    }
+
+    // ─── SUBMIT ────────────────────────────────────────────────────────────────
+    function mimeFromFileName(fileName) {
+      const fn = (fileName || '').toLowerCase();
+      if (fn.endsWith('.docx')) return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      return '';
+    }
+
+    function readFileAsBase64Fields(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          const comma = dataUrl.indexOf(',');
+          const base64 = comma >= 0 ? dataUrl.slice(comma + 1) : dataUrl;
+          const declared = (file.type || '').trim();
+          resolve({
+            fileBase64: base64,
+            fileName: file.name,
+            fileMime: declared || mimeFromFileName(file.name) || 'application/octet-stream',
+          });
+        };
+        reader.onerror = () => reject(new Error('Dosya okunamadı.'));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Büyük dosyalar tek POST'ta bağlantı kopması/zaman aşımıyla "Failed to fetch"
+    // veriyor; bu eşiğin üzerindeki base64 içerik parçalara bölünerek yüklenir.
+    const CHUNK_SIZE = 6 * 1024 * 1024; // base64 karakteri (~4,5 MB ham dosya)
+
+    function friendlyFetchError(err) {
+      const m = (err && err.message) || String(err);
+      if (/failed to fetch|networkerror|load failed/i.test(m)) {
+        return 'Bağlantı kesildi veya istek engellendi. İnternet bağlantınızı ve varsa reklam engelleyici / kurumsal ağ kısıtlamalarını kontrol edip tekrar deneyiniz';
+      }
+      return m;
+    }
+
+    async function postForm(fd) {
+      const res = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: fd, redirect: 'follow' });
+      if (!res.ok) throw new Error('Sunucu yanıtı: HTTP ' + res.status);
+      return res.json();
+    }
+
+    async function serverSupportsChunks() {
+      try {
+        const url = APPS_SCRIPT_URL + (APPS_SCRIPT_URL.indexOf('?') >= 0 ? '&' : '?') + 'action=ping';
+        const r = await fetch(url, { method: 'GET', redirect: 'follow' });
+        if (!r.ok) return false;
+        const d = await r.json();
+        return !!(d && d.chunkedUpload);
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function makeUploadId() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+    }
+
+    async function uploadInChunks(base64, submissionId, onProgress) {
+      const total = Math.ceil(base64.length / CHUNK_SIZE);
+      const uploadId = makeUploadId();
+      for (let i = 0; i < total; i++) {
+        const slice = base64.slice(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE);
+        let lastErr = null;
+        let sent = false;
+        for (let attempt = 1; attempt <= 3 && !sent; attempt++) {
+          try {
+            const fd = new FormData();
+            fd.append('action', 'uploadChunk');
+            fd.append('uploadId', uploadId);
+            fd.append('chunkIndex', String(i));
+            fd.append('totalChunks', String(total));
+            fd.append('chunkData', slice);
+            fd.append('submissionId', submissionId);
+            const data = await postForm(fd);
+            if (!data.success) throw new Error(data.error || 'Parça yüklenemedi.');
+            sent = true;
+          } catch (e) {
+            lastErr = e;
+            if (attempt < 3) await new Promise(r => setTimeout(r, 1200 * attempt));
+          }
+        }
+        if (!sent) throw lastErr || new Error('Parça yüklenemedi.');
+        onProgress(i + 1, total);
+      }
+      return { uploadId: uploadId, totalChunks: total };
+    }
+
+    async function checkSubmission(submissionId) {
+      const url = APPS_SCRIPT_URL + (APPS_SCRIPT_URL.indexOf('?') >= 0 ? '&' : '?') +
+        'action=checkSubmission&submissionId=' + encodeURIComponent(submissionId);
+      const response = await fetch(url, { method: 'GET', redirect: 'follow' });
+      if (!response.ok) throw new Error('Durum sorgusu yanıt vermedi.');
+      return response.json();
+    }
+
+    async function recoverSubmissionAfterNetworkError(submissionId) {
+      for (let attempt = 0; attempt < 3; attempt++) {
+        if (attempt) await new Promise(resolve => setTimeout(resolve, 5000));
+        try {
+          const status = await checkSubmission(submissionId);
+          if (status && status.found) return status;
+        } catch (e) {
+          console.warn('checkSubmission:', e);
+        }
+      }
+      return null;
+    }
+
+    async function processQueueForAtMostOneMinute() {
+      const qUrl = APPS_SCRIPT_URL + (APPS_SCRIPT_URL.indexOf('?') >= 0 ? '&' : '?') + 'action=processQueue';
+      const request = fetch(qUrl, { method: 'GET', redirect: 'follow' })
+        .then(response => response.ok ? response.json() : null)
+        .catch(error => { console.warn('processQueue:', error); return null; });
+      const timeout = new Promise(resolve => setTimeout(() => resolve(null), 60000));
+      return Promise.race([request, timeout]);
+    }
+
+    // Kongre formundaki yükleme overlay'inin birebir portu: göster/gizle + metin.
+    function setSubmitLoadingVisible(show, title, body) {
+      const ov = document.getElementById('submit-loading-overlay');
+      if (!ov) return;
+      ov.classList.toggle('is-visible', !!show);
+      ov.setAttribute('aria-hidden', show ? 'false' : 'true');
+      ov.setAttribute('aria-busy', show ? 'true' : 'false');
+      if (title != null) document.getElementById('submit-loading-title').textContent = title;
+      if (body != null) document.getElementById('submit-loading-body').textContent = body;
+    }
+
+    function showSubmissionSuccess(finalMsg, overlay, btn) {
+      const sorumluAdSoyad = (document.getElementById('a1_ad')?.value || '') + ' ' + (document.getElementById('a1_soyad')?.value || '');
+      const selectedBook = BOOK_LIST.find(book => book.key === selectedBookKey);
+      document.getElementById('sumAdSoyad').textContent = sorumluAdSoyad.trim();
+      document.getElementById('sumEmail').textContent = document.getElementById('a1_email')?.value || '';
+      document.getElementById('sumBaslik').textContent = document.getElementById('title')?.value || '';
+      document.getElementById('sumKitap').textContent = selectedBook ? bookLabel(selectedBook) : '—';
+      document.querySelector('.modal-success-subtitle').textContent = finalMsg;
+      setSubmitLoadingVisible(false);
+      overlay.classList.add('success-mode');
+      document.getElementById('modalSuccessState').classList.add('active');
+      overlay.classList.add('show');
+      btn.textContent = '✓ Gönderildi';
+    }
+
+    async function submitForm() {
+      document.getElementById('msgError').classList.remove('show');
+      if (!validate()) return;
+
+      if (!APPS_SCRIPT_URL) {
+        showError('APPS_SCRIPT_URL boş. Lütfen yönetici ile iletişime geçiniz.');
+        return;
+      }
+
+      const authors = [];
+      document.querySelectorAll('.author-block').forEach(block => {
+        const idx = block.id.replace('author-', '');
+        const unvanVal = document.getElementById(`a${idx}_unvan`)?.value || '';
+        let unvanDiger = '';
+        if (/^di[ğg]er$/i.test(unvanVal)) {
+          unvanDiger = document.getElementById(`a${idx}_unvanDiger`)?.value || '';
+        }
+        authors.push({
+          unvan: unvanVal,
+          unvanDiger: unvanDiger,
+          ad: document.getElementById(`a${idx}_ad`)?.value || '',
+          soyad: document.getElementById(`a${idx}_soyad`)?.value || '',
+          kurum: document.getElementById(`a${idx}_kurum`)?.value || '',
+          email: document.getElementById(`a${idx}_email`)?.value || '',
+          orcid: document.getElementById(`a${idx}_orcid`)?.value || '',
+        });
+      });
+
+      const file = document.getElementById('docFile').files[0];
+      let fileFields;
+      try {
+        fileFields = await readFileAsBase64Fields(file);
+      } catch (e) {
+        showError(e.message || 'Dosya okunamadı.');
+        return;
+      }
+
+      const fd = new FormData();
+      fd.append('bookKey', selectedBookKey);
+      fd.append('title', document.getElementById('title').value);
+      fd.append('subject', document.getElementById('subject').value);
+      fd.append('keywords', document.getElementById('keywords').value);
+      fd.append('authors', JSON.stringify(authors));
+      if (authors.length > 0) {
+        fd.append('email', authors[0].email);
+        fd.append('adSoyad', authors[0].ad + ' ' + authors[0].soyad);
+      }
+      // fileBase64 aşağıda eklenir: küçük dosyada doğrudan, büyükte parçalı
+      // yüklenip sunucuda birleştirilir (finalizeUpload).
+      fd.append('fileName', fileFields.fileName);
+      fd.append('fileMime', fileFields.fileMime);
+      fd.append('timestamp', new Date().toISOString());
+      const submissionId = makeUploadId();
+      fd.append('submissionId', submissionId);
+
+      const btn = document.getElementById('btnSubmit');
+      btn.disabled = true;
+      const overlay = document.getElementById('submitOverlay');
+      overlay.classList.remove('show', 'success-mode');
+      document.getElementById('modalSuccessState').classList.remove('active');
+      setSubmitLoadingVisible(true, 'Bölümünüz gönderiliyor', 'Lütfen bekleyin; işlem tamamlanana kadar bu sayfayı kapatmayın.');
+
+      let submissionPostStarted = false;
+
+      try {
+        let data;
+        if (fileFields.fileBase64.length > CHUNK_SIZE && await serverSupportsChunks()) {
+          // Parçalı yol: gerçek ilerleme gösterilir, her parça 3 kez denenir.
+          const up = await uploadInChunks(fileFields.fileBase64, submissionId, (done, total) => {
+            setSubmitLoadingVisible(true, null, 'Dosya yükleniyor… (' + done + '/' + total + ')');
+          });
+          fd.append('action', 'finalizeUpload');
+          fd.append('uploadId', up.uploadId);
+          fd.append('totalChunks', String(up.totalChunks));
+          setSubmitLoadingVisible(true, null, 'Dosya birleştiriliyor…');
+          submissionPostStarted = true;
+          data = await postForm(fd);
+        } else {
+          fd.append('fileBase64', fileFields.fileBase64);
+          submissionPostStarted = true;
+          data = await postForm(fd);
+        }
+
+        if (data.success) {
+          let finalMsg = 'Bölümünüz başarıyla yüklendi. Kitap dosyasına eklendiğinde onay e-postası alacaksınız.';
+
+          if (data.queued) {
+            setSubmitLoadingVisible(true, null, 'Kitap dosyasına ekleniyor ve e-postalar gönderiliyor…');
+            const qData = await processQueueForAtMostOneMinute();
+            if (qData && qData.processed > 0 && !qData.error) {
+              finalMsg = 'Bölümünüz kitap dosyasına eklendi. Onay e-postası gönderildi.';
+            } else {
+              finalMsg = 'Kitaba ekleme ve onay e-postası birkaç dakika içinde tamamlanacak.';
+            }
+          } else {
+            finalMsg = 'Bölümünüz kitap dosyasına eklendi. Onay e-postası gönderildi.';
+          }
+
+          showSubmissionSuccess(finalMsg, overlay, btn);
+        } else {
+          throw new Error(data.error || 'Sunucu hatası');
+        }
+      } catch (err) {
+        const recovered = submissionPostStarted && /failed to fetch|networkerror|load failed/i.test((err && err.message) || String(err))
+          ? await recoverSubmissionAfterNetworkError(submissionId)
+          : null;
+        if (recovered && recovered.found) {
+          const finalMsg = recovered.state === 'done'
+            ? 'Bölümünüz kitap dosyasına eklendi. Onay e-postası gönderildi.'
+            : 'Kitaba ekleme ve onay e-postası birkaç dakika içinde tamamlanacak.';
+          showSubmissionSuccess(finalMsg, overlay, btn);
+          return;
+        }
+        setSubmitLoadingVisible(false);
+        overlay.classList.remove('show', 'success-mode');
+        document.getElementById('modalSuccessState').classList.remove('active');
+        btn.disabled = false;
+        showError('Gönderim başarısız: ' + friendlyFetchError(err) + '. Lütfen tekrar deneyiniz.');
+      }
+    }
+
+    function closeSubmitOverlay() {
+      // Redirect to the WRITETEC congress site
+      window.location.href = 'https://www.congress.writetecbt.com/';
+    }
+
+    // ─── INIT ──────────────────────────────────────────────────────────────────
+    // ─── ORCID OTOMATİK FORMATLAMA ──────────────────────────────────────────────
+    function formatOrcidInput(input) {
+      const cursorPos = input.selectionStart;
+      const oldVal = input.value;
+      // Tire hariç alfanümerik olmayan her şeyi sil
+      let val = oldVal.replace(/[^a-zA-Z0-9]/g, '');
+      // 16 karakteri aşmasın
+      val = val.slice(0, 16);
+      // Her 4 karakterden sonra tire ekle
+      let formatted = '';
+      for (let i = 0; i < val.length; i++) {
+        if (i > 0 && i % 4 === 0) formatted += '-';
+        formatted += val[i];
+      }
+      input.value = formatted;
+      // İmleç pozisyonunu düzelt
+      const diff = formatted.length - oldVal.length;
+      const newPos = Math.max(0, cursorPos + diff);
+      input.setSelectionRange(newPos, newPos);
+    }
+
+    // ─── ÜNVAN DİĞER TOGGLE ─────────────────────────────────────────────────────
+    function toggleUnvanDiger(idx) {
+      const select = document.getElementById(`a${idx}_unvan`);
+      const digerInput = document.getElementById(`a${idx}_unvanDiger`);
+      if (!select || !digerInput) return;
+      if (/^di[ğg]er$/i.test(select.value)) {
+        digerInput.style.display = 'block';
+        digerInput.focus();
+      } else {
+        digerInput.style.display = 'none';
+        digerInput.value = '';
+      }
+      updateConsentLocks();
+    }
+
+    renderBookSelection();
+    updateBookCounter();
+    setStep(1);
+    addAuthor(true);
+    updateConsentLocks();
+
+    (function initFooterYear() {
+      const el = document.getElementById('footer-year');
+      if (el) el.textContent = String(new Date().getFullYear());
+    })();
+  </script>
+</body>
+
+</html>
